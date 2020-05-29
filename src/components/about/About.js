@@ -7,7 +7,7 @@ class About extends Component {
         return (
             <div>
                 <HeaderImg/>
-                <div style={{ margin:"10%" }} className="container">
+                <div style={{ margin:"5%" }} className="container">
                     <br />
                     <h4>
                         About<b> COURSEBEE</b>
