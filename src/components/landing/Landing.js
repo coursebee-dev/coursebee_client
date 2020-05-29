@@ -25,6 +25,7 @@ class Landing extends Component {
         <div>
           <div className="center-align container">
             <h4>
+              Dear Students<br/>
               Greetings from<b> COURSEBEE</b>
             </h4>
             <div className="">Coursebee is online education platform where we disseminate contemporary knowledge through live classroom , training and video based courses.</div>

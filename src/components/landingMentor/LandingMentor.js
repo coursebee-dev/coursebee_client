@@ -25,6 +25,7 @@ class LandingMentor extends Component {
         <div>
           <div className="center-align">
             <h4>
+              Mentors<br/>
               Greetings from<b> COURSEBEE</b>
             </h4>
             <div className="container">Coursebee is online education platform where we disseminate contemporary knowledge through live classroom , training and video based courses.</div>
