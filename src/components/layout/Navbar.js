@@ -36,7 +36,7 @@ class Navbar extends Component {
                             {this.props.auth.isAuthenticated ? <li><UserIcon /></li> : null}
                             <li><LinkStyled to="/about">About Us</LinkStyled></li>
                             <li><LinkStyled to="/comingSoon">Live Classroom</LinkStyled></li>
-                            <li><LinkStyled to="/coomingSoon">Courses</LinkStyled></li>
+                            <li><LinkStyled to="/comingSoon">Courses</LinkStyled></li>
                             <li><LinkStyled to="/comingSoon">Training</LinkStyled></li>
                             {this.props.auth.isAuthenticated ? null :
                                 <li>
@@ -56,7 +56,7 @@ class Navbar extends Component {
                     }
                     <li><LinkStyled to="/about">About Us</LinkStyled></li>
                     <li><LinkStyled to="/comingSoon">Live Classroom</LinkStyled></li>
-                    <li><LinkStyled to="/coomingSoon">Courses</LinkStyled></li>
+                    <li><LinkStyled to="/comingSoon">Courses</LinkStyled></li>
                     <li><LinkStyled to="/comingSoon">Training</LinkStyled></li>
                     {this.props.auth.isAuthenticated ? null :
                         <li>
