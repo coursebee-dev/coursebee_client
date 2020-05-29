@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import HeaderImg from "../layout/HeaderImg"
+
 class About extends Component {
     render() {
         return (
             <div>
+                <HeaderImg/>
                 <div style={{ margin:"10%" }} className="container">
                     <br />
                     <h4>
