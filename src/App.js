@@ -27,7 +27,7 @@ import DashboardMentor from "./components/dashboardMentor/DashboardMentor";
 import DashboardAdmin from "./components/dashboardAdmin/DashboardAdmin";
 import Footer from "./components/layout/Footer";
 import About from "./components/about/About";
-
+import ComingSoon from "./components/comingSoon/ComingSoon";
 //axios.defaults.baseURL="http://localhost:5000"
 axios.defaults.baseURL = "https://coursebee-server.herokuapp.com"
 // Check for token to keep user logged in
@@ -69,6 +69,7 @@ class App extends Component {
               <Route exact path="/admin/login" component={LoginAdmin} />
               <Route exact path="/verifyEmail" component={VerifyEmail} />
               <Route exact path="/about" component={About} />
+              <Route exact path="/comingSoon" component={ComingSoon} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/mentor/dashboard" component={DashboardMentor} />
               <PrivateRoute exact path="/admin/dashboard" component={DashboardAdmin} />

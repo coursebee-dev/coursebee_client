@@ -35,9 +35,9 @@ class Navbar extends Component {
                         <ul className="right hide-on-med-and-down">
                             {this.props.auth.isAuthenticated ? <li><UserIcon /></li> : null}
                             <li><LinkStyled to="/about">About Us</LinkStyled></li>
-                            <li><LinkStyled to="/liveclass">Live Classroom</LinkStyled></li>
-                            <li><LinkStyled to="/courses">Courses</LinkStyled></li>
-                            <li><LinkStyled to="/training">Training</LinkStyled></li>
+                            <li><LinkStyled to="/comingSoon">Live Classroom</LinkStyled></li>
+                            <li><LinkStyled to="/coomingSoon">Courses</LinkStyled></li>
+                            <li><LinkStyled to="/comingSoon">Training</LinkStyled></li>
                             {this.props.auth.isAuthenticated ? null :
                                 <li>
                                     <Link className="teal darken-1" to="/mentor">
@@ -54,8 +54,10 @@ class Navbar extends Component {
                     {this.props.auth.isAuthenticated ?
                         <li><LinkStyled to="#">{this.props.auth.user.name}</LinkStyled></li> : null
                     }
-                    <li><LinkStyled to="#">About Us</LinkStyled></li>
-                    <li><LinkStyled to="#">Courses</LinkStyled></li>
+                    <li><LinkStyled to="/about">About Us</LinkStyled></li>
+                    <li><LinkStyled to="/comingSoon">Live Classroom</LinkStyled></li>
+                    <li><LinkStyled to="/coomingSoon">Courses</LinkStyled></li>
+                    <li><LinkStyled to="/comingSoon">Training</LinkStyled></li>
                     {this.props.auth.isAuthenticated ? null :
                         <li>
                             <LinkStyled to="/mentor">
