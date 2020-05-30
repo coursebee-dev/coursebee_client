@@ -28,6 +28,9 @@ import DashboardAdmin from "./components/dashboardAdmin/DashboardAdmin";
 import Footer from "./components/layout/Footer";
 import About from "./components/about/About";
 import ComingSoon from "./components/comingSoon/ComingSoon";
+import ReactGA from 'react-ga';
+import {createBrowserHistory} from 'history'
+
 //axios.defaults.baseURL="http://localhost:5000"
 axios.defaults.baseURL = "https://coursebee-server.herokuapp.com"
 // Check for token to keep user logged in
@@ -50,11 +53,22 @@ if (localStorage.jwtToken) {
   }
 }
 
+const history = createBrowserHistory()
+history.listen(location => {
+  ReactGA.set({ page: location.pathname })
+  ReactGA.pageview(location.pathname)
+})
+
 class App extends Component {
+  
+  componentDidMount() {
+		ReactGA.pageview(window.location.pathname)
+  }
+  
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <Switch>
             <div className="App">
               <Navbar />
