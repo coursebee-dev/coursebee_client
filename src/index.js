@@ -4,7 +4,7 @@ import App from './App';
 import './index.css';
 import ReactGA from 'react-ga';
 
-ReactGA.initialize('G-6WKBWV16NM');
+ReactGA.initialize('UA-168052447-1');
 
 
 ReactDOM.render(
