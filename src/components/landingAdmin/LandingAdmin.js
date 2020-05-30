@@ -22,13 +22,13 @@ class LandingAdmin extends Component {
       <div>
         <HeaderImg />
         <div>
-          <div className="center-align">
+          <div className="center-align container">
             <h4>
               Admins, Greetings from<b> COURSEBEE</b>
             </h4>
-            <div className="container">Coursebee is online education platform where we disseminate contemporary knowledge through live classroom , training and video based courses.</div>
+            <div>Coursebee is online education platform where we disseminate contemporary knowledge through live classroom , training and video based courses.</div>
             <br />
-            <div className="container">Coursebee একটি অনলাইন শিক্ষামূলক প্ল্যাটফর্ম। আমাদের মূল লক্ষ্য হল একটি ইউনিফাইড প্ল্যাটফর্মে শিক্ষার্থী এবং প্রফেশনালদের একত্রিত করা।</div>
+            <div>Coursebee একটি অনলাইন শিক্ষামূলক প্ল্যাটফর্ম। আমাদের মূল লক্ষ্য হল একটি ইউনিফাইড প্ল্যাটফর্মে শিক্ষার্থী এবং প্রফেশনালদের একত্রিত করা।</div>
             <h4>
               Admin Login
             </h4>
