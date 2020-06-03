@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {  Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import setCurrentUser from "./actions/setUser";
@@ -67,31 +67,33 @@ class App extends Component {
   
   render() {
     return (
+      <>
       <Provider store={store}>
         <Router history={history}>
           <Switch>
             <div className="App">
               <Navbar />
               <Route exact path="/" component={Landing} />
-              <Route exact path="/mentor" component={LandingMentor} />
-              <Route exact path="/admin" component={LandingAdmin} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/mentor/register" component={RegisterMentor} />
-              <Route exact path="/mentor/login" component={LoginMentor} />
-              <Route exact path="/admin/register" component={RegisterAdmin} />
-              <Route exact path="/admin/login" component={LoginAdmin} />
-              <Route exact path="/verifyEmail" component={VerifyEmail} />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/comingSoon" component={ComingSoon} />
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute exact path="/mentor/dashboard" component={DashboardMentor} />
-              <PrivateRoute exact path="/admin/dashboard" component={DashboardAdmin} />
+              <Route  path="/mentor" component={LandingMentor} />
+              <Route  path="/admin" component={LandingAdmin} />
+              <Route  path="/register" component={Register} />
+              <Route  path="/login" component={Login} />
+              <Route  path="/mentor/register" component={RegisterMentor} />
+              <Route  path="/mentor/login" component={LoginMentor} />
+              <Route  path="/admin/register" component={RegisterAdmin} />
+              <Route  path="/admin/login" component={LoginAdmin} />
+              <Route  path="/verifyEmail" component={VerifyEmail} />
+              <Route  path="/about" component={About} />
+              <Route  path="/comingSoon" component={ComingSoon} />
+              <PrivateRoute  path="/dashboard" component={Dashboard} />
+              <PrivateRoute  path="/mentor/dashboard" component={DashboardMentor} />
+              <PrivateRoute  path="/admin/dashboard" component={DashboardAdmin} />
               <Footer />
             </div>
           </Switch>
         </Router>
       </Provider>
+      </>
     );
   }
 }

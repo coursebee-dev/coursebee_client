@@ -21,44 +21,42 @@ const LinkBrand = styled(Link)`
 class Navbar extends Component {
     render() {
         return (
-            <div>
+            <>
                 <nav style={{ height: "64px" }} className="white z-depth-2">
-                    <div className="nav-wrapper">
-                        <ul className="left">
-                            <li><LinkStyled to="#" style={{ height: "64px" }} data-target="mobile-demo" className="sidenav-trigger">
+                    <div className="container">
+                        <div className="nav-wrapper">
+                            <ul className="left">
+                                <li><LinkStyled to="#" style={{ height: "64px" }} data-target="mobile-demo" className="sidenav-trigger">
 
-                                <i style={{ lineHeight: "64px" }} className="material-icons">menu</i></LinkStyled>
-                            </li>
-
-                            <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
-                        </ul>
-                        <ul className="right hide-on-med-and-down">
-                            {this.props.auth.isAuthenticated ? <li><UserIcon /></li> : null}
-                            <li><LinkStyled to="/about">About Us</LinkStyled></li>
-                            <li><LinkStyled to="/comingSoon">Live Classroom</LinkStyled></li>
-                            <li><LinkStyled to="/comingSoon">Courses</LinkStyled></li>
-                            <li><LinkStyled to="/comingSoon">Training</LinkStyled></li>
-                            {this.props.auth.isAuthenticated ? null :
-                                <li>
-                                    <Link className="teal darken-1" to="/mentor">
-                                        Mentors Here!
-                                    </Link>
+                                    <i style={{ lineHeight: "64px" }} className="material-icons">menu</i></LinkStyled>
                                 </li>
-                            }
-                        </ul>
+
+                                <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
+                            </ul>
+                            <ul className="right hide-on-med-and-down">
+                                <li><LinkStyled to="/about">About Us</LinkStyled></li>
+                                <li><LinkStyled to="/comingSoon">Live Classroom</LinkStyled></li>
+                                <li><LinkStyled to="/comingSoon">Courses</LinkStyled></li>
+                                <li><LinkStyled to="/comingSoon">Training</LinkStyled></li>
+                                {this.props.auth.isAuthenticated ? <li><UserIcon /></li> :
+                                    <li>
+                                        <Link className="teal darken-1" to="/mentor">
+                                            Mentors Here!
+                                        </Link>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
                     </div>
                 </nav>
 
                 <ul className="sidenav" id="mobile-demo">
                     <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
-                    {this.props.auth.isAuthenticated ?
-                        <li><LinkStyled to="#">{this.props.auth.user.name}</LinkStyled></li> : null
-                    }
                     <li><LinkStyled to="/about">About Us</LinkStyled></li>
                     <li><LinkStyled to="/comingSoon">Live Classroom</LinkStyled></li>
                     <li><LinkStyled to="/comingSoon">Courses</LinkStyled></li>
                     <li><LinkStyled to="/comingSoon">Training</LinkStyled></li>
-                    {this.props.auth.isAuthenticated ? null :
+                    {this.props.auth.isAuthenticated ? <li><LinkStyled className="grey" to="#">{this.props.auth.user.name}</LinkStyled></li> :
                         <li>
                             <LinkStyled to="/mentor">
                                 Mentors Here!
@@ -68,7 +66,7 @@ class Navbar extends Component {
                     <li><Link to="#!" className="sidenav-close"><i className="material-icons">close</i></Link></li>
 
                 </ul>
-            </div>
+            </>
         );
     }
 }
