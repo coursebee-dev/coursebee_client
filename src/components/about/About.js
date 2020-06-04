@@ -1,11 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import HeaderImg from "../layout/HeaderImg"
+import {Helmet} from 'react-helmet'
 
 class About extends Component {
     render() {
+        const seo = {
+            title: "Coursebee : About",
+            description:
+              "A free, online API builder that works with CORS. A Postman alternative without the need for client app installation.",
+            url: "https://coursebee.com/about/",
+            image: ""
+          };
         return (
             <div>
+                <Helmet
+                title={seo.title}
+                meta={[
+                    {
+                    name: "description",
+                    property: "og:description",
+                    content: seo.description
+                    },
+                    { property: "og:title", content: seo.title },
+                    { property: "og:url", content: seo.url },
+                ]}
+                />
                 <HeaderImg/>
                     
                 <div className="container">

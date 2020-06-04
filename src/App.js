@@ -30,6 +30,10 @@ import About from "./components/about/About";
 import ComingSoon from "./components/comingSoon/ComingSoon";
 import ReactGA from 'react-ga';
 import {createBrowserHistory} from 'history'
+import LiveClass from "./components/liveClass/LiveClass";
+import Course from "./components/course/Course";
+import Training from "./components/training/Training";
+import {Helmet} from 'react-helmet';
 
 //axios.defaults.baseURL="http://localhost:5000"
 axios.defaults.baseURL = "https://coursebee-server.herokuapp.com"
@@ -66,8 +70,27 @@ class App extends Component {
   }
   
   render() {
+    const seo = {
+      title: "Coursebee",
+      description:
+        "A free, online API builder that works with CORS. A Postman alternative without the need for client app installation.",
+      url: "https://coursebee.com/",
+      image: ""
+    };
     return (
       <div className="App">
+        <Helmet
+  title={seo.title}
+  meta={[
+    {
+      name: "description",
+      property: "og:description",
+      content: seo.description
+    },
+    { property: "og:title", content: seo.title },
+    { property: "og:url", content: seo.url },
+  ]}
+/>
       <Provider store={store}>
         <Router history={history}>
           <Switch>
@@ -85,6 +108,9 @@ class App extends Component {
               <Route exact path="/verifyEmail" component={VerifyEmail} />
               <Route exact path="/about" component={About} />
               <Route exact path="/comingSoon" component={ComingSoon} />
+              <Route exact path="/liveClassroom" component={LiveClass} />
+              <Route exact path="/course" component={Course} />
+              <Route exact path="/training" component={Training} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/mentor/dashboard" component={DashboardMentor} />
               <PrivateRoute exact path="/admin/dashboard" component={DashboardAdmin} />
