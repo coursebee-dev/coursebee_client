@@ -67,11 +67,11 @@ class App extends Component {
   
   render() {
     return (
-      <>
+      <div className="App">
       <Provider store={store}>
         <Router history={history}>
           <Switch>
-            <div className="App">
+          <React.Fragment>
               <Navbar />
               <Route exact path="/" component={Landing} />
               <Route exact path="/mentor" component={LandingMentor} />
@@ -89,11 +89,11 @@ class App extends Component {
               <PrivateRoute exact path="/mentor/dashboard" component={DashboardMentor} />
               <PrivateRoute exact path="/admin/dashboard" component={DashboardAdmin} />
               <Footer />
-            </div>
+              </React.Fragment>
           </Switch>
         </Router>
       </Provider>
-      </>
+      </div>
     );
   }
 }

@@ -16,7 +16,7 @@ class Footer extends Component {
     render() {
         return (
             <div style={{marginTop:"40px"}}>
-                <footer className="page-footer white z-depth-4">
+                <footer className="page-footer white z-depth-1">
                     <div className="container" style={{ width: "40%", justifyContent: "center" }}>
                         <ul className="row">
                             <li className="col s12 m6 l2"><LinkStyled to="/about">About</LinkStyled></li>

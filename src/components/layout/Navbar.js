@@ -21,7 +21,7 @@ const LinkBrand = styled(Link)`
 class Navbar extends Component {
     render() {
         return (
-            <>
+            <div className="navbar-fixed">
                 <nav style={{ height: "64px" }} className="white z-depth-2">
                     <div className="container">
                         <div className="nav-wrapper">
@@ -66,7 +66,7 @@ class Navbar extends Component {
                     <li><Link to="#!" className="sidenav-close"><i className="material-icons">close</i></Link></li>
 
                 </ul>
-            </>
+            </div>
         );
     }
 }
