@@ -73,7 +73,7 @@ class App extends Component {
     const seo = {
       title: "Coursebee",
       description:
-        "A free, online API builder that works with CORS. A Postman alternative without the need for client app installation.",
+        "Coursebee is online education platform where we disseminate contemporary knowledge through live classroom , training and video based courses.",
       url: "https://coursebee.com/",
       image: ""
     };

@@ -8,7 +8,7 @@ class About extends Component {
         const seo = {
             title: "Coursebee : About",
             description:
-              "A free, online API builder that works with CORS. A Postman alternative without the need for client app installation.",
+              "About Coursebee.",
             url: "https://coursebee.com/about/",
             image: ""
           };

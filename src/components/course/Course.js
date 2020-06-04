@@ -6,7 +6,7 @@ export default function Course() {
     const seo = {
         title: "Coursebee : Course",
         description:
-          "A free, online API builder that works with CORS. A Postman alternative without the need for client app installation.",
+          "Courses from top-notch mentors are coming soon.",
         url: "https://coursebee.com/course/",
         image: ""
       };

@@ -6,7 +6,7 @@ export default function LiveClass() {
     const seo = {
         title: "Coursebee : Live Classrom",
         description:
-          "A free, online API builder that works with CORS. A Postman alternative without the need for client app installation.",
+          "Interactive live classes are coming soon.",
         url: "https://coursebee.com/liveClassroom/",
         image: ""
       };
