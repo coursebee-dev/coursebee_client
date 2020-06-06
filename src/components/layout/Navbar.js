@@ -25,9 +25,9 @@ class Navbar extends Component {
             <ul className="sidenav" id="mobile-demo">
                     <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
                     <li><LinkStyled to="/about">About Us</LinkStyled></li>
-                    <li><LinkStyled to="/comingSoon">Live Classroom</LinkStyled></li>
-                    <li><LinkStyled to="/comingSoon">Courses</LinkStyled></li>
-                    <li><LinkStyled to="/comingSoon">Training</LinkStyled></li>
+                    <li><LinkStyled to="/liveClassroom">Live Classroom</LinkStyled></li>
+                    <li><LinkStyled to="/course">Courses</LinkStyled></li>
+                    <li><LinkStyled to="/training">Training</LinkStyled></li>
                     {this.props.auth.isAuthenticated ? <li><LinkStyled className="grey" to="#">{this.props.auth.user.name}</LinkStyled></li> :
                         <li>
                             <LinkStyled to="/mentor">
