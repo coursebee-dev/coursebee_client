@@ -21,6 +21,23 @@ const LinkBrand = styled(Link)`
 class Navbar extends Component {
     render() {
         return (
+            <>
+            <ul className="sidenav" id="mobile-demo">
+                    <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
+                    <li><LinkStyled to="/about">About Us</LinkStyled></li>
+                    <li><LinkStyled to="/comingSoon">Live Classroom</LinkStyled></li>
+                    <li><LinkStyled to="/comingSoon">Courses</LinkStyled></li>
+                    <li><LinkStyled to="/comingSoon">Training</LinkStyled></li>
+                    {this.props.auth.isAuthenticated ? <li><LinkStyled className="grey" to="#">{this.props.auth.user.name}</LinkStyled></li> :
+                        <li>
+                            <LinkStyled to="/mentor">
+                                Mentors Here!
+                                </LinkStyled>
+                        </li>
+                    }
+                    <li><Link to="#!" className="sidenav-close"><i className="material-icons">close</i></Link></li>
+
+                </ul>
             <div className="navbar-fixed">
                 <nav style={{ height: "64px" }} className="white z-depth-2">
                     <div className="container">
@@ -49,24 +66,8 @@ class Navbar extends Component {
                         </div>
                     </div>
                 </nav>
-
-                <ul className="sidenav" id="mobile-demo">
-                    <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
-                    <li><LinkStyled to="/about">About Us</LinkStyled></li>
-                    <li><LinkStyled to="/comingSoon">Live Classroom</LinkStyled></li>
-                    <li><LinkStyled to="/comingSoon">Courses</LinkStyled></li>
-                    <li><LinkStyled to="/comingSoon">Training</LinkStyled></li>
-                    {this.props.auth.isAuthenticated ? <li><LinkStyled className="grey" to="#">{this.props.auth.user.name}</LinkStyled></li> :
-                        <li>
-                            <LinkStyled to="/mentor">
-                                Mentors Here!
-                                </LinkStyled>
-                        </li>
-                    }
-                    <li><Link to="#!" className="sidenav-close"><i className="material-icons">close</i></Link></li>
-
-                </ul>
             </div>
+            </>
         );
     }
 }

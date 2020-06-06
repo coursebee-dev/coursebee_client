@@ -27,3 +27,7 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+
+  .sidenav-overlay {
+    display: none;
+ }
