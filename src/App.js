@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import setCurrentUser from "./actions/setUser";
@@ -22,14 +22,16 @@ import RegisterAdmin from "./components/authAdmin/RegisterAdmin";
 import LoginAdmin from "./components/authAdmin/LoginAdmin";
 import VerifyEmail from "./components/verifyEmail/VerifyEmail"
 import PrivateRoute from "./components/private-route/PrivateRoute";
+import PrivateRouteMentor from "./components/private-route/PrivateRouteMentor";
+import PrivateRouteAdmin from "./components/private-route/PrivateRouteAdmin";
 import Dashboard from "./components/dashboard/Dashboard";
 import DashboardMentor from "./components/dashboardMentor/DashboardMentor";
 import DashboardAdmin from "./components/dashboardAdmin/DashboardAdmin";
 import Footer from "./components/layout/Footer";
 import About from "./components/about/About";
 import ComingSoon from "./components/comingSoon/ComingSoon";
-//axios.defaults.baseURL="http://localhost:5000"
-axios.defaults.baseURL = "https://coursebee-server.herokuapp.com"
+axios.defaults.baseURL="http://localhost:5000"
+//axios.defaults.baseURL = "https://coursebee-server.herokuapp.com"
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -55,7 +57,6 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <Switch>
             <div className="App">
               <Navbar />
               <Route exact path="/" component={Landing} />
@@ -71,11 +72,10 @@ class App extends Component {
               <Route exact path="/about" component={About} />
               <Route exact path="/comingSoon" component={ComingSoon} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute exact path="/mentor/dashboard" component={DashboardMentor} />
-              <PrivateRoute exact path="/admin/dashboard" component={DashboardAdmin} />
+              <PrivateRouteMentor exact path="/mentor/dashboard" component={DashboardMentor} />
+              <PrivateRouteAdmin exact path="/admin/dashboard" component={DashboardAdmin} />
               <Footer />
             </div>
-          </Switch>
         </Router>
       </Provider>
     );

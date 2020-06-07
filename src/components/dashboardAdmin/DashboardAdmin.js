@@ -3,14 +3,61 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import logoutUser from "../../actions/logoutAction";
 import HeaderImg from "../layout/HeaderImg"
+import axios from "axios";
 class DashboardAdmin extends Component {
+  constructor() {
+    super();
+    this.state = {
+      allMentors: []
+    };
+  }
+  componentDidMount() {
+    axios.get('/api/admin/allMentors')
+      .then(res => {
+        this.setState({ allMentors: res.data })
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      });
+  }
   onLogoutClick = e => {
     e.preventDefault();
     this.props.history.push("/");
     this.props.logoutUser();
   };
+  onVerifyClick = mentorId => e => {
+    e.preventDefault();
+    axios.put('/api/admin/verifyMentor/' + mentorId)
+      .then(res => {
+        if (res.data.message === 'success') {
+          this.state.allMentors.find(mentor => mentor._id === mentorId).adminVerify = true;
+          this.setState(this.state)
+          console.log(res.data)
+        } else {
+          throw Error({ message: "failed" })
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      });
+  }
   render() {
-    const { user } = this.props.auth; return (
+    const allMentors = this.state.allMentors.map(mentor => (
+      <div key={mentor._id}>
+        <h6>{mentor.name}</h6>
+        <p>{mentor.email}</p>
+        <p>{mentor.organization}</p>
+        <p>{mentor.position}</p>
+        <p>{mentor.mobileNo}</p>
+        <p>
+          {mentor.adminVerify ? "verified" : <button onClick={this.onVerifyClick(mentor._id)} className="btn btn-small waves-effect waves-light hoverable black">Verify</button>}   
+        </p>
+        <br />
+      </div>
+    ));
+    const { user } = this.props.auth;
+    return (
       <div>
         <HeaderImg />
         <div className="row">
@@ -22,8 +69,11 @@ class DashboardAdmin extends Component {
                 <br /><br />If you want to join our team send us a message in our{" "}
                 <a href="https://www.facebook.com/coursebee.live" target="_blank" rel="noopener noreferrer">facebook page</a>.
               </p>
-
             </h4>
+            <div className="container left-align">
+              <h5>Mentors in Coursebee</h5>
+              {allMentors}
+            </div>
             <button
               style={{
                 width: "150px",

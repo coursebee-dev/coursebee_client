@@ -7,10 +7,10 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      auth.isAuthenticated === true && auth.user.type === "student"? (
+      auth.isAuthenticated === true && auth.user.type === "mentor"? (
         <Component {...props} />
       ) : (
-        <Redirect to="/login" />
+        <Redirect to="/mentor/login" />
       )
     }
   />
