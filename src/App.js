@@ -14,8 +14,8 @@ import {createBrowserHistory} from 'history'
 import {Helmet} from 'react-helmet';
 import PathRoute from "./router";
 
-//axios.defaults.baseURL="http://localhost:5000"
-axios.defaults.baseURL = "https://coursebee-server.herokuapp.com"
+axios.defaults.baseURL="http://localhost:5000"
+//axios.defaults.baseURL = "https://coursebee-server.herokuapp.com"
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -36,17 +36,17 @@ if (localStorage.jwtToken) {
   }
 }
 
-const history = createBrowserHistory()
-history.listen(location => {
-  ReactGA.set({ page: location.pathname })
-  ReactGA.pageview(location.pathname)
-})
+// const history = createBrowserHistory()
+// history.listen(location => {
+//   ReactGA.set({ page: location.pathname })
+//   ReactGA.pageview(location.pathname)
+// })
 
 class App extends Component {
   
-  componentDidMount() {
-		ReactGA.pageview(window.location.pathname)
-  }
+  // componentDidMount() {
+	// 	ReactGA.pageview(window.location.pathname)
+  // }
   
   render() {
     const seo = {
@@ -71,7 +71,8 @@ class App extends Component {
         ]}
         />
       <Provider store={store}>
-        <Router history={history}>
+        <Router>
+        {/* <Router history={history}> */}
               <PathRoute />
         </Router>
       </Provider>
