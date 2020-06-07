@@ -15,7 +15,7 @@ class DashboardMentor extends Component {
   render() {
     const { user } = this.props.auth; return (
       <div>
-        <div className="container">
+        <div>
           <HeaderImg />
           <div className="row">
             <div className="col s12 center-align">

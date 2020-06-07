@@ -28,9 +28,8 @@ class Footer extends Component {
                             {this.props.auth.isAuthenticated ? <li className="col s12 m6 l2"><LinkStyled to="#">Settings</LinkStyled></li> : null}
                         </ul>
                     </div>
-
                     <div className="footer-copyright">
-                        <div className="container">
+                        <div style={{ width: "100%"}} className="container">
                             <LinkStyled to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkStyled>
                             <div style={{ lineHeight: "60px" }} className="right black-text">© Kernel Foundation</div>
                         </div>

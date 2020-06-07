@@ -22,7 +22,7 @@ class Landing extends Component {
     return (
       <div>
         <HeaderImg />
-        <div className="container">
+        <div>
           <div className="center-align container">
             <h4>
               Dear Students, Greetings from<b> COURSEBEE</b>

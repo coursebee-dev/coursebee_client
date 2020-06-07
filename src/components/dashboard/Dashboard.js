@@ -14,7 +14,7 @@ class Dashboard extends Component {
     return (
       <div>
         <HeaderImg />
-        <div className="container">
+        <div>
           <div className="row">
             <div className="col s12 center-align">
               <h4>
