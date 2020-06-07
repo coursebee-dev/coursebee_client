@@ -21,7 +21,7 @@ class LandingMentor extends Component {
     return (
       <div>
         <HeaderImg/>
-        <div>
+        <div className="container">
           <div className="center-align container">
             <h4>
               Mentors, Greetings from<b> COURSEBEE</b>
