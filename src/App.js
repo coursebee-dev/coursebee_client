@@ -8,14 +8,13 @@ import logoutUser from "./actions/logoutAction";
 import { Provider } from "react-redux";
 import store from "./store";
 import axios from "axios";
-
 import ReactGA from 'react-ga';
-import {createBrowserHistory} from 'history'
-import {Helmet} from 'react-helmet';
+import { createBrowserHistory } from 'history'
+import { Helmet } from 'react-helmet';
 import PathRoute from "./router";
 
-axios.defaults.baseURL="http://localhost:5000"
-//axios.defaults.baseURL = "https://coursebee-server.herokuapp.com"
+//axios.defaults.baseURL = "http://localhost:5000"
+axios.defaults.baseURL = "https://coursebee-server.herokuapp.com"
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -36,18 +35,18 @@ if (localStorage.jwtToken) {
   }
 }
 
-// const history = createBrowserHistory()
-// history.listen(location => {
-//   ReactGA.set({ page: location.pathname })
-//   ReactGA.pageview(location.pathname)
-// })
+const history = createBrowserHistory()
+history.listen(location => {
+  ReactGA.set({ page: location.pathname })
+  ReactGA.pageview(location.pathname)
+})
 
 class App extends Component {
-  
-  // componentDidMount() {
-	// 	ReactGA.pageview(window.location.pathname)
-  // }
-  
+
+  componentDidMount() {
+    ReactGA.pageview(window.location.pathname)
+  }
+
   render() {
     const seo = {
       title: "Coursebee",
@@ -59,23 +58,22 @@ class App extends Component {
     return (
       <div className="App">
         <Helmet
-        title={seo.title}
-        meta={[
-          {
-            name: "description",
-            property: "og:description",
-            content: seo.description
-          },
-          { property: "og:title", content: seo.title },
-          { property: "og:url", content: seo.url },
-        ]}
+          title={seo.title}
+          meta={[
+            {
+              name: "description",
+              property: "og:description",
+              content: seo.description
+            },
+            { property: "og:title", content: seo.title },
+            { property: "og:url", content: seo.url },
+          ]}
         />
-      <Provider store={store}>
-        <Router>
-        {/* <Router history={history}> */}
-              <PathRoute />
-        </Router>
-      </Provider>
+        <Provider store={store}>
+          <Router history={history}>
+              <PathRoute/>
+          </Router>
+        </Provider>
       </div>
     );
   }

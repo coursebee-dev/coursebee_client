@@ -21,8 +21,8 @@ const LinkBrand = styled(Link)`
 class Navbar extends Component {
     render() {
         return (
-            <>
-            <ul className="sidenav" id="mobile-demo">
+            <div>
+                <ul className="sidenav" id="mobile-demo">
                     <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
                     <li><LinkStyled to="/about">About Us</LinkStyled></li>
                     <li><LinkStyled to="/liveClassroom">Live Classroom</LinkStyled></li>
@@ -36,38 +36,37 @@ class Navbar extends Component {
                         </li>
                     }
                     <li><Link to="#!" className="sidenav-close"><i className="material-icons">close</i></Link></li>
-
                 </ul>
-            <div className="navbar-fixed">
-                <nav style={{ height: "64px" }} className="white z-depth-2">
-                    <div className="container">
-                        <div className="nav-wrapper">
-                            <ul className="left">
-                                <li><LinkStyled to="#" style={{ height: "64px" }} data-target="mobile-demo" className="sidenav-trigger">
+                <div className="navbar-fixed">
+                    <nav style={{ height: "64px" }} className="white z-depth-2">
+                        <div className="container">
+                            <div className="nav-wrapper">
+                                <ul className="left">
+                                    <li><LinkStyled to="#" style={{ height: "64px" }} data-target="mobile-demo" className="sidenav-trigger">
 
-                                    <i style={{ lineHeight: "64px" }} className="material-icons">menu</i></LinkStyled>
-                                </li>
-
-                                <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
-                            </ul>
-                            <ul className="right hide-on-med-and-down">
-                                <li><LinkStyled to="/about">About Us</LinkStyled></li>
-                                <li><LinkStyled to="/liveClassroom">Live Classroom</LinkStyled></li>
-                                <li><LinkStyled to="/course">Courses</LinkStyled></li>
-                                <li><LinkStyled to="/training">Training</LinkStyled></li>
-                                {this.props.auth.isAuthenticated ? <li><UserIcon /></li> :
-                                    <li>
-                                        <Link className="teal darken-1" to="/mentor">
-                                            Mentors Here!
-                                        </Link>
+                                        <i style={{ lineHeight: "64px" }} className="material-icons">menu</i></LinkStyled>
                                     </li>
-                                }
-                            </ul>
+
+                                    <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
+                                </ul>
+                                <ul className="right hide-on-med-and-down">
+                                    <li><LinkStyled to="/about">About Us</LinkStyled></li>
+                                    <li><LinkStyled to="/liveClassroom">Live Classroom</LinkStyled></li>
+                                    <li><LinkStyled to="/course">Courses</LinkStyled></li>
+                                    <li><LinkStyled to="/training">Training</LinkStyled></li>
+                                    {this.props.auth.isAuthenticated ? <li><UserIcon /></li> :
+                                        <li>
+                                            <Link className="teal darken-1" to="/mentor">
+                                                Mentors Here!
+                                        </Link>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </nav>
+                    </nav>
+                </div>
             </div>
-            </>
         );
     }
 }

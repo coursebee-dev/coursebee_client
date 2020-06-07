@@ -32,7 +32,7 @@ class DashboardAdmin extends Component {
       .then(res => {
         if (res.data.message === 'success') {
           this.state.allMentors.find(mentor => mentor._id === mentorId).adminVerify = true;
-          //this.setState(this.state)
+          this.setState(this.state)
           console.log(res.data)
         } else {
           throw Error({ message: "failed" })
@@ -51,7 +51,7 @@ class DashboardAdmin extends Component {
         <p>{mentor.position}</p>
         <p>{mentor.mobileNo}</p>
         <p>
-          {mentor.adminVerify ? "verified" : <button className="btn btn-small waves-effect waves-light hoverable black">Verify</button>}   
+          {mentor.adminVerify ? "verified" : <button onClick={this.onVerifyClick(mentor._id)} className="btn btn-small waves-effect waves-light hoverable black">Verify</button>}   
         </p>
         <br />
       </div>
