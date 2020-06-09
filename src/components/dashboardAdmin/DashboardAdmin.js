@@ -44,8 +44,8 @@ class DashboardAdmin extends Component {
   }
   render() {
     const allMentors = this.state.allMentors.map(mentor => (
-      <div key={mentor._id}>
-        <h6>{mentor.name}</h6>
+      <li className="collection-item" key={mentor._id}>
+        <span class="title">{mentor.name}</span>
         <p>{mentor.email}</p>
         <p>{mentor.organization}</p>
         <p>{mentor.position}</p>
@@ -54,7 +54,7 @@ class DashboardAdmin extends Component {
           {mentor.adminVerify ? "verified" : <button onClick={this.onVerifyClick(mentor._id)} className="btn btn-small waves-effect waves-light hoverable black">Verify</button>}   
         </p>
         <br />
-      </div>
+      </li>
     ));
     const { user } = this.props.auth;
     return (
@@ -72,7 +72,9 @@ class DashboardAdmin extends Component {
             </h4>
             <div className="container left-align">
               <h5>Mentors in Coursebee</h5>
-              {allMentors}
+              <ul className="collection">
+                {allMentors}
+              </ul>
             </div>
             <button
               style={{
@@ -100,6 +102,7 @@ DashboardAdmin.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth
 });
+
 
 export default connect(
   mapStateToProps,
