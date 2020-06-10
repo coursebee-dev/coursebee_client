@@ -2,80 +2,54 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import logoutUser from "../../actions/logoutAction";
-import HeaderImg from "../layout/HeaderImg"
-import axios from "axios";
+//import HeaderImg from "../layout/HeaderImg"
+import Mentor from "../adminComponents/Mentor";
+import User from "../adminComponents/User";
+
+import M from 'materialize-css';
+
 class DashboardAdmin extends Component {
   constructor() {
     super();
     this.state = {
-      allMentors: []
     };
   }
+
   componentDidMount() {
-    axios.get('/api/admin/allMentors')
-      .then(res => {
-        this.setState({ allMentors: res.data })
-        console.log(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      });
+    M.Tabs.init(this.Tabs);
   }
+
   onLogoutClick = e => {
     e.preventDefault();
     this.props.history.push("/");
     this.props.logoutUser();
   };
-  onVerifyClick = mentorId => e => {
-    e.preventDefault();
-    axios.put('/api/admin/verifyMentor/' + mentorId)
-      .then(res => {
-        if (res.data.message === 'success') {
-          this.state.allMentors.find(mentor => mentor._id === mentorId).adminVerify = true;
-          this.setState(this.state)
-          console.log(res.data)
-        } else {
-          throw Error({ message: "failed" })
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      });
-  }
   render() {
-    const allMentors = this.state.allMentors.map(mentor => (
-      <li className="collection-item" key={mentor._id}>
-        <span class="title">{mentor.name}</span>
-        <p>{mentor.email}</p>
-        <p>{mentor.organization}</p>
-        <p>{mentor.position}</p>
-        <p>{mentor.mobileNo}</p>
-        <p>
-          {mentor.adminVerify ? "verified" : <button onClick={this.onVerifyClick(mentor._id)} className="btn btn-small waves-effect waves-light hoverable black">Verify</button>}   
-        </p>
-        <br />
-      </li>
-    ));
-    const { user } = this.props.auth;
+    //const { user } = this.props.auth;
     return (
       <div>
-        <HeaderImg />
+        {/*<HeaderImg />*/}
+        <div></div>
         <div className="row">
           <div className="col s12 center-align">
-            <h4>
-              <b>Hello, </b> {user.name.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1">
-                Thank you for signing in to COURSEBEE. We are continuously working to make this a better platform.
-                <br /><br />If you want to join our team send us a message in our{" "}
-                <a href="https://www.facebook.com/coursebee.live" target="_blank" rel="noopener noreferrer">facebook page</a>.
-              </p>
-            </h4>
-            <div className="container left-align">
-              <h5>Mentors in Coursebee</h5>
-              <ul className="collection">
-                {allMentors}
-              </ul>
-            </div>
+              <div className="row">
+                <div className="col s12">
+                  <div className="container">
+                  <ul className="tabs" ref={Tabs => {
+                        this.Tabs = Tabs;
+                    }}>
+                    <li className="tab col s3"><a href="#mentors" >Mentors</a></li>
+                    <li className="tab col s3"><a href="#users" >Users</a></li>
+                    <li className="tab col s3"><a href="#requests" >Requests</a></li>
+                    <li className="tab col s3"><a href="#webinars">Webinars</a></li>
+                  </ul>
+                  </div>
+                </div>
+                  <div id="mentors" class="col s12"><Mentor /></div>
+                  <div id="users" class="col s12"><User /></div>
+                  <div id="requests" class="col s12"><Mentor /></div>
+                  <div id="webinars" class="col s12"><Mentor /></div>
+              </div>
             <button
               style={{
                 width: "150px",
