@@ -5,18 +5,22 @@ import logoutUser from "../../actions/logoutAction";
 //import HeaderImg from "../layout/HeaderImg"
 import Mentor from "../adminComponents/Mentor";
 import User from "../adminComponents/User";
-
 import M from 'materialize-css';
 
 class DashboardAdmin extends Component {
   constructor() {
     super();
     this.state = {
+      isLoading: false
     };
   }
 
   componentDidMount() {
     M.Tabs.init(this.Tabs);
+  }
+
+  setLoader (set) {
+    this.setState({isLoading:set})
   }
 
   onLogoutClick = e => {
@@ -45,10 +49,10 @@ class DashboardAdmin extends Component {
                   </ul>
                   </div>
                 </div>
-                  <div id="mentors" class="col s12"><Mentor /></div>
-                  <div id="users" class="col s12"><User /></div>
-                  <div id="requests" class="col s12"><Mentor /></div>
-                  <div id="webinars" class="col s12"><Mentor /></div>
+                  <div id="mentors" className="col s12"><Mentor isLoading={this.state.isLoading} setLoader={set=>this.setLoader(set)} /></div>
+                  <div id="users" className="col s12"><User /></div>
+                  <div id="requests" className="col s12"><Mentor /></div>
+                  <div id="webinars" className="col s12"><Mentor /></div>
               </div>
             <button
               style={{
