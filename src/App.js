@@ -57,7 +57,7 @@ class App extends Component {
       image: ""
     };
     return (
-      <div className="App">
+      <>
         <Helmet
           title={seo.title}
           meta={[
@@ -75,7 +75,7 @@ class App extends Component {
               <PathRoute/>
           </Router>
         </Provider>
-      </div>
+      </>
     );
   }
 }

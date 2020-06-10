@@ -36,16 +36,17 @@ class DashboardAdmin extends Component {
         <div></div>
         <div className="row">
           <div className="col s12 center-align">
+            <br />
               <div className="row">
                 <div className="col s12">
                   <div className="container">
                   <ul className="tabs" ref={Tabs => {
                         this.Tabs = Tabs;
                     }}>
-                    <li className="tab col s3"><a href="#mentors" >Mentors</a></li>
-                    <li className="tab col s3"><a href="#users" >Users</a></li>
-                    <li className="tab col s3"><a href="#requests" >Requests</a></li>
-                    <li className="tab col s3"><a href="#webinars">Webinars</a></li>
+                    <li className="tab col s3"><a className="deep-orange-text" href="#mentors" >Mentors</a></li>
+                    <li className="tab col s3"><a className="deep-orange-text" href="#users" >Users</a></li>
+                    <li className="tab col s3"><a className="deep-orange-text" href="#requests" >Requests</a></li>
+                    <li className="tab col s3"><a className="deep-orange-text" href="#webinars">Webinars</a></li>
                   </ul>
                   </div>
                 </div>

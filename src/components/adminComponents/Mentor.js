@@ -1,5 +1,6 @@
 import React,{ Component } from "react";
 import axios from "axios";
+import '../../App.css'
 import M from "materialize-css";
 
 export default class Mentor extends Component {
@@ -40,6 +41,11 @@ export default class Mentor extends Component {
       }
 
     render() {
+      const verified = (
+        <>
+        <i className="material-icons">done</i>Verified
+        </>
+      )
       const mentors = (
         this.state.allMentors?.map((mentor,id) => (
           <li key={mentor._id}>
@@ -52,7 +58,7 @@ export default class Mentor extends Component {
               <p>{mentor.position}</p>
               <p>{mentor.mobileNo}</p>
               <p>
-                {mentor.adminVerify ? "verified" : <button onClick={this.onVerifyClick(mentor._id)} className="btn btn-small waves-effect waves-light hoverable black">Verify</button>}   
+                {mentor.adminVerify ? <>{verified}</> : <button onClick={this.onVerifyClick(mentor._id)} className="btn btn-small waves-effect waves-light hoverable black">Verify</button>}   
               </p>
           </span>
           </div>
