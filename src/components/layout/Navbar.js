@@ -21,7 +21,7 @@ const LinkBrand = styled(Link)`
 class Navbar extends Component {
     render() {
         return (
-            <div>
+            <header className="no-padding">
                 <ul className="sidenav" id="mobile-demo">
                     <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
                     <li><LinkStyled to="/about">About Us</LinkStyled></li>
@@ -64,7 +64,7 @@ class Navbar extends Component {
                         </div>
                     </nav>
                 </div>
-            </div>
+            </header>
         );
     }
 }

@@ -25,7 +25,10 @@ export class Training extends Component {
                         { property: "og:title", content: seo.title },
                         { property: "og:url", content: seo.url },
                     ]}
-                />
+                    
+                >
+                    <meta name="keywords" content="training,coursebee,training course" />
+                    </Helmet>
                 <ComingSoon />
             </div>
         )

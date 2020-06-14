@@ -12,10 +12,11 @@ class DashboardAdmin extends Component {
   };
   
   render() {
-    const { user } = this.props.auth;
+    //const { user } = this.props.auth;
     return (
       <div>
         <HeaderImg />
+        <div></div>
         <div className="row">
           <div className="col s12 center-align">
             <h4>
@@ -58,6 +59,7 @@ DashboardAdmin.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth
 });
+
 
 export default connect(
   mapStateToProps,

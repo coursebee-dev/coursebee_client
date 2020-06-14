@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-
+import './App.css'
 
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import PrivateRouteMentor from "./components/private-route/PrivateRouteMentor";
@@ -36,6 +36,7 @@ export default function PathRoute() {
         <Switch>
             <React.Fragment>
                 <Navbar />
+                <main className="no-padding">
                 <Route exact path="/" component={Landing} />
                 <Route exact path="/mentor" component={LandingMentor} />
                 <Route exact path="/admin" component={LandingAdmin} />
@@ -58,6 +59,7 @@ export default function PathRoute() {
                 <PrivateRouteAdmin exact path="/admin/dashboard/viewmentor/:mentorid" component={ViewMentorDetail} />
                 <PrivateRouteAdmin exact path="/admin/dashboard/viewliveclass" component={ViewLiveClass} />
                 <Footer />
+                </main>
             </React.Fragment>
         </Switch>
     )
