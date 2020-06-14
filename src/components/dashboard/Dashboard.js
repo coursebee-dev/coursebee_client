@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import logoutUser from "../../actions/logoutAction";
 import HeaderImg from "../layout/HeaderImg"
+import LiveClass from "./LiveClass"
 class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
@@ -26,6 +27,7 @@ class Dashboard extends Component {
                 </p>
 
               </h4>
+              <LiveClass />
               <button
                 style={{
                   width: "150px",

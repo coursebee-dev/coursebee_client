@@ -1,61 +1,17 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import logoutUser from "../../actions/logoutAction";
 import HeaderImg from "../layout/HeaderImg"
-import axios from "axios";
 class DashboardAdmin extends Component {
-  constructor() {
-    super();
-    this.state = {
-      allMentors: []
-    };
-  }
-  componentDidMount() {
-    axios.get('/api/admin/allMentors')
-      .then(res => {
-        this.setState({ allMentors: res.data })
-        console.log(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      });
-  }
   onLogoutClick = e => {
     e.preventDefault();
     this.props.history.push("/");
     this.props.logoutUser();
   };
-  onVerifyClick = mentorId => e => {
-    e.preventDefault();
-    axios.put('/api/admin/verifyMentor/' + mentorId)
-      .then(res => {
-        if (res.data.message === 'success') {
-          this.state.allMentors.find(mentor => mentor._id === mentorId).adminVerify = true;
-          this.setState(this.state)
-          console.log(res.data)
-        } else {
-          throw Error({ message: "failed" })
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      });
-  }
+  
   render() {
-    const allMentors = this.state.allMentors.map(mentor => (
-      <div key={mentor._id}>
-        <h6>{mentor.name}</h6>
-        <p>{mentor.email}</p>
-        <p>{mentor.organization}</p>
-        <p>{mentor.position}</p>
-        <p>{mentor.mobileNo}</p>
-        <p>
-          {mentor.adminVerify ? "verified" : <button onClick={this.onVerifyClick(mentor._id)} className="btn btn-small waves-effect waves-light hoverable black">Verify</button>}   
-        </p>
-        <br />
-      </div>
-    ));
     const { user } = this.props.auth;
     return (
       <div>
@@ -71,8 +27,10 @@ class DashboardAdmin extends Component {
               </p>
             </h4>
             <div className="container left-align">
-              <h5>Mentors in Coursebee</h5>
-              {allMentors}
+              <Link to="/admin/dashboard/viewmentor" style={{margin:"15px", width:"100%"}} className="btn btn-large waves-effect waves-light hoverable black">View All Mentors</Link>
+            </div>
+            <div className="container left-align">
+            <Link to="/admin/dashboard/viewliveclass" style={{margin:"15px", width:"100%"}} className="btn btn-large waves-effect waves-light hoverable black">View All Live Classes</Link>
             </div>
             <button
               style={{

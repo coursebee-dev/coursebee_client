@@ -13,7 +13,7 @@ export const registerMentor = (userData, history) => dispatch => {
         .post("/api/mentor/register", qs.stringify(userData))
         .then(res => {
             console.log(res.data)
-            history.push("/verifyEmail", res.data)
+            history.push("/verifyemail", res.data)
         }) // re-direct to email verification on successful register
         .catch(err => {
             console.log(err)

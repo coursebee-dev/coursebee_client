@@ -14,6 +14,7 @@ export class Course extends Component {
         };
         return (
             <div>
+                <h4 style={{ margin: "50px" }}>Courses</h4>
                 <Helmet
                     title={seo.title}
                     meta={[
