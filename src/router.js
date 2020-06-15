@@ -60,8 +60,8 @@ export default function PathRoute() {
                 <PrivateRouteAdmin exact path="/admin/dashboard/viewmentor/:mentorid" component={ViewMentorDetail} />
                 <PrivateRouteAdmin exact path="/admin/dashboard/viewliveclass" component={ViewLiveClass} />
                 <PrivateRouteAdmin exact path="/admin/dashboard/viewstudent" component={ViewStudent} />
-                <Footer />
                 </main>
+                <Footer />
             </React.Fragment>
         </Switch>
     )
