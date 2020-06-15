@@ -157,6 +157,9 @@ class ScheduleClass extends Component {
                                     error={errors.password}
                                     id="password"
                                     type="password"
+                                    minLength={6}
+                                    maxLength={10}
+                                    pattern="[a-zA-Z0-9@-_*]"
                                     className={classnames("", {
                                         invalid: errors.password || errors.passwordincorrect
                                     })}

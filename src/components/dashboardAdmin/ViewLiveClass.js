@@ -20,7 +20,7 @@ export default class ViewLiveClass extends Component {
     }
     onApproveClick = (liveId) => e => {
         e.preventDefault();
-        axios.put('/api/admin/approvelive/' + liveId)
+        axios.put(`/api/admin/approvelive/${liveId}`)
             .then(res => {
                 if (res.data.message === 'success') {
                     this.setState(state => {
@@ -52,6 +52,9 @@ export default class ViewLiveClass extends Component {
         ));
         return (
             <div style={{ margin: "50px" }}>
+                <Link to="/admin/dashboard" className="btn-flat waves-effect orange darken-1">
+                        <i className="material-icons left">keyboard_backspace</i>Go Back
+                </Link>
                 <h4 style={{ margin: "50px" }}>Scheduled Classes</h4>
                 <ul style={{ textAlign: "left" }} className="collection">{liveClasses}</ul>
                 <Link to="/admin/dashboard" className="btn-flat waves-effect orange darken-1">
