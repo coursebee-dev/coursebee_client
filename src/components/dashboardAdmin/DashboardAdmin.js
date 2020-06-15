@@ -33,6 +33,9 @@ class DashboardAdmin extends Component {
             <div className="container left-align">
             <Link to="/admin/dashboard/viewliveclass" style={{margin:"15px", width:"100%"}} className="btn btn-large waves-effect waves-light hoverable black">View All Live Classes</Link>
             </div>
+            <div className="container left-align">
+              <Link to="/admin/dashboard/viewstudent" style={{margin:"15px", width:"100%"}} className="btn btn-large waves-effect waves-light hoverable black">View All Students</Link>
+            </div>
             <button
               style={{
                 width: "150px",
