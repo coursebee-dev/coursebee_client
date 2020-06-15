@@ -6,6 +6,7 @@ import HeaderImg from "../layout/HeaderImg"
 
 class Landing extends Component {
   componentDidMount() {
+    window.scrollTo(0, 0)
     // If logged in and user navigates to Landing page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
       if (this.props.auth.user.type === "student") {

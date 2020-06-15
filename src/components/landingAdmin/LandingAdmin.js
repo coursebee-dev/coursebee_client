@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import HeaderImg from "../layout/HeaderImg"
 class LandingAdmin extends Component {
   componentDidMount() {
+    window.scrollTo(0, 0)
     // If logged in and user navigates to Register page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
       if (this.props.auth.user.type === "student") {
