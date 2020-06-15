@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
 //import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import axios from "axios";
 import {Helmet} from 'react-helmet'
-export default class LiveClass extends Component {
+class LiveClass extends Component {
     constructor() {
         super();
         this.state = {
             liveClasses: []
         }
+        this.getLiveClasses = this.getLiveClasses.bind(this)
     }
-    componentDidMount() {
+
+    getLiveClasses = () => {
         axios.get('/api/approvedliveclass')
             .then(res => {
                 this.setState({ liveClasses: res.data })
@@ -19,8 +23,19 @@ export default class LiveClass extends Component {
                 console.log(err)
             });
     }
-    onRegisterClick = e =>{
 
+    componentDidMount() {
+        this.getLiveClasses()
+    }
+    onRegisterClick = async (e) =>{
+        try {
+            const { user } = this.props.auth;
+            var meetingid = e.target.value
+            const {data} = await axios.post(`/api/registerLiveClass/${user.id}/${meetingid}`)
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
     }
     render() {
         const seo = {
@@ -33,7 +48,7 @@ export default class LiveClass extends Component {
         const liveClasses = this.state.liveClasses.map(liveClass => (
             <li className="collection-item" key={liveClass._id}>
                 <p className="secondary-content">
-                   <button onClick={this.onRegisterClick} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Register</button>
+                   <button onClick={this.onRegisterClick} value={liveClass.meetingid} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Register</button>
                 </p>
                 <h6>Topic : {liveClass.topic}</h6>
                 <p>Start Time: {liveClass.start_time.split('T')[0] + " " + liveClass.start_time.split('T')[1]} </p>
@@ -62,3 +77,14 @@ export default class LiveClass extends Component {
         )
     }
 }
+
+LiveClass.propTypes = {
+    auth: PropTypes.object.isRequired
+  };
+  const mapStateToProps = state => ({
+    auth: state.auth
+  });
+  
+  export default connect(
+    mapStateToProps
+  )(LiveClass);
