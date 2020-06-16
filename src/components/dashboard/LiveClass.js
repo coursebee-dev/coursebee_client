@@ -29,10 +29,7 @@ class LiveClass extends Component {
     }
     onRegisterClick = async (e) =>{
         try {
-            const { user } = this.props.auth;
-            var meetingid = e.target.value
-            const {data} = await axios.post(`/api/registerLiveClass/${user.id}/${meetingid}`)
-            console.log(data)
+            
         } catch (error) {
             console.log(error)
         }
