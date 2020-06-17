@@ -46,8 +46,7 @@ export default class ViewLiveClass extends Component {
                 <h6>Topic : {liveClass.topic}</h6>
                 <p>Start Time: {liveClass.start_time.split('T')[0] + " " + liveClass.start_time.split('T')[1]} </p>
                 <p>Duration : {liveClass.duration}</p>
-                <p>Agenda: {liveClass.agenda}</p>
-                <p>Password : {liveClass.password}</p>
+                <p>Type: {liveClass.class_type}</p>
             </li>
         ));
         return (

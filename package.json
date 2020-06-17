@@ -9,7 +9,7 @@
     "history": "^4.10.1",
     "is-empty": "^1.2.0",
     "jwt-decode": "^2.2.0",
-    "materialize-css": "^1.0.0-rc.2",
+    "materialize-css": "^1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-ga": "^2.7.0",

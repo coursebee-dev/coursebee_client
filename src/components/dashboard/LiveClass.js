@@ -3,12 +3,14 @@ import React, { Component } from 'react'
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import axios from "axios";
-import {Helmet} from 'react-helmet'
+import { Helmet } from 'react-helmet'
+import M from "materialize-css"
 class LiveClass extends Component {
     constructor() {
         super();
         this.state = {
-            liveClasses: []
+            liveClasses: [],
+            notify:""
         }
         this.getLiveClasses = this.getLiveClasses.bind(this)
     }
@@ -17,7 +19,6 @@ class LiveClass extends Component {
         axios.get('/api/approvedliveclass')
             .then(res => {
                 this.setState({ liveClasses: res.data })
-                console.log(this.state)
             })
             .catch(err => {
                 console.log(err)
@@ -27,12 +28,17 @@ class LiveClass extends Component {
     componentDidMount() {
         this.getLiveClasses()
     }
-    onRegisterClick = async (e) =>{
-        try {
-            
-        } catch (error) {
-            console.log(error)
-        }
+    onRegisterClick = e => {
+        console.log(this.props.studentId)
+        axios.post('/api/registerliveclass/'+this.props.studentId)
+            .then(res => {
+                this.setState({ notify: res.data.message })
+            })
+            .catch(err => {
+                console.log(err)
+            });
+
+        M.toast({ html: this.state.notify })
     }
     render() {
         const seo = {
@@ -45,13 +51,12 @@ class LiveClass extends Component {
         const liveClasses = this.state.liveClasses.map(liveClass => (
             <li className="collection-item" key={liveClass._id}>
                 <p className="secondary-content">
-                   <button onClick={this.onRegisterClick} value={liveClass.meetingid} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Register</button>
+                    <button onClick={this.onRegisterClick} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Register</button>
                 </p>
                 <h6>Topic : {liveClass.topic}</h6>
                 <p>Start Time: {liveClass.start_time.split('T')[0] + " " + liveClass.start_time.split('T')[1]} </p>
                 <p>Duration : {liveClass.duration}</p>
-                <p>Agenda: {liveClass.agenda}</p>
-                <p>Password : {liveClass.password}</p>
+                <p>Type: {liveClass.class_type}</p>
             </li>
         ));
         return (
@@ -77,11 +82,11 @@ class LiveClass extends Component {
 
 LiveClass.propTypes = {
     auth: PropTypes.object.isRequired
-  };
-  const mapStateToProps = state => ({
+};
+const mapStateToProps = state => ({
     auth: state.auth
-  });
-  
-  export default connect(
+});
+
+export default connect(
     mapStateToProps
-  )(LiveClass);
+)(LiveClass);

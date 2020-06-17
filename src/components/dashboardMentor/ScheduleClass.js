@@ -9,12 +9,11 @@ class ScheduleClass extends Component {
         super();
         this.state = {
             topic: "",
+            class_type: "",
             start_date: "",
             start_time: "",
             duration: "",
-            password: "",
-            agenda: "",
-            errors:{},
+            errors: {}
         };
     }
     componentWillReceiveProps(nextProps) {
@@ -35,18 +34,43 @@ class ScheduleClass extends Component {
     };
     onSubmit = e => {
         e.preventDefault();
+        if(this.state.topic === ""){
+            this.setState({errors:{topic: "Topic field is required"}})
+            return
+        }
+        if(this.state.class_type === ""){
+            this.setState({errors:{class_type: "Class type field is required"}})
+            return
+        }
+        if(this.state.start_date === ""){
+            this.setState({errors:{start_date: "Date field is required"}})
+            return
+        }
+        if(this.state.start_time === ""){
+            this.setState({errors:{start_time: "Time field is required"}})
+            return
+        }
+        if(this.state.duration === ""){
+            this.setState({errors:{duration: "Duration field is required"}})
+            return
+        }
+        const startTime = new Date(`${this.state.start_date}T${this.state.start_time}:00Z`)
+        startTime.setHours(startTime.getHours() - 6)// timezone:Asia/Dhaka
+        const tempTime = new Date()
+        tempTime.setHours(tempTime.getHours() - 2)
+        if(tempTime >= startTime){
+            this.setState({errors:{start_date: "Schedule at least two hours before",start_time: "Schedule at least two hours before"}})
+            return
+        }
         const formData = {
             mentorId: this.props.auth.user.id,
             topic: this.state.topic,
-            type: 2,
-            start_time: this.state.start_date + "T" + this.state.start_time + ":00",
+            class_type: this.state.class_type,
+            start_time: startTime.toISOString(),//start time in iso format UTC
             duration: this.state.duration,
-            timezone: "Asia/Dhaka",
-            password: this.state.password,
-            agenda: this.state.agenda
         }
         console.log(formData)
-        this.props.scheduleLiveClass(formData,this.props.auth.user.id,this.props.history)
+        this.props.scheduleLiveClass(formData, this.props.auth.user.id, this.props.history)
     }
 
     render() {
@@ -80,8 +104,29 @@ class ScheduleClass extends Component {
                                     {errors.topic}
                                     {errors.topicnotfound}
                                 </span>
-                            </div>              
-                            <div className=" col s12">      
+                            </div>
+                            <div className="col s12">
+                                <select
+                                    onChange={this.onChange}
+                                    value={this.state.class_type}
+                                    id="class_type"
+                                    error={errors.class_type}
+                                    className={classnames("browser-default", {
+                                        invalid: errors.class_type || errors.class_typenotfound
+                                    })}
+                                >
+                                    <option disabled value="">Select Type</option>
+                                    <option value="Open" disabled>Open For All</option>
+                                    <option value="Free">Free Registration</option>
+                                    <option value="Paid" disabled>Paid Live Class</option>
+                                </select>
+                                <label htmlFor="class_type">class type  </label>
+                                <span className="red-text">
+                                    {errors.class_type}
+                                    {errors.class_typenotfound}
+                                </span>
+                            </div>
+                            <div className=" col s12">
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.start_date}
@@ -92,12 +137,13 @@ class ScheduleClass extends Component {
                                         invalid: errors.start_date || errors.start_datenotfound
                                     })}
                                 />
-                                <label htmlFor="start_date">start date</label>
+                                <label htmlFor="start_date">start date  </label>
                                 <span className="red-text">
                                     {errors.start_date}
                                     {errors.start_datenotfound}
                                 </span>
                             </div>
+
                             <div className="col s12">
                                 <input
                                     onChange={this.onChange}
@@ -109,12 +155,12 @@ class ScheduleClass extends Component {
                                         invalid: errors.start_time || errors.start_timenotfound
                                     })}
                                 />
-                                <label htmlFor="start_time">start time</label>
+                                <label htmlFor="start_time">start time  </label>
                                 <span className="red-text">
                                     {errors.start_time}
                                     {errors.start_timenotfound}
                                 </span>
-                            </div> 
+                            </div>
                             <div className="input-field col s12">
                                 <input
                                     onChange={this.onChange}
@@ -131,43 +177,6 @@ class ScheduleClass extends Component {
                                 <span className="red-text">
                                     {errors.duration}
                                     {errors.durationnotfound}
-                                </span>
-                            </div>
-                            <div className="input-field col s12">
-                                <textarea
-                                    onChange={this.onChange}
-                                    value={this.state.agenda}
-                                    error={errors.agenda}
-                                    id="agenda"
-                                    type="text"
-                                    className={classnames("materialize-textarea", {
-                                        invalid: errors.agenda || errors.agendanotfound
-                                    })}
-                                />
-                                <label htmlFor="agenda">agenda</label>
-                                <span className="red-text">
-                                    {errors.agenda}
-                                    {errors.agendanotfound}
-                                </span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.password}
-                                    error={errors.password}
-                                    id="password"
-                                    type="password"
-                                    minLength={6}
-                                    maxLength={10}
-                                    pattern="[a-zA-Z0-9@-_*]"
-                                    className={classnames("", {
-                                        invalid: errors.password || errors.passwordincorrect
-                                    })}
-                                />
-                                <label htmlFor="password">Password</label>
-                                <span className="red-text">
-                                    {errors.password}
-                                    {errors.passwordincorrect}
                                 </span>
                             </div>
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>

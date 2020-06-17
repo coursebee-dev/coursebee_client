@@ -31,6 +31,7 @@ import ViewMentor from './components/dashboardAdmin/ViewMentor';
 import ViewMentorDetail from './components/dashboardAdmin/ViewMentorDetail';
 import ViewLiveClass from './components/dashboardAdmin/ViewLiveClass';
 import ViewStudent from './components/dashboardAdmin/ViewStudent';
+import LiveClassRoom from './components/dashboardMentor/LiveClassRoom';
 
 export default function PathRoute() {
     return (
@@ -55,6 +56,7 @@ export default function PathRoute() {
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 <PrivateRouteMentor exact path="/mentor/dashboard" component={DashboardMentor} />
                 <PrivateRouteMentor exact path="/mentor/dashboard/scheduleclass" component={ScheduleClass} />
+                <PrivateRouteMentor exact path="/mentor/dashboard/liveclassroom/:topic" component={LiveClassRoom} />
                 <PrivateRouteAdmin exact path="/admin/dashboard" component={DashboardAdmin} />
                 <PrivateRouteAdmin exact path="/admin/dashboard/viewmentor" component={ViewMentor} />
                 <PrivateRouteAdmin exact path="/admin/dashboard/viewmentor/:mentorid" component={ViewMentorDetail} />

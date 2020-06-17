@@ -5,7 +5,8 @@ body {
   }
 
   main {
-    min-height: calc(100vh - 227px);
+    min-height: 100vh;
+    display: flex;
   }
   
   /* width */

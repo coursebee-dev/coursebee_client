@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import logoutUser from "../../actions/logoutAction";
 import HeaderImg from "../layout/HeaderImg"
 import LiveClass from "./LiveClass"
+
 class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
@@ -27,7 +28,7 @@ class Dashboard extends Component {
                 </p>
 
               </h4>
-              <LiveClass />
+              <LiveClass studentId={this.props.auth.user.id}/>
               <button
                 style={{
                   width: "150px",
