@@ -3,11 +3,16 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import hexagon from '../../images/hexagon2.jpg'
+import hexagonwebp from '../../images/hexagon2.webp'
 class HeaderImg extends Component {
     render() {
         return (
             <div>
-                <img style={{ width: "100%" }} src={hexagon} alt="header img" />
+                <picture>
+                    <source type="image/webp" srcset={hexagonwebp} />
+                    <source type="image/jpeg" srcset={hexagon} />
+                    <img style={{ width: "100%" }} src={hexagon} alt="header img" />
+                </picture>
             </div>
         );
     }

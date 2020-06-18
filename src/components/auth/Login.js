@@ -11,6 +11,7 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
+            loading: false,
             errors: {}
         };
     }
@@ -41,11 +42,14 @@ class Login extends Component {
         this.setState({ [e.target.id]: e.target.value });
     };
     onSubmit = e => {
-        e.preventDefault(); const userData = {
+        e.preventDefault();
+        this.setState({loading:true})
+        const userData = {
             email: this.state.email,
             password: this.state.password
         };
         this.props.loginUser(userData,this.props.history);
+        this.setState({loading:true})
     }
 
     render() {
@@ -101,7 +105,12 @@ class Login extends Component {
                                 </span>
                             </div>
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                <button
+                                {this.state.loading? (
+                                    <div className="progress">
+                                        <div className="indeterminate"></div>
+                                    </div>
+                                ) : (
+                                    <button
                                     style={{
                                         width: "150px",
                                         borderRadius: "3px",
@@ -113,6 +122,7 @@ class Login extends Component {
                                 >
                                     Login
                                 </button>
+                                )}
                             </div>
                         </form>
                     </div>

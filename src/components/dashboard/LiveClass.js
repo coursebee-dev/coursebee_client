@@ -10,6 +10,7 @@ class LiveClass extends Component {
         super();
         this.state = {
             liveClasses: [],
+            loading: false,
             notify:""
         }
         this.getLiveClasses = this.getLiveClasses.bind(this)

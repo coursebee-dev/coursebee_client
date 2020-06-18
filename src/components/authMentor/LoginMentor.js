@@ -12,6 +12,7 @@ class Login extends Component {
             email: "",
             password: "",
             captcha: false,
+            loading: false,
             errors: {}
         };
     }
@@ -42,12 +43,14 @@ class Login extends Component {
         this.setState({ [e.target.id]: e.target.value });
     };
     onSubmit = e => {
-        e.preventDefault(); const userData = {
+        e.preventDefault();
+        this.setState({loading:true})
+        const userData = {
             email: this.state.email,
             password: this.state.password
         };
         this.props.loginMentor(userData,this.props.history);
-
+        this.setState({loading:false})
         // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
     };
 
@@ -104,7 +107,12 @@ class Login extends Component {
                                 </span>
                             </div>
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                <button
+                                {this.state.loading? (
+                                    <div className="progress">
+                                        <div className="indeterminate"></div>
+                                    </div>
+                                ) : (
+                                    <button
                                     style={{
                                         width: "150px",
                                         borderRadius: "3px",
@@ -113,9 +121,10 @@ class Login extends Component {
                                     }}
                                     type="submit"
                                     className="btn btn-large waves-effect waves-light hoverable teal darken-1"
-                                >
-                                    Login
-                                </button>
+                                    >
+                                        Login
+                                    </button>
+                                )}
                             </div>
                         </form>
                     </div>
