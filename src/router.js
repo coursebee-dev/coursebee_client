@@ -31,8 +31,8 @@ import ViewMentor from './components/dashboardAdmin/ViewMentor';
 import ViewMentorDetail from './components/dashboardAdmin/ViewMentorDetail';
 import ViewLiveClass from './components/dashboardAdmin/ViewLiveClass';
 import ViewStudent from './components/dashboardAdmin/ViewStudent';
-import LiveClassRoom from './components/dashboardMentor/LiveClassRoom';
-
+import LiveClassRoom from './components/dashboard/LiveClassRoom';
+import Profile from './components/profile/profile'
 export default function PathRoute() {
     return (
         <Switch>
@@ -53,7 +53,9 @@ export default function PathRoute() {
                 <Route exact path="/liveclass" component={LiveClass} />
                 <Route exact path="/course" component={Course} />
                 <Route exact path="/training" component={Training} />
+                <PrivateRoute exact path="/profile" component={Profile} />
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                <PrivateRoute exact path="/classroom/:id" component={LiveClassRoom} />
                 <PrivateRouteMentor exact path="/mentor/dashboard" component={DashboardMentor} />
                 <PrivateRouteMentor exact path="/mentor/dashboard/scheduleclass" component={ScheduleClass} />
                 <PrivateRouteMentor exact path="/mentor/dashboard/liveclassroom/:topic" component={LiveClassRoom} />

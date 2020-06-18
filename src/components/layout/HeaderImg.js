@@ -9,8 +9,8 @@ class HeaderImg extends Component {
         return (
             <div>
                 <picture>
-                    <source type="image/webp" srcset={hexagonwebp} />
-                    <source type="image/jpeg" srcset={hexagon} />
+                    <source type="image/webp" srcSet={hexagonwebp} />
+                    <source type="image/jpeg" srcSet={hexagon} />
                     <img style={{ width: "100%" }} src={hexagon} alt="header img" />
                 </picture>
             </div>

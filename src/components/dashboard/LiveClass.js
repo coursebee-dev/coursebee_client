@@ -30,8 +30,9 @@ class LiveClass extends Component {
         this.getLiveClasses()
     }
     onRegisterClick = e => {
+        let liveclassid = e.target.value
         console.log(this.props.studentId)
-        axios.post('/api/registerliveclass/'+this.props.studentId)
+        axios.post(`/api/registerliveclass/${this.props.studentId}/${liveclassid}`)
             .then(res => {
                 this.setState({ notify: res.data.message })
             })
@@ -52,7 +53,7 @@ class LiveClass extends Component {
         const liveClasses = this.state.liveClasses.map(liveClass => (
             <li className="collection-item" key={liveClass._id}>
                 <p className="secondary-content">
-                    <button onClick={this.onRegisterClick} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Register</button>
+                    <button value={liveClass._id} onClick={this.onRegisterClick} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Register</button>
                 </p>
                 <h6>Topic : {liveClass.topic}</h6>
                 <p>Start Time: {liveClass.start_time.split('T')[0] + " " + liveClass.start_time.split('T')[1]} </p>
@@ -61,7 +62,7 @@ class LiveClass extends Component {
             </li>
         ));
         return (
-            <div style={{ margin: "50px" }}>
+            <div>
                 <Helmet
                     title={seo.title}
                     meta={[

@@ -28,7 +28,10 @@ class Dashboard extends Component {
                 </p>
 
               </h4>
+
+              <div className="container">
               <LiveClass studentId={this.props.auth.user.id}/>
+              </div>
               <button
                 style={{
                   width: "150px",
