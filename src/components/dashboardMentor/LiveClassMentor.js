@@ -27,7 +27,7 @@ export default class LiveClassMentor extends Component {
                 { liveClass.approved ?<span> Approved</span>:<span className="red-text"> Waiting Approval</span>}
                 </p>
                 <h6>Topic : {liveClass.topic}</h6>
-                <p>Start Time: {liveClass.start_time.split('T')[0]+ " " + liveClass.start_time.split('T')[1]} </p>
+                <p>Start Time: {new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>
                 <p>Duration : {liveClass.duration}</p>
                 <p>Type: {liveClass.class_type}</p>
                 <Link to={"/mentor/dashboard/liveclassroom/"+liveClass._id} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Start Class</Link>
@@ -36,7 +36,7 @@ export default class LiveClassMentor extends Component {
         return (
             <div style={{ margin: "50px" }}>
                 <h4 style={{ margin: "50px" }}>Scheduled Classes</h4>
-                <ul style={{ textAlign: "left" }} className="collection">{liveClasses}</ul>
+                <ul style={{ textAlign: "left" }} className="collection">{liveClasses.reverse()}</ul>
             </div>
         )
     }

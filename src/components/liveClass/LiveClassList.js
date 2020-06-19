@@ -56,7 +56,7 @@ class LiveClassList extends Component {
                     <button value={liveClass._id} onClick={this.onRegisterClick} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Register</button>
                 </p>
                 <h6>Topic : {liveClass.topic}</h6>
-                <p>Start Time: {liveClass.start_time.split('T')[0] + " " + liveClass.start_time.split('T')[1]} </p>
+                <p>Start Time: {new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>
                 <p>Duration : {liveClass.duration}</p>
                 <p>Type: {liveClass.class_type}</p>
             </li>
@@ -76,7 +76,7 @@ class LiveClassList extends Component {
                     ]}
                 />
                 <h4 style={{ margin: "50px" }}>Scheduled Classes</h4>
-                <ul style={{width:"100%",textAlign: "left" }} className="collection">{liveClasses}</ul>
+                <ul style={{width:"100%",textAlign: "left" }} className="collection">{liveClasses.reverse()}</ul>
                 <Link style={{ margin: "40px" }} to="/" className="btn-flat waves-effect teal darken-1 white-text">
                         <i className="material-icons left">keyboard_backspace</i>Go Back
                 </Link>

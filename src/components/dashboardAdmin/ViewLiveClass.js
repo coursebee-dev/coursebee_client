@@ -18,7 +18,7 @@ export default class ViewLiveClass extends Component {
                 console.log(err)
             });
     }
-    onApproveClick = (liveId) => e => {
+     onApproveClick = (liveId) => e => {
         e.preventDefault();
         axios.put(`/api/admin/approvelive/${liveId}`)
             .then(res => {
@@ -27,7 +27,6 @@ export default class ViewLiveClass extends Component {
                         state.liveClasses.find(live => live._id === liveId).approved = true;
                         return state
                     });
-                    //console.log(this.state.mentor)
                 } else {
                     throw Error({ message: "failed" })
                 }
@@ -44,7 +43,7 @@ export default class ViewLiveClass extends Component {
                 </p>
                
                 <h6>Topic : {liveClass.topic}</h6>
-                <p>Start Time: {liveClass.start_time.split('T')[0] + " " + liveClass.start_time.split('T')[1]} </p>
+                <p>Start Time: {new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>
                 <p>Duration : {liveClass.duration}</p>
                 <p>Type: {liveClass.class_type}</p>
             </li>
@@ -55,7 +54,7 @@ export default class ViewLiveClass extends Component {
                         <i className="material-icons left">keyboard_backspace</i>Go Back
                 </Link>
                 <h4 style={{ margin: "50px" }}>Scheduled Classes</h4>
-                <ul style={{ textAlign: "left" }} className="collection">{liveClasses}</ul>
+                <ul style={{ textAlign: "left" }} className="collection">{liveClasses.reverse()}</ul>
                 <Link to="/admin/dashboard" className="btn-flat waves-effect orange darken-1">
                         <i className="material-icons left">keyboard_backspace</i>Go Back
                 </Link>

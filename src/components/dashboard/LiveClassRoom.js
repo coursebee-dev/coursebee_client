@@ -18,14 +18,12 @@ class LiveClassRoom extends Component {
                 disableInviteFunctions: true
             },
             interfaceConfigOverwrite: {
-                filmStripOnly: true,
                 HIDE_INVITE_MORE_HEADER: true,
                 TOOLBAR_BUTTONS: [
                     'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
-                    'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
-                    'livestreaming', 'etherpad', 'settings', 'raisehand',
+                    'fodeviceselection', 'hangup', 'profile', 'chat', 'recording', 'etherpad', 'raisehand',
                     'videoquality', 'filmstrip', 'feedback', 'stats', 'shortcuts',
-                    'tileview', 'videobackgroundblur', 'download', 'help', 'mute-everyone', 'security'
+                    'tileview', 'videobackgroundblur', 'download', 'help'
                 ]
             },
             parentNode: document.querySelector('#studentmeet')

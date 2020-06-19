@@ -60,7 +60,7 @@ class MyLiveClass extends Component {
                     <button value={liveClass._id} onClick={this.onJoinClick} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Join Class</button>
                 </p>
                 <h6>Topic : {liveClass.topic}</h6>
-                <p>Start Time: {liveClass.start_time.split('T')[0] + " " + liveClass.start_time.split('T')[1]} </p>
+                <p>Start Time: {new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>
                 <p>Duration : {liveClass.duration}</p>
                 <p>Type: {liveClass.class_type}</p>
             </li>
@@ -80,7 +80,7 @@ class MyLiveClass extends Component {
                     ]}
                 />
                 <h4 style={{ margin: "50px" }}>Registered Classes</h4>
-                <ul style={{ textAlign: "left" }} className="collection">{myLiveClasses}</ul>
+                <ul style={{ textAlign: "left" }} className="collection">{myLiveClasses.reverse()}</ul>
             </div>
         )
     }
