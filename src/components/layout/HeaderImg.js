@@ -7,13 +7,9 @@ import hexagonwebp from '../../images/hexagon2.webp'
 class HeaderImg extends Component {
     render() {
         return (
-            <div>
-                <picture>
-                    <source type="image/webp" srcSet={hexagonwebp} />
-                    <source type="image/jpeg" srcSet={hexagon} />
-                    <img style={{ width: "100%" }} src={hexagon} alt="header img" />
-                </picture>
-            </div>
+                
+                    <img className="" style={{ width: "100vw" }} src={hexagon} alt="header img" />
+                
         );
     }
 }
