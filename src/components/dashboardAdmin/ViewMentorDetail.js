@@ -42,7 +42,7 @@ export default class ViewMentorDetail extends Component {
     }
     render() {
         return (
-            <div>
+            <div style={{width:"100%"}}>
                 <div className="container">
                     <h2>{this.state.mentor.name}</h2>
                     <h5>{this.state.mentor.email}</h5>

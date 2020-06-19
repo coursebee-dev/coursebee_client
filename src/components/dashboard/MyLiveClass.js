@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { Helmet } from 'react-helmet'
 import M from "materialize-css"
-class LiveClass extends Component {
+class MyLiveClass extends Component {
     constructor() {
         super();
         this.state = {
-            liveClasses: [],
+            myLiveClasses: [],
             loading: false,
             notify:""
         }
@@ -17,9 +17,9 @@ class LiveClass extends Component {
     }
 
     getLiveClasses = () => {
-        axios.get('/api/approvedliveclass')
+        axios.get('/api/myliveclass/' + this.props.studentId)
             .then(res => {
-                this.setState({ liveClasses: res.data })
+                this.setState({ myLiveClasses: res.data })
             })
             .catch(err => {
                 console.log(err)
@@ -29,18 +29,22 @@ class LiveClass extends Component {
     componentDidMount() {
         this.getLiveClasses()
     }
-    onRegisterClick = e => {
+    onJoinClick = e => {
         let liveclassid = e.target.value
         console.log(this.props.studentId)
-        axios.post(`/api/registerliveclass/${this.props.studentId}/${liveclassid}`)
+        axios.get(`/api/joinliveclass/${this.props.studentId}/${liveclassid}`)
             .then(res => {
                 this.setState({ notify: res.data.message })
+                if(res.data.success){
+                    this.props.history.push('/dashboard/liveclassroom/' + liveclassid)
+                }
+                else{
+                    M.toast({ html: this.state.notify })
+                }
             })
             .catch(err => {
                 console.log(err)
             });
-
-        M.toast({ html: this.state.notify })
     }
     render() {
         const seo = {
@@ -50,10 +54,10 @@ class LiveClass extends Component {
             url: "https://coursebee.com/liveClassroom/",
             image: ""
         };
-        const liveClasses = this.state.liveClasses.map(liveClass => (
+        const myLiveClasses = this.state.myLiveClasses.map(liveClass => (
             <li className="collection-item" key={liveClass._id}>
                 <p className="secondary-content">
-                    <button value={liveClass._id} onClick={this.onRegisterClick} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Register</button>
+                    <button value={liveClass._id} onClick={this.onJoinClick} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Join Class</button>
                 </p>
                 <h6>Topic : {liveClass.topic}</h6>
                 <p>Start Time: {liveClass.start_time.split('T')[0] + " " + liveClass.start_time.split('T')[1]} </p>
@@ -75,14 +79,14 @@ class LiveClass extends Component {
                         { property: "og:url", content: seo.url },
                     ]}
                 />
-                <h4 style={{ margin: "50px" }}>Scheduled Classes</h4>
-                <ul style={{ textAlign: "left" }} className="collection">{liveClasses}</ul>
+                <h4 style={{ margin: "50px" }}>Registered Classes</h4>
+                <ul style={{ textAlign: "left" }} className="collection">{myLiveClasses}</ul>
             </div>
         )
     }
 }
 
-LiveClass.propTypes = {
+MyLiveClass.propTypes = {
     auth: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
@@ -91,4 +95,4 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps
-)(LiveClass);
+)(MyLiveClass);

@@ -23,16 +23,17 @@ import Training from './components/training/Training';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Dashboard from './components/dashboard/Dashboard';
-import LiveClass from './components/dashboard/LiveClass';
+import LiveClassList from './components/liveClass/LiveClassList';
+import LiveClassRoom from './components/dashboard/LiveClassRoom';
 import DashboardMentor from './components/dashboardMentor/DashboardMentor';
 import ScheduleClass from './components/dashboardMentor/ScheduleClass';
+import LiveClassRoomMentor from './components/dashboardMentor/LiveClassRoomMentor';
 import DashboardAdmin from './components/dashboardAdmin/DashboardAdmin';
 import ViewMentor from './components/dashboardAdmin/ViewMentor';
 import ViewMentorDetail from './components/dashboardAdmin/ViewMentorDetail';
 import ViewLiveClass from './components/dashboardAdmin/ViewLiveClass';
 import ViewStudent from './components/dashboardAdmin/ViewStudent';
-import LiveClassRoom from './components/dashboard/LiveClassRoom';
-import Profile from './components/profile/profile'
+import MyLiveClass from './components/dashboard/MyLiveClass';
 export default function PathRoute() {
     return (
         <Switch>
@@ -50,15 +51,15 @@ export default function PathRoute() {
                 <Route exact path="/admin/login" component={LoginAdmin} />
                 <Route exact path="/verifyemail" component={VerifyEmail} />
                 <Route exact path="/about" component={About} />
-                <Route exact path="/liveclass" component={LiveClass} />
+                <Route exact path="/liveclass" component={LiveClassList} />
                 <Route exact path="/course" component={Course} />
                 <Route exact path="/training" component={Training} />
-                <PrivateRoute exact path="/profile" component={Profile} />
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                <PrivateRoute exact path="/classroom/:id" component={LiveClassRoom} />
+                <PrivateRoute exact path="/dashboard/myliveclass/:id" component={MyLiveClass} />
+                <PrivateRoute exact path="/dashboard/liveclassroom/:classid" component={LiveClassRoom} />
                 <PrivateRouteMentor exact path="/mentor/dashboard" component={DashboardMentor} />
                 <PrivateRouteMentor exact path="/mentor/dashboard/scheduleclass" component={ScheduleClass} />
-                <PrivateRouteMentor exact path="/mentor/dashboard/liveclassroom/:topic" component={LiveClassRoom} />
+                <PrivateRouteMentor exact path="/mentor/dashboard/liveclassroom/:classid" component={LiveClassRoomMentor} />
                 <PrivateRouteAdmin exact path="/admin/dashboard" component={DashboardAdmin} />
                 <PrivateRouteAdmin exact path="/admin/dashboard/viewmentor" component={ViewMentor} />
                 <PrivateRouteAdmin exact path="/admin/dashboard/viewmentor/:mentorid" component={ViewMentorDetail} />

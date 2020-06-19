@@ -40,7 +40,7 @@ export default class ViewMentor extends Component {
         ));
         return (
             
-            <div style={{margin:"50px"}}>
+            <div style={{width:"100%",margin:"50px"}}>
                 <Link to="/admin/dashboard" className="btn-flat waves-effect orange darken-1">
                         <i className="material-icons left">keyboard_backspace</i>Go Back
                 </Link>

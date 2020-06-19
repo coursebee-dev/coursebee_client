@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import logoutUser from "../../actions/logoutAction";
 import HeaderImg from "../layout/HeaderImg"
-import LiveClass from "./LiveClass"
+import MyLiveClass from "./MyLiveClass"
 
 class Dashboard extends Component {
   onLogoutClick = e => {
@@ -28,9 +29,12 @@ class Dashboard extends Component {
                 </p>
 
               </h4>
-
+              <Link to="/liveclass" className="btn-flat waves-effect orange darken-1">
+                View All Live Classes
+                <i className="material-icons left">arrow_forward</i>
+              </Link>
               <div className="container">
-              <LiveClass studentId={this.props.auth.user.id}/>
+                <MyLiveClass history={this.props.history} studentId={this.props.auth.user.id} />
               </div>
               <button
                 style={{

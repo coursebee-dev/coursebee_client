@@ -30,7 +30,7 @@ export default class LiveClassMentor extends Component {
                 <p>Start Time: {liveClass.start_time.split('T')[0]+ " " + liveClass.start_time.split('T')[1]} </p>
                 <p>Duration : {liveClass.duration}</p>
                 <p>Type: {liveClass.class_type}</p>
-                <Link to={"/mentor/dashboard/liveclassroom/"+liveClass.topic.replace(/\s/g, "_")} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Start Class</Link>
+                <Link to={"/mentor/dashboard/liveclassroom/"+liveClass._id} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Start Class</Link>
             </li>
         ));
         return (
