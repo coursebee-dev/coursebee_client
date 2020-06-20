@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { scheduleLiveClass } from "../../actions/liveClassAction";
+import { Editor } from '@tinymce/tinymce-react';
+
 class ScheduleClass extends Component {
     constructor() {
         super();
@@ -13,6 +15,7 @@ class ScheduleClass extends Component {
             start_date: "",
             start_time: "",
             duration: "",
+            description: "",
             errors: {}
         };
     }
@@ -28,6 +31,9 @@ class ScheduleClass extends Component {
         if (this.props.auth.user.adminVerify === false) {
             this.props.history.push("mentor/dashboard");
         }
+    }
+    handleEditorChange = (e) => {
+        this.setState({description: e.target.getContent()})
     }
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
@@ -66,6 +72,7 @@ class ScheduleClass extends Component {
             mentorId: this.props.auth.user.id,
             topic: this.state.topic,
             class_type: this.state.class_type,
+            description: this.state.description,
             start_time: startTime.toISOString(),//start time in iso format UTC
             duration: this.state.duration,
         }
@@ -103,6 +110,21 @@ class ScheduleClass extends Component {
                                 <span className="red-text">
                                     {errors.topic}
                                     {errors.topicnotfound}
+                                </span>
+                            </div>
+                            <div className="input-field col s12">
+                                <Editor id="description"
+                                    initialValue="<p>Add a description</p>"
+                                    init={{
+                                    plugins: 'link image code',
+                                    toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+                                    }}
+                                    onChange={this.handleEditorChange}
+                                />
+                                <label htmlFor="description">Description</label>
+                                <span className="red-text">
+                                    {errors.description}
+                                    {errors.descriptionnotfound}
                                 </span>
                             </div>
                             <div className="col s12">

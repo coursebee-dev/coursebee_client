@@ -56,6 +56,7 @@ class LiveClassList extends Component {
                     <button value={liveClass._id} onClick={this.onRegisterClick} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Register</button>
                 </p>
                 <h6>Topic : {liveClass.topic}</h6>
+                <div dangerouslySetInnerHTML={{__html: liveClass.description}} />
                 <p>Start Time: {new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>
                 <p>Duration : {liveClass.duration}</p>
                 <p>Type: {liveClass.class_type}</p>
