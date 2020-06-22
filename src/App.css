@@ -14,6 +14,10 @@ body {
   ::-webkit-scrollbar {
     width: 10px;
   }
+
+  #description{
+    height: 200px;
+  }
   
   /* Track */
   ::-webkit-scrollbar-track {
@@ -36,4 +40,10 @@ body {
 
  .tabs .indicator {
   background-color:#ff5722 ;
+}
+
+.schedule{
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
 }
