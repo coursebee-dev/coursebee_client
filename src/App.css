@@ -45,5 +45,17 @@ body {
 .schedule{
   display: flex;
   width: 100%;
+  margin: 20px 0 20px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.schedule .row {
+  margin: 20px;
+}
+
+.class-button{
+  display: flex;
+  flex-direction: row;
   justify-content: space-evenly;
 }
