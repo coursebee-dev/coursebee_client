@@ -73,6 +73,7 @@ class PaidClass extends Component {
             topic: this.state.topic,
             class_type: this.state.class_type,
             description: this.state.description,
+            price: this.state.price,
             start_time: startTime.toISOString(),//start time in iso format UTC
             duration: this.state.duration,
         }
