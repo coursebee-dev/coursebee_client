@@ -160,7 +160,7 @@ class FreeClass extends Component {
                                     id="duration"
                                     type="number"
                                     min="0"
-                                    className={classnames("materialize-textarea", {
+                                    className={classnames("", {
                                         invalid: errors.duration || errors.durationnotfound
                                     })}
                                 />
