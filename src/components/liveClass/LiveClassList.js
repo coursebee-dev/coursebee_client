@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet'
 import M from "materialize-css"
+
 class LiveClassList extends Component {
     constructor() {
         super();
@@ -26,12 +27,14 @@ class LiveClassList extends Component {
     }
     onRegisterClick = e => {
         const liveclassid = e.target.value
+        const liveclasstype = e.target.id
         if(!this.props.auth.isAuthenticated || this.props.auth.user.type !== "student"){
             M.toast({ html: "Please login as a student"})
             return
         }
         
-        axios.post(`/api/registerliveclass/${this.props.auth.user.id}/${liveclassid}`)
+        if(liveclasstype==="Free"){
+            axios.post(`/api/registerliveclass/${this.props.auth.user.id}/${liveclassid}`)
             .then(res => {
                 M.toast({ html: res.data.message })
             })
@@ -39,9 +42,21 @@ class LiveClassList extends Component {
                 M.toast({ html: "Server Error"})
                 console.log(err)
             });
+        } else if(liveclasstype==="Paid") {
+            axios.post(`/api/registerliveclass/${this.props.auth.user.id}/${liveclassid}`)
+            .then(res => {
+                console.log(res.data)
+                window.open(res.data.GatewayPageURL);
+            })
+            .catch(err => {
+                M.toast({ html: "Server Error"})
+                console.log(err)
+            });
+        }
     }
     componentDidMount() {
         this.getLiveClasses()
+        
     }
     render() {
         const seo = {
@@ -53,9 +68,20 @@ class LiveClassList extends Component {
         };
         const liveClasses = this.state.liveClasses.map(liveClass => (
             <li className="collection-item" key={liveClass._id}>
-                <p className="secondary-content">
-                    <button value={liveClass._id} onClick={this.onRegisterClick} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Register</button>
-                </p>
+                {(() => {
+                    switch (liveClass.class_type) {
+                    case "Free":   return (
+                        <p className="secondary-content">
+                            <button value={liveClass._id} id={liveClass.class_type} onClick={this.onRegisterClick} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Register for free</button>
+                        </p>
+                    );
+                    case "Paid": return (
+                        <p className="secondary-content">
+                            <button value={liveClass._id} id={liveClass.class_type} /*id="sslczPayBtn" postdata={paymentData} endpoint="https://coursebee-server-staging.herokuapp.com/api/payment" order={liveClass._id+Math.random().toString(36).substring(7)}*/ onClick={this.onRegisterClick} className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">Register for ৳ {liveClass.price}</button>
+                        </p>
+                    );
+                    }
+                })()}
                 <h6>Topic : {liveClass.topic}</h6>
                 <div dangerouslySetInnerHTML={{__html: liveClass.description}} />
                 <p>Start Time: {new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>

@@ -34,6 +34,7 @@ import ViewMentorDetail from './components/dashboardAdmin/ViewMentorDetail';
 import ViewLiveClass from './components/dashboardAdmin/ViewLiveClass';
 import ViewStudent from './components/dashboardAdmin/ViewStudent';
 import MyLiveClass from './components/dashboard/MyLiveClass';
+import PostPayment from './components/payment/PostPayment';
 export default function PathRoute() {
     return (
         <Switch>
@@ -54,6 +55,9 @@ export default function PathRoute() {
                 <Route exact path="/liveclass" component={LiveClassList} />
                 <Route exact path="/course" component={Course} />
                 <Route exact path="/training" component={Training} />
+                <Route exact path="/success" component={PostPayment} />
+                <Route exact path="/failed" component={PostPayment} />
+                <Route exact path="/cancel" component={PostPayment} />
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 <PrivateRoute exact path="/dashboard/myliveclass/:id" component={MyLiveClass} />
                 <PrivateRoute exact path="/dashboard/liveclassroom/:classid" component={LiveClassRoom} />
