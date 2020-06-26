@@ -46,8 +46,13 @@ class LiveClassList extends Component {
         } else if (liveclasstype === "Paid") {
             axios.post(`/api/registerliveclass/${this.props.auth.user.id}/${liveclassid}`)
                 .then(res => {
-                    console.log(res.data)
-                    window.location.href =res.data.data;
+                    if(res.data.status === 'success'){
+                        window.open(res.data.data);
+                    } else {
+                        M.toast({ html: "Server Error" })
+                        console.log(res.data.message)
+                    }
+                    
                 })
                 .catch(err => {
                     M.toast({ html: "Server Error" })
@@ -57,14 +62,6 @@ class LiveClassList extends Component {
     }
     componentDidMount() {
         this.getLiveClasses();
-        (function (window, document) {
-            var loader = function () {
-                var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
-                script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
-                tag.parentNode.insertBefore(script, tag);
-            };
-            window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
-        })(window, document);
     }
     render() {
         const seo = {
@@ -79,8 +76,7 @@ class LiveClassList extends Component {
                 {liveClass.class_type === "Paid" ?
                     <p className="secondary-content">
                         <button
-                            id="sslczPayBtn"
-                            value={liveClass._id} liveclasstype={liveClass.class_type} 
+                            value={liveClass._id}
                             onClick={this.onRegisterClick(liveClass.class_type)}
                             className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">
                             Register for ৳ {liveClass.price}
@@ -88,7 +84,7 @@ class LiveClassList extends Component {
                     </p> :
                     <p className="secondary-content">
                         <button
-                            value={liveClass._id} liveclasstype={liveClass.class_type} 
+                            value={liveClass._id}
                             onClick={this.onRegisterClick(liveClass.class_type)}
                             className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">
                             Register for free
