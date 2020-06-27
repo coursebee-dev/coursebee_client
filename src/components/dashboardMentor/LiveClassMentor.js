@@ -9,11 +9,9 @@ export default class LiveClassMentor extends Component {
         }
     }
     componentDidMount() {
-        console.log(this.props.mentorId)
         axios.get('/api/mentor/liveclass/' + this.props.mentorId)
             .then(res => {
                 this.setState({ liveClasses: res.data })
-                console.log(this.state)
             })
             .catch(err => {
                 console.log(err)
