@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { scheduleLiveClass } from "../../actions/liveClassAction";
-import { Editor } from '@tinymce/tinymce-react';
+import tinymce from 'tinymce';
+import '../../App.css';
 
 class PaidClass extends Component {
     constructor() {
@@ -27,45 +28,49 @@ class PaidClass extends Component {
         }
     }
     componentDidMount() {
+        tinymce.init({
+            selector: '#paidclassdescription',
+            inline: true
+        });
         window.scrollTo(0, 0)
         if (this.props.auth.user.adminVerify === false) {
             this.props.history.push("mentor/dashboard");
         }
     }
     handleEditorChange = (e) => {
-        this.setState({description: e.target.getContent()})
+        this.setState({ description: e.target.value })
     }
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
     onSubmit = e => {
         e.preventDefault();
-        if(this.state.topic === ""){
-            this.setState({errors:{topic: "Topic field is required"}})
+        if (this.state.topic === "") {
+            this.setState({ errors: { topic: "Topic field is required" } })
             return
         }
-        if(this.state.class_type === ""){
-            this.setState({errors:{class_type: "Class type field is required"}})
+        if (this.state.class_type === "") {
+            this.setState({ errors: { class_type: "Class type field is required" } })
             return
         }
-        if(this.state.start_date === ""){
-            this.setState({errors:{start_date: "Date field is required"}})
+        if (this.state.start_date === "") {
+            this.setState({ errors: { start_date: "Date field is required" } })
             return
         }
-        if(this.state.start_time === ""){
-            this.setState({errors:{start_time: "Time field is required"}})
+        if (this.state.start_time === "") {
+            this.setState({ errors: { start_time: "Time field is required" } })
             return
         }
-        if(this.state.duration === ""){
-            this.setState({errors:{duration: "Duration field is required"}})
+        if (this.state.duration === "") {
+            this.setState({ errors: { duration: "Duration field is required" } })
             return
         }
         const startTime = new Date(`${this.state.start_date}T${this.state.start_time}:00Z`)
         startTime.setHours(startTime.getHours() - 6)// timezone:Asia/Dhaka
         const tempTime = new Date()
         tempTime.setHours(tempTime.getHours() - 2)
-        if(tempTime >= startTime){
-            this.setState({errors:{start_date: "Schedule at least two hours before",start_time: "Schedule at least two hours before"}})
+        if (tempTime >= startTime) {
+            this.setState({ errors: { start_date: "Schedule at least two hours before", start_time: "Schedule at least two hours before" } })
             return
         }
         const formData = {
@@ -106,14 +111,8 @@ class PaidClass extends Component {
                                 </span>
                             </div>
                             <div className="input-field col s12">
-                                <Editor inline={true} id="description"
-                                    init={{
-                                        plugins: 'link image code',
-                                        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
-                                    }}
-                                    onChange={this.handleEditorChange}
-                                />
-                                <label htmlFor="description">Description</label>
+                                <div className="input-field col s12" id="paidclassdescription" onChange={this.handleEditorChange}></div>
+                                <label htmlFor="paidclassdescription">Description</label>
                                 <span className="red-text">
                                     {errors.description}
                                     {errors.descriptionnotfound}
