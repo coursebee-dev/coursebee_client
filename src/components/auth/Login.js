@@ -53,7 +53,8 @@ class Login extends Component {
     }
 
     render() {
-        const { errors } = this.state; return (
+        const { errors } = this.state; 
+        return (
             <div className="container">
                 <div style={{ marginTop: "8rem", marginBottom: "8rem" }} className="row">
                     <div className="col s8 offset-s2">
@@ -125,6 +126,9 @@ class Login extends Component {
                                 )}
                             </div>
                         </form>
+                        <div className="col s12" style={{ marginTop: "5%" }}>
+                            <Link className="orange-text text-darken-1" to="/forgotpass">Forgot Password?</Link>
+                        </div> 
                     </div>
                 </div>
             </div>
