@@ -22,7 +22,8 @@ class Login extends Component {
         }
         if (nextProps.errors) {
             this.setState({
-                errors: nextProps.errors
+                errors: nextProps.errors,
+                loading:false
             });
         }
     }
@@ -50,7 +51,7 @@ class Login extends Component {
             password: this.state.password
         };
         this.props.loginMentor(userData,this.props.history);
-        this.setState({loading:false})
+        //this.setState({loading:false})
         // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
     };
 

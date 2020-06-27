@@ -48,7 +48,7 @@ class DashboardMentor extends Component {
                         this.Modal = Modal;
                     }} className="modal">
                 <div className="modal-fixed-header">
-                  <button style={{float: "right" }} className="modal-close btn-floating" onClick={this.openmodal}><i class="close material-icons">close</i></button>
+                  <button style={{float: "right" }} className="modal-close btn-floating" onClick={this.openmodal}><i className="close material-icons">close</i></button>
                 </div>
                 <div className="modal-content">
                   <h4>Modal Header</h4>

@@ -21,7 +21,8 @@ class Login extends Component {
         }
         if (nextProps.errors) {
             this.setState({
-                errors: nextProps.errors
+                errors: nextProps.errors,
+                loading:false
             });
         }
     }
@@ -49,7 +50,7 @@ class Login extends Component {
             password: this.state.password
         };
         this.props.loginUser(userData,this.props.history);
-        this.setState({loading:true})
+        //this.setState({loading:true})
     }
 
     render() {

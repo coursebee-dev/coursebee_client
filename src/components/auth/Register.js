@@ -59,7 +59,7 @@ class Register extends Component {
             subject: this.state.subject,
             type: "student"
         };
-        console.log(JSON.stringify(newUser));
+        //console.log(JSON.stringify(newUser));
         if (this.state.captcha) {
             this.props.registerUser(newUser, this.props.history);
         } else {
