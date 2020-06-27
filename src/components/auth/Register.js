@@ -18,7 +18,6 @@ class Register extends Component {
             institution: "",
             subject: "",
             captcha: false,
-            loading: false,
             errors: {},
         };
     }
@@ -49,7 +48,6 @@ class Register extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        this.setState({loading: true})
         const newUser = {
             name: this.state.name,
             email: this.state.email,
@@ -65,8 +63,6 @@ class Register extends Component {
         } else {
             alert('Please verify captcha!')
         }
-        this.setState({loading: false})
-
     };
 
     verifyCaptcha(response) {
@@ -179,12 +175,6 @@ class Register extends Component {
                                 <label htmlFor="subject">Subject</label>
                                 <span className="red-text">{errors.subject}</span>
                             </div>
-                            {this.state.loading? (
-                                        <div className="progress">
-                                            <div className="indeterminate"></div>
-                                        </div>
-                                    ) : null }
-
                             {this.state.captcha ? (
                                 <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                                         <button
