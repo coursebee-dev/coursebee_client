@@ -43,7 +43,7 @@ class DashboardMentor extends Component {
                   </Link>
                 </div>
               }
-              <LiveClassMentor mentorId={this.props.auth.user.id}/>
+              <LiveClassMentor mentorId={this.props.auth.user.id} />
               <button
                 style={{
                   width: "150px",

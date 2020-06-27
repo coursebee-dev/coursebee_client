@@ -26,7 +26,7 @@ export const registerMentor = (userData, history) => dispatch => {
 
 
 // Login - get user token
-export const loginMentor = (userData,history) => dispatch => {
+export const loginMentor = (userData, history) => dispatch => {
     axios
         .post("/api/mentor/login", qs.stringify(userData))
         .then(res => {
@@ -34,9 +34,9 @@ export const loginMentor = (userData,history) => dispatch => {
             const { token } = res.data;
             // Decode token to get user data
             const decoded = jwt_decode(token);
-            if(decoded.emailVerify === false){
-                history.push("/verifyEmail",decoded)
-            } else{
+            if (decoded.emailVerify === false) {
+                history.push("/verifyEmail", decoded)
+            } else {
                 localStorage.setItem("jwtToken", token);
                 // Set token to Auth header
                 setAuthToken(token);

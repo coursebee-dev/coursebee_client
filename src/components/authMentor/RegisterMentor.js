@@ -47,6 +47,7 @@ class Register extends Component {
     };
     onSubmit = e => {
         e.preventDefault();
+        this.setState({ loading: true })
         const newUser = {
             name: this.state.name,
             email: this.state.email,
@@ -64,6 +65,7 @@ class Register extends Component {
         } else {
             alert('Please verify captcha!')
         }
+        this.setState({ loading: false })
     };
 
     verifyCaptcha(response) {

@@ -10,7 +10,7 @@ class DashboardAdmin extends Component {
     this.props.history.push("/");
     this.props.logoutUser();
   };
-  
+
   render() {
     const { user } = this.props.auth;
     return (
@@ -28,13 +28,13 @@ class DashboardAdmin extends Component {
               </p>
             </h4>
             <div className="container left-align">
-              <Link to="/admin/dashboard/viewmentor" style={{margin:"15px", width:"100%"}} className="btn btn-large waves-effect waves-light hoverable black">View All Mentors</Link>
+              <Link to="/admin/dashboard/viewmentor" style={{ margin: "15px", width: "100%" }} className="btn btn-large waves-effect waves-light hoverable black">View All Mentors</Link>
             </div>
             <div className="container left-align">
-            <Link to="/admin/dashboard/viewliveclass" style={{margin:"15px", width:"100%"}} className="btn btn-large waves-effect waves-light hoverable black">View All Live Classes</Link>
+              <Link to="/admin/dashboard/viewliveclass" style={{ margin: "15px", width: "100%" }} className="btn btn-large waves-effect waves-light hoverable black">View All Live Classes</Link>
             </div>
             <div className="container left-align">
-              <Link to="/admin/dashboard/viewstudent" style={{margin:"15px", width:"100%"}} className="btn btn-large waves-effect waves-light hoverable black">View All Students</Link>
+              <Link to="/admin/dashboard/viewstudent" style={{ margin: "15px", width: "100%" }} className="btn btn-large waves-effect waves-light hoverable black">View All Students</Link>
             </div>
             <button
               style={{

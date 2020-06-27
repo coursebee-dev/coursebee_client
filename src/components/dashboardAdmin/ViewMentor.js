@@ -33,21 +33,21 @@ export default class ViewMentor extends Component {
                 <p>Organization : {mentor.organization}</p>
                 <p>Position : {mentor.position}</p>
                 <p>Mobile No. : {mentor.mobileNo}</p>
-                <p>Verification Status: {mentor.adminVerify?"verified":"not verified"}</p>
-                
-                
+                <p>Verification Status: {mentor.adminVerify ? "verified" : "not verified"}</p>
+
+
             </li>
         ));
         return (
-            
-            <div style={{width:"100%",margin:"50px"}}>
+
+            <div style={{ width: "100%", margin: "50px" }}>
                 <Link to="/admin/dashboard" className="btn-flat waves-effect orange darken-1">
-                        <i className="material-icons left">keyboard_backspace</i>Go Back
+                    <i className="material-icons left">keyboard_backspace</i>Go Back
                 </Link>
-                <h4 style={{margin:"50px"}} className="center-align">MENTORS IN COURSEBEE</h4>
+                <h4 style={{ margin: "50px" }} className="center-align">MENTORS IN COURSEBEE</h4>
                 <ul className="collection">{allMentors}</ul>
                 <Link to="/admin/dashboard" className="btn-flat waves-effect orange darken-1">
-                        <i className="material-icons left">keyboard_backspace</i>Go Back
+                    <i className="material-icons left">keyboard_backspace</i>Go Back
                 </Link>
             </div>
         )

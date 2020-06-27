@@ -72,7 +72,7 @@ class App extends Component {
         />
         <Provider store={store}>
           <Router history={history}>
-              <PathRoute/>
+            <PathRoute />
           </Router>
         </Provider>
       </>

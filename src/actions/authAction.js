@@ -1,7 +1,7 @@
 import qs from "querystring";
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
-import jwt_decode from "jwt-decode"; 
+import jwt_decode from "jwt-decode";
 import {
     GET_ERRORS,
 } from "./types";
@@ -14,9 +14,9 @@ export const registerUser = (userData, history) => dispatch => {
         .post("/api/register", qs.stringify(userData))
         .then(res => {
             console.log(res.data)
-            history.push("/verifyemail",userData)
+            history.push("/verifyemail", userData)
         }) // re-direct to email verification on successful register
-        .catch(err =>{
+        .catch(err => {
             console.log(err)
             dispatch({
                 type: GET_ERRORS,
@@ -27,7 +27,7 @@ export const registerUser = (userData, history) => dispatch => {
 
 
 // Login - get user token
-export const loginUser = (userData,history) => dispatch => {
+export const loginUser = (userData, history) => dispatch => {
     axios
         .post("/api/login", qs.stringify(userData))
         .then(res => {
@@ -35,9 +35,9 @@ export const loginUser = (userData,history) => dispatch => {
             const { token } = res.data;
             // Decode token to get user data
             const decoded = jwt_decode(token);
-            if(decoded.emailVerify === false){
-                history.push("/verifyemail",decoded)
-            } else{
+            if (decoded.emailVerify === false) {
+                history.push("/verifyemail", decoded)
+            } else {
                 localStorage.setItem("jwtToken", token);
                 // Set token to Auth header
                 setAuthToken(token);

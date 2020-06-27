@@ -26,8 +26,8 @@ class LiveClassList extends Component {
     }
     onRegisterClick = e => {
         const liveclassid = e.target.value
-        if(!this.props.auth.isAuthenticated || this.props.auth.user.type !== "student"){
-            M.toast({ html: "Please login as a student"})
+        if (!this.props.auth.isAuthenticated || this.props.auth.user.type !== "student") {
+            M.toast({ html: "Please login as a student" })
             return
         }
         axios.post(`/api/registerliveclass/${this.props.auth.user.id}/${liveclassid}`)
@@ -35,7 +35,7 @@ class LiveClassList extends Component {
                 M.toast({ html: res.data.message })
             })
             .catch(err => {
-                M.toast({ html: "Server Error"})
+                M.toast({ html: "Server Error" })
                 console.log(err)
             });
     }
@@ -76,9 +76,9 @@ class LiveClassList extends Component {
                     ]}
                 />
                 <h4 style={{ margin: "50px" }}>Scheduled Classes</h4>
-                <ul style={{width:"100%",textAlign: "left" }} className="collection">{liveClasses.reverse()}</ul>
+                <ul style={{ width: "100%", textAlign: "left" }} className="collection">{liveClasses.reverse()}</ul>
                 <Link style={{ margin: "40px" }} to="/" className="btn-flat waves-effect teal darken-1 white-text">
-                        <i className="material-icons left">keyboard_backspace</i>Go Back
+                    <i className="material-icons left">keyboard_backspace</i>Go Back
                 </Link>
             </div>
         )

@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const sendEmail = (userData) => () =>{
+const sendEmail = (userData) => () => {
     axios
-        .get("/api/email/send", {params:userData})
+        .get("/api/email/send", { params: userData })
         .then(res => {
             console.log(res.data)
-        }) 
-        .catch(err =>{
+        })
+        .catch(err => {
             console.log(err)
         });
 }

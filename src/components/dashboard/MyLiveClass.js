@@ -11,7 +11,7 @@ class MyLiveClass extends Component {
         this.state = {
             myLiveClasses: [],
             loading: false,
-            notify:""
+            notify: ""
         }
         this.getLiveClasses = this.getLiveClasses.bind(this)
     }
@@ -35,10 +35,10 @@ class MyLiveClass extends Component {
         axios.get(`/api/joinliveclass/${this.props.studentId}/${liveclassid}`)
             .then(res => {
                 this.setState({ notify: res.data.message })
-                if(res.data.success){
+                if (res.data.success) {
                     this.props.history.push('/dashboard/liveclassroom/' + liveclassid)
                 }
-                else{
+                else {
                     M.toast({ html: this.state.notify })
                 }
             })

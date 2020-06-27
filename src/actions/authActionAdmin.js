@@ -26,7 +26,7 @@ export const registerAdmin = (userData, history) => dispatch => {
 
 
 // Login - get user token
-export const loginAdmin = (userData,history) => dispatch => {
+export const loginAdmin = (userData, history) => dispatch => {
     axios
         .post("/api/admin/login", qs.stringify(userData))
         .then(res => {
@@ -34,9 +34,9 @@ export const loginAdmin = (userData,history) => dispatch => {
             const { token } = res.data;
             // Decode token to get user data
             const decoded = jwt_decode(token);
-            if(decoded.emailVerify === false){
-                history.push("/verifyemail",decoded)
-            } else{
+            if (decoded.emailVerify === false) {
+                history.push("/verifyemail", decoded)
+            } else {
                 localStorage.setItem("jwtToken", token);
                 // Set token to Auth header
                 setAuthToken(token);

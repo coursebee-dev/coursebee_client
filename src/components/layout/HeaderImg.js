@@ -9,7 +9,7 @@ class HeaderImg extends Component {
             <div>
                 <img style={{ width: "100vw" }} src={hexagon} alt="header img" />
             </div>
-            
+
         );
     }
 }

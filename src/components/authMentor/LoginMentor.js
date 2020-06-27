@@ -44,13 +44,13 @@ class Login extends Component {
     };
     onSubmit = e => {
         e.preventDefault();
-        this.setState({loading:true})
+        this.setState({ loading: true })
         const userData = {
             email: this.state.email,
             password: this.state.password
         };
-        this.props.loginMentor(userData,this.props.history);
-        this.setState({loading:false})
+        this.props.loginMentor(userData, this.props.history);
+        this.setState({ loading: false })
         // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
     };
 
@@ -107,24 +107,24 @@ class Login extends Component {
                                 </span>
                             </div>
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                {this.state.loading? (
+                                {this.state.loading ? (
                                     <div className="progress">
                                         <div className="indeterminate"></div>
                                     </div>
                                 ) : (
-                                    <button
-                                    style={{
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        marginTop: "1rem"
-                                    }}
-                                    type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable teal darken-1"
-                                    >
-                                        Login
-                                    </button>
-                                )}
+                                        <button
+                                            style={{
+                                                width: "150px",
+                                                borderRadius: "3px",
+                                                letterSpacing: "1.5px",
+                                                marginTop: "1rem"
+                                            }}
+                                            type="submit"
+                                            className="btn btn-large waves-effect waves-light hoverable teal darken-1"
+                                        >
+                                            Login
+                                        </button>
+                                    )}
                             </div>
                         </form>
                     </div>

@@ -31,12 +31,12 @@ class Register extends Component {
         window.scrollTo(0, 0)
         // If logged in and user navigates to Register page, should redirect them to dashboard
         if (this.props.auth.isAuthenticated) {
-            if(this.props.auth.user.type === "student"){
-              this.props.history.push("/dashboard");
-            } else if (this.props.auth.user.type === "mentor"){
-              this.props.history.push("mentor/dashboard");
-            } else if (this.props.auth.user.type === "admin"){
-              this.props.history.push("admin/dashboard");
+            if (this.props.auth.user.type === "student") {
+                this.props.history.push("/dashboard");
+            } else if (this.props.auth.user.type === "mentor") {
+                this.props.history.push("mentor/dashboard");
+            } else if (this.props.auth.user.type === "admin") {
+                this.props.history.push("admin/dashboard");
             }
         }
     }
@@ -45,6 +45,7 @@ class Register extends Component {
     };
     onSubmit = e => {
         e.preventDefault();
+        this.setState({ loading: true })
         const newUser = {
             name: this.state.name,
             email: this.state.email,
@@ -59,6 +60,7 @@ class Register extends Component {
         };
         console.log(JSON.stringify(newUser));
         this.props.registerAdmin(newUser, this.props.history);
+        this.setState({ loading: false })
     };
 
     render() {

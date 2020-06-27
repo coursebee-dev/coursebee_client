@@ -29,7 +29,7 @@ class VerifyEmail extends Component {
     render() {
         return (
             <div>
-                <div style={{ minHeight:"60vh"}} className="container">
+                <div style={{ minHeight: "60vh" }} className="container">
                     <div style={{ margin: "5%" }}>
                         <h6>
                             One last step

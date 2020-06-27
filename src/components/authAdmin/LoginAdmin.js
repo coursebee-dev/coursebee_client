@@ -16,7 +16,7 @@ class Login extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.auth.isAuthenticated) {
             this.props.history.push("/admin/dashboard"); // push user to dashboard when they login
-        } 
+        }
         if (nextProps.errors) {
             this.setState({
                 errors: nextProps.errors
@@ -27,12 +27,12 @@ class Login extends Component {
         window.scrollTo(0, 0)
         // If logged in and user navigates to Login page, should redirect them to dashboard
         if (this.props.auth.isAuthenticated) {
-            if(this.props.auth.user.type === "student"){
-              this.props.history.push("/dashboard");
-            } else if (this.props.auth.user.type === "mentor"){
-              this.props.history.push("mentor/dashboard");
-            } else if (this.props.auth.user.type === "admin"){
-              this.props.history.push("admin/dashboard");
+            if (this.props.auth.user.type === "student") {
+                this.props.history.push("/dashboard");
+            } else if (this.props.auth.user.type === "mentor") {
+                this.props.history.push("mentor/dashboard");
+            } else if (this.props.auth.user.type === "admin") {
+                this.props.history.push("admin/dashboard");
             }
         }
     }
@@ -40,12 +40,15 @@ class Login extends Component {
         this.setState({ [e.target.id]: e.target.value });
     };
     onSubmit = e => {
-        e.preventDefault(); const userData = {
+        e.preventDefault();
+        this.setState({ loading: true })
+        const userData = {
             email: this.state.email,
             password: this.state.password
         };
-        this.props.loginAdmin(userData,this.props.history);
+        this.props.loginAdmin(userData, this.props.history);
         // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+        this.setState({ loading: false })
     };
     render() {
         const { errors } = this.state; return (

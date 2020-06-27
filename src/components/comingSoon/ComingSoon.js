@@ -5,7 +5,7 @@ export class ComingSoon extends Component {
     render() {
         return (
             <div>
-                <div style={{ minHeight:"70vh"}} className="container valign-wrapper">
+                <div style={{ minHeight: "70vh" }} className="container valign-wrapper">
                     <div className="valign">
                         <h3>
                             Coming Soon ...
@@ -18,11 +18,11 @@ export class ComingSoon extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    
+
 })
 
 const mapDispatchToProps = {
-    
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ComingSoon)

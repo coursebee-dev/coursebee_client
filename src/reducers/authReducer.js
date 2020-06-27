@@ -1,7 +1,7 @@
 import {
     SET_CURRENT_USER,
 } from "../actions/types";
-const isEmpty = require("is-empty"); 
+const isEmpty = require("is-empty");
 
 const initialState = {
     isAuthenticated: false,
