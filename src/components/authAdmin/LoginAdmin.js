@@ -114,6 +114,9 @@ class Login extends Component {
                                 </button>
                             </div>
                         </form>
+                        <div className="col s12" style={{ marginTop: "5%" }}>
+                            <Link className="orange-text text-darken-1" to="/admin/forgotpass">Forgot Password?</Link>
+                        </div> 
                     </div>
                 </div>
             </div>

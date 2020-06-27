@@ -35,6 +35,11 @@ import ViewLiveClass from './components/dashboardAdmin/ViewLiveClass';
 import ViewStudent from './components/dashboardAdmin/ViewStudent';
 import MyLiveClass from './components/dashboard/MyLiveClass';
 import PostPayment from './components/payment/PostPayment';
+import ForgotPass from './components/forgotPass/ForgotPass';
+import ForgotPassMentor from './components/forgotPass/ForgotPassMentor';
+import ForgotPassAdmin from './components/forgotPass/ForgotPassAdmin';
+
+
 export default function PathRoute() {
     return (
         <Switch>
@@ -46,10 +51,13 @@ export default function PathRoute() {
                 <Route exact path="/admin" component={LandingAdmin} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/forgotpass" component={ForgotPass} />
                 <Route exact path="/mentor/register" component={RegisterMentor} />
                 <Route exact path="/mentor/login" component={LoginMentor} />
+                <Route exact path="/mentor/forgotpass" component={ForgotPassMentor} />
                 <Route exact path="/admin/register" component={RegisterAdmin} />
                 <Route exact path="/admin/login" component={LoginAdmin} />
+                <Route exact path="/admin/forgotpass" component={ForgotPassAdmin} />
                 <Route exact path="/verifyemail" component={VerifyEmail} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/liveclass" component={LiveClassList} />

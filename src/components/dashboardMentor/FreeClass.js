@@ -87,7 +87,7 @@ class FreeClass extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <>
+            <div>
                 <div style={{ marginTop: "8rem", marginBottom: "8rem" }} className="row">
                     <div className="col s8 offset-s2">
                         <form noValidate onSubmit={this.onSubmit}>
@@ -186,7 +186,7 @@ class FreeClass extends Component {
                         </form>
                     </div>
                 </div>
-            </>
+            </div>
         );
     }
 }
