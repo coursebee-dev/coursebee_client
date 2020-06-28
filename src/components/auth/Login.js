@@ -33,9 +33,9 @@ class Login extends Component {
             if (this.props.auth.user.type === "student") {
                 this.props.history.push("/dashboard");
             } else if (this.props.auth.user.type === "mentor") {
-                this.props.history.push("mentor/dashboard");
+                this.props.history.push("/mentor/dashboard");
             } else if (this.props.auth.user.type === "admin") {
-                this.props.history.push("admin/dashboard");
+                this.props.history.push("/admin/dashboard");
             }
         }
     }

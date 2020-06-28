@@ -38,6 +38,7 @@ import PostPayment from './components/payment/PostPayment';
 import ForgotPass from './components/forgotPass/ForgotPass';
 import ForgotPassMentor from './components/forgotPass/ForgotPassMentor';
 import ForgotPassAdmin from './components/forgotPass/ForgotPassAdmin';
+import ChangePass from './components/forgotPass/ChangePass';
 
 
 export default function PathRoute() {
@@ -58,6 +59,7 @@ export default function PathRoute() {
                 <Route exact path="/admin/register" component={RegisterAdmin} />
                 <Route exact path="/admin/login" component={LoginAdmin} />
                 <Route exact path="/admin/forgotpass" component={ForgotPassAdmin} />
+                <Route exact path="/changepass/:token" component={ChangePass} />
                 <Route exact path="/verifyemail" component={VerifyEmail} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/liveclass" component={LiveClassList} />
