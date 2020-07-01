@@ -21,7 +21,8 @@ class Login extends Component {
         }
         if (nextProps.errors) {
             this.setState({
-                errors: nextProps.errors
+                errors: nextProps.errors,
+                loading:false
             });
         }
     }
@@ -32,9 +33,9 @@ class Login extends Component {
             if (this.props.auth.user.type === "student") {
                 this.props.history.push("/dashboard");
             } else if (this.props.auth.user.type === "mentor") {
-                this.props.history.push("mentor/dashboard");
+                this.props.history.push("/mentor/dashboard");
             } else if (this.props.auth.user.type === "admin") {
-                this.props.history.push("admin/dashboard");
+                this.props.history.push("/admin/dashboard");
             }
         }
     }
@@ -48,8 +49,8 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         };
-        this.props.loginUser(userData, this.props.history);
-        this.setState({ loading: false })
+        this.props.loginUser(userData,this.props.history);
+        //this.setState({loading:true})
     }
 
     render() {

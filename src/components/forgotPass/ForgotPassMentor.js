@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-//import { Link } from "react-router-dom"
-import forgotPassEmail from "../../actions/forgotPassEmail";
 import classnames from "classnames";
+import axios from "axios";
 
-class ForgotPass extends Component {
+export default class ForgotPass extends Component {
     constructor() {
         super();
         this.state = {
+            status: "",
             name: "",
             email: "",
             errors: {},
@@ -21,20 +19,31 @@ class ForgotPass extends Component {
     onSubmit = e => {
         e.preventDefault();
         if (this.state.name === "") {
-            this.setState({ errors: { name: "Topic field is required" } })
+            this.setState({ errors: { name: "Name field is required" } })
             return
         }
         if (this.state.email === "") {
-            this.setState({ errors: { email: "Class type field is required" } })
+            this.setState({ errors: { email: "Email field is required" } })
             return
         }
         const userData = {
+            sync_code: `${process.env.REACT_APP_SYNC_CODE}`,
             name: this.state.name,
             email: this.state.email,
             type: "mentor"
         };
         //console.log(JSON.stringify(userData));
-        this.props.forgotPassEmail(userData);
+        //console.log("In forgotpassemail")
+        axios
+            .get("/api/email/forgotpass", { params: userData })
+            .then(res => {
+                //console.log(res.data)
+                this.setState({ status: res.data.message })
+            })
+            .catch(err => {
+                console.log(err)
+                this.setState({ errors: { message: "Username or email is incorrect" } })
+            });
 
     };
     render() {
@@ -42,14 +51,17 @@ class ForgotPass extends Component {
         return (
             <div>
                 <div style={{ marginTop: "8rem", marginBottom: "8rem" }} className="row">
-                    <div className="col s8 offset-s1" style={{padding:"2%"}} >
+                    <div className="col s8 offset-s1" style={{ padding: "2%" }} >
                         <h4>
                             Please verify your Username and Email
                         </h4>
                         <div>
                             We will send an email to reset your password<br />
-                            please open the email and click on the given link
+                            Please open the email and click on the given link
                         </div>
+                        <div className='red-text'>Note that the link will expire in a short time</div>
+                        <br/>
+                        <span className='teal-text'>{this.state.status}</span>
                     </div>
                     <div className="col s8 offset-s1">
                         <form noValidate onSubmit={this.onSubmit}>
@@ -61,11 +73,14 @@ class ForgotPass extends Component {
                                     id="name"
                                     type="text"
                                     className={classnames("", {
-                                        invalid: errors.name
+                                        invalid: errors.name || errors.message
                                     })}
                                 />
                                 <label htmlFor="name">Username</label>
-                                <span className="red-text">{errors.name}</span>
+                                <span className="red-text">
+                                    {errors.name}
+                                    {errors.message}
+                                </span>
                             </div>
                             <div className="input-field col s12">
                                 <input
@@ -75,11 +90,14 @@ class ForgotPass extends Component {
                                     id="email"
                                     type="email"
                                     className={classnames("", {
-                                        invalid: errors.email
+                                        invalid: errors.email || errors.message
                                     })}
                                 />
                                 <label htmlFor="email">Email</label>
-                                <span className="red-text">{errors.email}</span>
+                                <span className="red-text">
+                                    {errors.email}
+                                    {errors.message}
+                                </span>
                             </div>
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                                 <button
@@ -102,16 +120,3 @@ class ForgotPass extends Component {
         )
     }
 }
-ForgotPass.propTypes = {
-    forgotPassEmail: PropTypes.func.isRequired
-}
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-    forgotPassEmail
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ForgotPass)

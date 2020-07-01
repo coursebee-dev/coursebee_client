@@ -58,7 +58,7 @@ class Register extends Component {
             interests: this.state.interests,
             type: "mentor"
         };
-        console.log(JSON.stringify(newUser));
+        //console.log(JSON.stringify(newUser));
         if (this.state.captcha) {
             this.props.registerMentor(newUser, this.props.history);
         } else {
