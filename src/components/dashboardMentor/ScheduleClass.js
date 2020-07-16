@@ -86,6 +86,7 @@ class ScheduleClass extends Component {
 
     render() {
         const { errors } = this.state;
+        let API_KEY = process.env.REACT_APP_NOT_TINYMCE_API_KEY;
         return (
             <div>
                 <div style={{ marginTop: "8rem", marginBottom: "8rem" }} className="row">
@@ -110,7 +111,8 @@ class ScheduleClass extends Component {
                             </div>
                             <div className="input-field col s12">
                                 <Editor
-                                    initialValue="<p>This is the initial content of the editor</p>"
+                                    apiKey="24ih6yos0ufi5m49dpgg789u7to27syl18z7wpj3zd80ol3k"
+                                    initialValue="<p>Add a description</p>"
                                     init={{
                                         height: 500,
                                         menubar: false,
