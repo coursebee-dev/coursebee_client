@@ -220,29 +220,26 @@ class Register extends Component {
                                 <label htmlFor="adminKey">Admin Key</label>
                                 <span className="red-text">{errors.adminKey}</span>
                             </div>
-                            {this.state.captcha ? (
-                                <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                    <button
-                                        style={{
-                                            width: "150px",
-                                            borderRadius: "3px",
-                                            letterSpacing: "1.5px",
-                                            marginTop: "1rem"
-                                        }}
-                                        type="submit"
-                                        className="btn btn-large waves-effect waves-light hoverable teal-darken-1"
-                                    >
-                                        Sign up
+                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                                <ReCAPTCHA
+                                    sitekey={`${captcha_secret}`}
+                                    onChange={this.verifyCaptcha}
+                                />
+                            </div>
+                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                                <button
+                                    style={{
+                                        width: "150px",
+                                        borderRadius: "3px",
+                                        letterSpacing: "1.5px",
+                                        marginTop: "1rem"
+                                    }}
+                                    type="submit"
+                                    className="btn btn-large waves-effect waves-light hoverable teal-darken-1"
+                                >
+                                    Sign up
                                 </button>
-                                </div>
-                            ) : (
-                                    <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                        <ReCAPTCHA
-                                            sitekey={`${captcha_secret}`}
-                                            onChange={this.verifyCaptcha}
-                                        />
-                                    </div>
-                                )}
+                            </div>
                         </form>
                     </div>
                 </div>

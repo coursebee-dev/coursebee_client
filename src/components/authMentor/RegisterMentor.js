@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { registerMentor } from "../../actions/authActionMentor";
 import classnames from "classnames";
 import ReCAPTCHA from 'react-google-recaptcha';
+import "../../App.css";
 class Register extends Component {
     constructor() {
         super();
@@ -17,10 +18,14 @@ class Register extends Component {
             mobileNo: "",
             organization: "",
             position: "",
-            interests: "",
+            interest: "",
+            interests: [],
             captcha: false,
             errors: {}
         };
+        this.onInterstChange = this.onInterstChange.bind(this)
+        this.addInterest = this.addInterest.bind(this)
+        this.deleteInterest = this.deleteInterest.bind(this)
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
@@ -58,7 +63,6 @@ class Register extends Component {
             interests: this.state.interests,
             type: "mentor"
         };
-        //console.log(JSON.stringify(newUser));
         if (this.state.captcha) {
             this.props.registerMentor(newUser, this.props.history);
         } else {
@@ -66,10 +70,33 @@ class Register extends Component {
         }
     };
 
+    onInterstChange(e) {
+        this.setState({ interest: e.target.value })
+    }
+
+    addInterest(e) {
+        e.preventDefault()
+        this.setState(state => {
+            const interests = [...state.interests, state.interest]
+            return {
+                interests,
+                interest: '',
+            };
+        });
+        console.log(this.state.interests)
+    }
+
     verifyCaptcha(response) {
         if (response) {
             this.setState({ captcha: true })
         }
+    }
+
+    deleteInterest(e) {
+        e.preventDefault()
+        this.setState({
+            interests: []
+        });
     }
 
     render() {
@@ -190,10 +217,15 @@ class Register extends Component {
                                 <label htmlFor="position">Position</label>
                                 <span className="red-text">{errors.position}</span>
                             </div>
+                            {this.state.interests.map((interest, id) => (
+                                <div className="chip" key={id}>
+                                    {interest}
+                                </div>
+                            ))}
                             <div className="input-field col s12">
-                                <textarea
-                                    onChange={this.onChange}
-                                    value={this.state.interests}
+                                <input
+                                    onChange={this.onInterstChange}
+                                    value={this.state.interest}
                                     error={errors.interests}
                                     id="interests"
                                     type="text"
@@ -202,35 +234,35 @@ class Register extends Component {
                                         invalid: errors.interests
                                     })}
                                 />
+                                <button className="btn btn-small" disabled={!this.state.interest} onClick={this.addInterest}>Add Interest</button>
+                                <button className="btn btn-small" disabled={!this.state.interests[0]} onClick={this.deleteInterest}>Clear Interest</button>
                                 <label htmlFor="interests">Interests (you may add multiple)</label>
                                 <span className="red-text">{errors.interests}</span>
                             </div>
-                            {this.state.captcha ? (
-                                <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                    <button
-                                        style={{
-                                            width: "150px",
-                                            borderRadius: "3px",
-                                            letterSpacing: "1.5px",
-                                            marginTop: "1rem"
-                                        }}
-                                        type="submit"
-                                        className="btn btn-large waves-effect waves-light hoverable teal darken-1"
-                                    >
-                                        Sign up
+                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                                <ReCAPTCHA
+                                    sitekey={`${captcha_secret}`}
+                                    onChange={this.verifyCaptcha}
+                                />
+                            </div>
+                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                                <button
+                                    style={{
+                                        width: "150px",
+                                        borderRadius: "3px",
+                                        letterSpacing: "1.5px",
+                                        marginTop: "1rem"
+                                    }}
+                                    type="submit"
+                                    className="btn btn-large waves-effect waves-light hoverable teal darken-1"
+                                >
+                                    Sign up
                                 </button>
-                                </div>
-                            ) : (
-                                    <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                        <ReCAPTCHA
-                                            sitekey={`${captcha_secret}`}
-                                            onChange={this.verifyCaptcha}
-                                        />
-                                    </div>
-                                )}
+                            </div>
                         </form>
                     </div>
                 </div>
+                <button onClick={() => console.log(this.state.interests)}>onclick</button>
             </div>
         );
     }
