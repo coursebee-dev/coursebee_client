@@ -4,9 +4,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerAdmin } from "../../actions/authActionAdmin";
 import classnames from "classnames";
+import ReCAPTCHA from 'react-google-recaptcha';
+
 class Register extends Component {
     constructor() {
         super();
+        this.verifyCaptcha = this.verifyCaptcha.bind(this)
         this.state = {
             name: "",
             email: "",
@@ -17,6 +20,7 @@ class Register extends Component {
             position: "",
             location: "",
             adminKey: "",
+            captcha: false,
             errors: {}
         };
     }
@@ -58,13 +62,22 @@ class Register extends Component {
             adminKey: this.state.adminKey,
             type: "admin"
         };
-        console.log(JSON.stringify(newUser));
-        this.props.registerAdmin(newUser, this.props.history);
-        this.setState({ loading: false })
+        if (this.state.captcha) {
+            //console.log(JSON.stringify(newUser));
+            this.props.registerAdmin(newUser, this.props.history);
+        } else {
+            alert('Please verify captcha!')
+        }
     };
 
+    verifyCaptcha(response) {
+        if (response) {
+            this.setState({ captcha: true })
+        }
+    }
     render() {
         const { errors } = this.state;
+        let captcha_secret = process.env.REACT_APP_NOT_CAPTCHA_SECRET
         return (
             <div className="container">
                 <div style={{ marginTop: "8rem", marginBottom: "8rem" }} className="row">
@@ -207,6 +220,12 @@ class Register extends Component {
                                 />
                                 <label htmlFor="adminKey">Admin Key</label>
                                 <span className="red-text">{errors.adminKey}</span>
+                            </div>
+                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                                <ReCAPTCHA
+                                    sitekey={`${captcha_secret}`}
+                                    onChange={this.verifyCaptcha}
+                                />
                             </div>
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                                 <button

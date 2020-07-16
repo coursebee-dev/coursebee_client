@@ -1,9 +1,12 @@
+
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { scheduleLiveClass } from "../../actions/liveClassAction";
+import { Editor } from '@tinymce/tinymce-react';
+import '../../App.css';
+
 class ScheduleClass extends Component {
     constructor() {
         super();
@@ -12,7 +15,9 @@ class ScheduleClass extends Component {
             class_type: "",
             start_date: "",
             start_time: "",
+            price: "",
             duration: "",
+            description: "",
             errors: {}
         };
     }
@@ -28,6 +33,10 @@ class ScheduleClass extends Component {
         if (this.props.auth.user.adminVerify === false) {
             this.props.history.push("mentor/dashboard");
         }
+    }
+    handleEditorChange = (content, editor) => {
+        console.log('Content was updated:', content);
+        this.setState({ description: content })
     }
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
@@ -66,6 +75,8 @@ class ScheduleClass extends Component {
             mentorId: this.props.auth.user.id,
             topic: this.state.topic,
             class_type: this.state.class_type,
+            description: this.state.description,
+            price: this.state.price,
             start_time: startTime.toISOString(),//start time in iso format UTC
             duration: this.state.duration,
         }
@@ -76,17 +87,9 @@ class ScheduleClass extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <div className="container">
+            <div>
                 <div style={{ marginTop: "8rem", marginBottom: "8rem" }} className="row">
                     <div className="col s8 offset-s2">
-                        <Link to="/mentor/dashboard" className="btn-flat waves-effect orange">
-                            <i className="material-icons left">keyboard_backspace</i>Go Back
-                        </Link>
-                        <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                            <h4>
-                                <b>Schedule Class</b> Below
-                            </h4>
-                        </div>
                         <form noValidate onSubmit={this.onSubmit}>
                             <div className="input-field col s12">
                                 <input
@@ -105,7 +108,39 @@ class ScheduleClass extends Component {
                                     {errors.topicnotfound}
                                 </span>
                             </div>
+                            <div className="input-field col s12">
+                                <Editor
+                                    initialValue="<p>This is the initial content of the editor</p>"
+                                    init={{
+                                        height: 500,
+                                        menubar: false,
+                                        plugins: [
+                                            'advlist autolink lists link image charmap print preview anchor',
+                                            'searchreplace visualblocks code fullscreen',
+                                            'insertdatetime media table paste code help wordcount'
+                                        ],
+                                        toolbar:
+                                            'undo redo | formatselect | bold italic backcolor | \
+                                            alignleft aligncenter alignright alignjustify | \
+                                            bullist numlist outdent indent | removeformat | help'
+                                    }}
+                                    onEditorChange={this.handleEditorChange}
+                                />
+                                <span className="red-text">
+                                    {errors.description}
+                                    {errors.descriptionnotfound}
+                                </span>
+                            </div>
+                            {/* <div className="input-field col s12">
+                                <div className="input-field col s12" id="paidclassdescription" onChange={this.handleEditorChange}></div>
+                                <label htmlFor="paidclassdescription">Description</label>
+                                <span className="red-text">
+                                    {errors.description}
+                                    {errors.descriptionnotfound}
+                                </span>
+                            </div> */}
                             <div className="col s12">
+                                <label htmlFor="class_type">Class type  </label>
                                 <select
                                     onChange={this.onChange}
                                     value={this.state.class_type}
@@ -118,15 +153,33 @@ class ScheduleClass extends Component {
                                     <option disabled value="">Select Type</option>
                                     <option value="Open" disabled>Open For All</option>
                                     <option value="Free">Free Registration</option>
-                                    <option value="Paid" disabled>Paid Live Class</option>
+                                    <option value="Paid">Paid Live Class</option>
                                 </select>
-                                <label htmlFor="class_type">class type  </label>
                                 <span className="red-text">
                                     {errors.class_type}
                                     {errors.class_typenotfound}
                                 </span>
                             </div>
+                            <div className="input-field col s12" style={{ display: this.state.class_type === "Free" ? "none" : null }}>
+                                <input
+                                    onChange={this.onChange}
+                                    value={this.state.price}
+                                    error={errors.price}
+                                    id="price"
+                                    type="number"
+                                    min="1"
+                                    className={classnames("", {
+                                        invalid: errors.price || errors.pricenotfound
+                                    })}
+                                />
+                                <label htmlFor="price">Price</label>
+                                <span className="red-text">
+                                    {errors.price}
+                                    {errors.pricenotfound}
+                                </span>
+                            </div>
                             <div className=" col s12">
+                                <label htmlFor="start_date">Start Date  </label>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.start_date}
@@ -137,7 +190,6 @@ class ScheduleClass extends Component {
                                         invalid: errors.start_date || errors.start_datenotfound
                                     })}
                                 />
-                                <label htmlFor="start_date">start date  </label>
                                 <span className="red-text">
                                     {errors.start_date}
                                     {errors.start_datenotfound}
@@ -145,6 +197,7 @@ class ScheduleClass extends Component {
                             </div>
 
                             <div className="col s12">
+                                <label htmlFor="start_time">Start Time  </label>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.start_time}
@@ -155,13 +208,13 @@ class ScheduleClass extends Component {
                                         invalid: errors.start_time || errors.start_timenotfound
                                     })}
                                 />
-                                <label htmlFor="start_time">start time  </label>
                                 <span className="red-text">
                                     {errors.start_time}
                                     {errors.start_timenotfound}
                                 </span>
                             </div>
                             <div className="input-field col s12">
+                                <label htmlFor="duration">duration in minutes</label>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.duration}
@@ -173,7 +226,6 @@ class ScheduleClass extends Component {
                                         invalid: errors.duration || errors.durationnotfound
                                     })}
                                 />
-                                <label htmlFor="duration">duration in minutes</label>
                                 <span className="red-text">
                                     {errors.duration}
                                     {errors.durationnotfound}

@@ -6,13 +6,26 @@ import logoutUser from "../../actions/logoutAction";
 import HeaderImg from "../layout/HeaderImg"
 import liveClass from '../../images/liveClass.jpg'
 import onlineCourse from '../../images/onlineCourse.jpg'
-import LiveClassMentor from './LiveClassMentor'
+import LiveClassMentor from './LiveClassMentor';
+
 class DashboardMentor extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.history.push("/");
     this.props.logoutUser();
   };
+
+  componentDidMount() {
+    // const options = {
+    //     inDuration: 250,
+    //     outDuration: 250,
+    //     opacity: 0.5,
+    //     dismissible: false,
+    //     startingTop: "4%",
+    //     endingTop: "10%"
+    // };
+  }
+
   render() {
     const { user } = this.props.auth; return (
       <div>
@@ -28,6 +41,7 @@ class DashboardMentor extends Component {
                   <a href="https://www.facebook.com/coursebee.live" target="_blank" rel="noopener noreferrer">facebook page</a>.
               </p>
               </h4>
+              <button onClick={() => window.location.replace('/mentor/account')} className="btn modal-trigger">View your Account Information</button>
               {this.props.auth.user.adminVerify === false ?
                 <h5 className="red-text">Your account has been suspended. Your information is under review.
                 <br />To schedule live classes or submit online courses please send us an email</h5>

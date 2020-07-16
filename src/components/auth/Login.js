@@ -21,7 +21,8 @@ class Login extends Component {
         }
         if (nextProps.errors) {
             this.setState({
-                errors: nextProps.errors
+                errors: nextProps.errors,
+                loading: false
             });
         }
     }
@@ -32,9 +33,9 @@ class Login extends Component {
             if (this.props.auth.user.type === "student") {
                 this.props.history.push("/dashboard");
             } else if (this.props.auth.user.type === "mentor") {
-                this.props.history.push("mentor/dashboard");
+                this.props.history.push("/mentor/dashboard");
             } else if (this.props.auth.user.type === "admin") {
-                this.props.history.push("admin/dashboard");
+                this.props.history.push("/admin/dashboard");
             }
         }
     }
@@ -53,7 +54,8 @@ class Login extends Component {
     }
 
     render() {
-        const { errors } = this.state; return (
+        const { errors } = this.state;
+        return (
             <div className="container">
                 <div style={{ marginTop: "8rem", marginBottom: "8rem" }} className="row">
                     <div className="col s8 offset-s2">
@@ -125,6 +127,9 @@ class Login extends Component {
                                     )}
                             </div>
                         </form>
+                        <div className="col s12" style={{ marginTop: "5%" }}>
+                            <Link className="orange-text text-darken-1" to="/forgotpass">Forgot Password?</Link>
+                        </div>
                     </div>
                 </div>
             </div>

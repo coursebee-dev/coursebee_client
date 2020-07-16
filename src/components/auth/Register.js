@@ -18,7 +18,6 @@ class Register extends Component {
             institution: "",
             subject: "",
             captcha: false,
-            loading: false,
             errors: {},
         };
     }
@@ -49,7 +48,6 @@ class Register extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        this.setState({ loading: true })
         const newUser = {
             name: this.state.name,
             email: this.state.email,
@@ -59,14 +57,12 @@ class Register extends Component {
             subject: this.state.subject,
             type: "student"
         };
-        console.log(JSON.stringify(newUser));
+        //console.log(JSON.stringify(newUser));
         if (this.state.captcha) {
             this.props.registerUser(newUser, this.props.history);
         } else {
             alert('Please verify captcha!')
         }
-        this.setState({ loading: false })
-
     };
 
     verifyCaptcha(response) {
@@ -179,35 +175,26 @@ class Register extends Component {
                                 <label htmlFor="subject">Subject</label>
                                 <span className="red-text">{errors.subject}</span>
                             </div>
-                            {this.state.loading ? (
-                                <div className="progress">
-                                    <div className="indeterminate"></div>
-                                </div>
-                            ) : null}
-
-                            {this.state.captcha ? (
-                                <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                    <button
-                                        style={{
-                                            width: "150px",
-                                            borderRadius: "3px",
-                                            letterSpacing: "1.5px",
-                                            marginTop: "1rem"
-                                        }}
-                                        type="submit"
-                                        className="btn btn-large waves-effect waves-light hoverable teal darken-1"
-                                    >
-                                        Sign up
+                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                                <ReCAPTCHA
+                                    sitekey={`${captcha_secret}`}
+                                    onChange={this.verifyCaptcha}
+                                />
+                            </div>
+                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                                <button
+                                    style={{
+                                        width: "150px",
+                                        borderRadius: "3px",
+                                        letterSpacing: "1.5px",
+                                        marginTop: "1rem"
+                                    }}
+                                    type="submit"
+                                    className="btn btn-large waves-effect waves-light hoverable teal darken-1"
+                                >
+                                    Sign up
                                     </button>
-                                </div>
-                            ) : (
-                                    <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                        <ReCAPTCHA
-                                            sitekey={`${captcha_secret}`}
-                                            onChange={this.verifyCaptcha}
-                                        />
-                                    </div>
-                                )}
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -15,15 +15,20 @@ class LiveClassRoom extends Component {
             },
             configOverwrite: {
                 startWithAudioMuted: true,
-                disableInviteFunctions: true
+                disableInviteFunctions: true,
+                remoteVideoMenu: {
+                    //     // If set to true the 'Kick out' button will be disabled.
+                    disableKick: true
+                },
+                disableRemoteMute: true
             },
             interfaceConfigOverwrite: {
                 HIDE_INVITE_MORE_HEADER: true,
                 TOOLBAR_BUTTONS: [
                     'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
-                    'fodeviceselection', 'hangup', 'profile', 'chat', 'recording', 'etherpad', 'raisehand',
-                    'videoquality', 'filmstrip', 'feedback', 'stats', 'shortcuts',
-                    'tileview', 'videobackgroundblur', 'download', 'help'
+                    'fodeviceselection', 'hangup', 'chat', 'etherpad', 'raisehand',
+                    'videoquality', 'filmstrip', 'feedback', 'stats',
+                    'tileview', 'videobackgroundblur', 'help'
                 ]
             },
             parentNode: document.querySelector('#studentmeet')
