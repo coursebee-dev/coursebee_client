@@ -8,7 +8,6 @@ import logoutUser from "./actions/logoutAction";
 import { Provider } from "react-redux";
 import store from "./store";
 import axios from "axios";
-import ReactGA from 'react-ga';
 import { createBrowserHistory } from 'history'
 import { Helmet } from 'react-helmet';
 import PathRoute from "./router";
@@ -37,16 +36,9 @@ if (localStorage.jwtToken) {
 }
 
 const history = createBrowserHistory()
-history.listen(location => {
-  ReactGA.set({ page: location.pathname })
-  ReactGA.pageview(location.pathname)
-})
 
 class App extends Component {
 
-  componentDidMount() {
-    ReactGA.pageview(window.location.pathname)
-  }
 
   render() {
     const seo = {
