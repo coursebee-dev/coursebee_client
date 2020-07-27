@@ -264,7 +264,6 @@ class Register extends Component {
                         </form>
                     </div>
                 </div>
-                <button onClick={() => console.log(this.state.interests)}>onclick</button>
             </div>
         );
     }

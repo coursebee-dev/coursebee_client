@@ -10,7 +10,7 @@ import setCurrentUser from "./setUser";
 // Register User
 export const registerMentor = (userData, history) => dispatch => {
     axios
-        .post("/api/mentor/register", qs.stringify(userData))
+        .post("/api/mentor/register", userData)
         .then(res => {
             console.log(res.data)
             history.push("/verifyemail", res.data)
