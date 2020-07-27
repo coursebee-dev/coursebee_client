@@ -65,12 +65,12 @@ body {
   border-bottom: 1px solid #000000;
 }
 
-.card {
+#card {
   border-top-left-radius: 50%;
   border-top-right-radius: 50%;
 }
 
-.card-image {
+#card .card-image {
   border-radius: 50%;
   overflow: hidden;
   margin: -20px;

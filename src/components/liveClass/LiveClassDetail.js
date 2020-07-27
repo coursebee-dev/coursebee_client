@@ -89,7 +89,7 @@ export default class LiveClassDetail extends Component {
                             <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.description }} />
                         </div>
                         <div className="col m3">
-                            <div className="card vertical">
+                            <div id="card" className="card vertical">
                                 <div className="card-image">
                                     <img className="responsive-img" alt="mentor" src="https://lorempixel.com/400/400/nature/6" />
                                 </div>
