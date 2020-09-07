@@ -32,7 +32,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "pstart": "pm2 serve build/ 3001 --name 'my-react-app' --spa ",
+    "pstart": "pm2 serve build/ 3001 --name 'coursebee-client' --spa ",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
