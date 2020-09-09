@@ -1,4 +1,3 @@
-import qs from "querystring";
 import axios from "axios";
 import {
     GET_ERRORS,
@@ -7,7 +6,7 @@ import {
 export const scheduleLiveClass = (formData, mentorId, history) => dispatch => {
     console.log(mentorId)
     axios
-        .post("/api/mentor/scheduleclass/" + mentorId, qs.stringify(formData))
+        .post("/api/mentor/scheduleclass/" + mentorId, formData)
         .then(res => {
             console.log(res.data)
             history.push("/mentor/dashboard")
