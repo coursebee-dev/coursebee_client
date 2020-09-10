@@ -92,3 +92,31 @@ body {
 .editor{
   border-bottom: 1px solid rgb(221, 221, 221);
 }
+
+/*custom button*/
+.custom-card{
+    transition: 0.3s ease-in-out !important;
+}
+.custom-card:hover{
+    box-shadow: 5px 5px 10px #666363;
+    transition: 0.3s ease-in-out;
+    transform: translate(-5px, -5px);
+}
+.custom_btn{
+    width: 100%;
+    width: -moz-fit-content;
+    color: #ffffff;
+    font-weight: bold;
+    height: 50px;
+    text-transform: uppercase;
+    transition: all 0.4s ease-in-out;
+    background: linear-gradient(90deg, #EE8E24, black);
+}
+.custom_btn:hover {
+    transition: all 0.4s ease-in-out;
+    box-shadow: 2px 2px 6px 0px  rgb(58 58 58);
+    letter-spacing: 2px;
+    color: white;
+    /*background: linear-gradient(90deg, black, black);*/
+    background: linear-gradient(90deg, black, #EE8E24);
+}
