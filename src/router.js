@@ -45,6 +45,7 @@ import Disclaimer from './components/LegalDocuments/Disclaimer';
 import Contact from './components/contact/Contact';
 import ChangePass from './components/forgotPass/ChangePass';
 import AccountMentor from './components/dashboardMentor/AccountMentor';
+import Categories from './components/dashboardAdmin/Categories';
 
 
 export default function PathRoute() {
@@ -91,6 +92,7 @@ export default function PathRoute() {
                     <PrivateRouteAdmin exact path="/admin/dashboard/viewmentor/:mentorid" component={ViewMentorDetail} />
                     <PrivateRouteAdmin exact path="/admin/dashboard/viewliveclass" component={ViewLiveClass} />
                     <PrivateRouteAdmin exact path="/admin/dashboard/viewstudent" component={ViewStudent} />
+                    <PrivateRouteAdmin exact path="/admin/dashboard/category" component={Categories} />
                 </main>
                 <Footer />
             </React.Fragment>
