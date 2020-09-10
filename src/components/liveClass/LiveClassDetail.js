@@ -81,35 +81,50 @@ export default class LiveClassDetail extends Component {
                 <div className="section">
                     <div className="row">
                         <div className="col m9">
-                            <h1>Topic: {this.state.liveClasses.topic}</h1>
-                            <p>Start Time: {new Date(this.state.liveClasses.start_time).toLocaleDateString() + " " + new Date(this.state.liveClasses.start_time).toLocaleTimeString()} </p>
-                            <p>Duration : {Math.round(this.state.liveClasses.duration / 60)} hour {this.state.liveClasses.duration % 60} minutes </p>
-                            <p>Type: {this.state.liveClasses.class_type}</p>
+                            <h1 className="center-align">{this.state.liveClasses.topic}</h1>
+                            <blockquote>
+                                <p><b>Start Time:</b> {new Date(this.state.liveClasses.start_time).toLocaleDateString() + " " + new Date(this.state.liveClasses.start_time).toLocaleTimeString()} </p>
+                                <p><b>Duration :</b> {Math.round(this.state.liveClasses.duration / 60)} hour {this.state.liveClasses.duration % 60} minutes </p>
+                                <p><b>Type:</b> {this.state.liveClasses.class_type}</p>
+                            </blockquote>
+
                             <h4>Description:</h4>
-                            <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.description }} />
+                            <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.description }}  style={{background: "rgb(241, 241, 241)", padding: "20px"}}/>
                         </div>
-                        <div className="col m3">
-                            <div id="card" className="card vertical">
+                        <div className="col m3" style={{marginTop: "100px"}}>
+                            {/*<div id="card" className="card vertical">*/}
+                            {/*    <div className="card-image">*/}
+                            {/*        <img className="responsive-img mentors" alt="mentor" src="https://icon-library.com/images/profile-image-icon/profile-image-icon-26.jpg" />*/}
+                            {/*    </div>*/}
+                            {/*    <div className="card-content">*/}
+                            {/*        Mentor:*/}
+                            {/*        <span className="card-title">{this.state.mentor.name}</span>*/}
+                            {/*        <p>{this.state.mentor.organization}</p>*/}
+                            {/*        <p>{this.state.mentor.position}</p>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            <div className="card vertical">
                                 <div className="card-image">
-                                    <img className="responsive-img" alt="mentor" src="https://lorempixel.com/400/400/nature/6" />
+                                    <img className=" mentors" alt="mentor" src="https://icon-library.com/images/profile-image-icon/profile-image-icon-26.jpg" />
                                 </div>
                                 <div className="card-content">
                                     Mentor:
                                     <span className="card-title">{this.state.mentor.name}</span>
-                                    <p>{this.state.mentor.organization}</p>
+                                    <p>{this.state.mentor.medicalcollege}</p>
                                     <p>{this.state.mentor.position}</p>
                                 </div>
                             </div>
+
                             {this.state.liveClasses.class_type === "Paid" ?
                                 <button
                                     value={this.state.liveClasses._id}
-                                    onClick={this.onRegisterClick(this.state.liveClasses.class_type)}
+                                    // onClick={this.onRegisterClick(this.state.liveClasses.class_type)}
                                     className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">
                                     Register for ৳ {this.state.liveClasses.price}
                                 </button>
                                 : <button
                                     value={this.state.liveClasses._id}
-                                    onClick={this.onRegisterClick(this.state.liveClasses.class_type)}
+                                    // onClick={this.onRegisterClick(this.state.liveClasses.class_type)}
                                     className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">
                                     Register for free
                         </button>
