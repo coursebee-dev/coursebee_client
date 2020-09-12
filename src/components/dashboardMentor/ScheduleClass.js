@@ -110,6 +110,7 @@ class ScheduleClass extends Component {
                         <Formik initialValues={{
                             topic: "",
                             description: "",
+                            class_schedule: "",
                             class_type: "",
                             start_date: "",
                             end_date: "",
@@ -128,7 +129,11 @@ class ScheduleClass extends Component {
                                 }
 
                                 if (!values.description) {
-                                    errors.description = "CLass description is required!";
+                                    errors.description = "Class description is required!";
+                                }
+
+                                if (!values.class_schedule) {
+                                    errors.class_schedule = "Class Schedule is required!";
                                 }
 
                             }}
@@ -139,7 +144,7 @@ class ScheduleClass extends Component {
                                     topic: values.topic,
                                     class_type: values.class_type,
                                     description: values.description,
-                                    //price: this.state.price,
+                                    class_schedule: values.class_schedule,
                                     start_date: values.start_date,
                                     time: values.time,
                                     end_date: values.end_date,
@@ -165,7 +170,7 @@ class ScheduleClass extends Component {
                                         <Editor
                                             apiKey={API_KEY}
                                             init={{
-                                                height: 500,
+                                                height: 300,
                                                 menubar: 'edit insert format table tools help',
                                                 plugins: [
                                                     ' autolink media lists link charmap print preview anchor',
@@ -178,6 +183,25 @@ class ScheduleClass extends Component {
                                             onEditorChange={desc => setFieldValue("description", desc)}
                                         />
                                         <ErrorMessage name="description" render={msg => <span className="red-text">{msg}</span>} />
+                                    </div>
+                                    <div className="input-field col s12">
+                                        <span>Class Schedule</span>
+                                        <Editor
+                                            apiKey={API_KEY}
+                                            init={{
+                                                height: 300,
+                                                menubar: 'edit insert format table tools help',
+                                                plugins: [
+                                                    ' autolink media lists link charmap print preview anchor',
+                                                    'searchreplace visualblocks code fullscreen',
+                                                    'insertdatetime table paste code wordcount'
+                                                ],
+                                                toolbar:
+                                                    'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat '
+                                            }}
+                                            onEditorChange={desc => setFieldValue("class_schedule", desc)}
+                                        />
+                                        <ErrorMessage name="class_schedule" render={msg => <span className="red-text">{msg}</span>} />
                                     </div>
                                     <div className="col s12">
                                         <label htmlFor="class_type">Class type  </label>
