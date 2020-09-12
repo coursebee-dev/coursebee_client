@@ -77,34 +77,47 @@ class LiveClassList extends Component {
             image: ""
         };
         const liveClasses = this.state.liveClasses.map(liveClass => (
-            <li className="collection-item" key={liveClass._id}>
-                <p className="secondary-content">
-                    {liveClass.class_type === "Paid" ?
-                        <button
-                            value={liveClass._id}
-                            onClick={this.onRegisterClick(liveClass.class_type)}
-                            className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">
-                            Register for ৳ {liveClass.price}
-                        </button>
-                        : <button
-                            value={liveClass._id}
-                            onClick={this.onRegisterClick(liveClass.class_type)}
-                            className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">
-                            Register for free
-                        </button>
-                    }
-                </p>
-                <h6>Topic : {liveClass.topic}</h6>
-                <p>Start Time: {new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>
-                <p>Duration : {Math.round(liveClass.duration / 60)} hour {liveClass.duration % 60} minutes</p>
-                <p>Type: {liveClass.class_type}</p>
-                <button
-                    value={liveClass._id}
-                    onClick={this.seeDetails}
-                    className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">
-                    <i className="material-icons right">visibility</i>View Details
-                </button>
-            </li>
+                <div className="collection-item col m4 s12" key={liveClass._id}>
+                    <div className="card custom-card">
+                        <div className="card-content">
+
+                            <div className="card-title center-align">{liveClass.topic}</div>
+                            <p><b>Start Time: </b>{new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>
+                            <p><b>Duration :</b> {Math.round(liveClass.duration / 60)} hour {liveClass.duration % 60} minutes</p>
+                            <p><b>Type:</b> {liveClass.class_type}</p>
+                        </div>
+                        <div className="card-action">
+                            <div className="row">
+                                <div className="col m12 s12" style={{marginBottom : "10px"}}>
+                                    <button
+                                        value={liveClass._id}
+                                        onClick={this.seeDetails}
+                                        className="btn-flat custom_btn">
+                                        View Details
+                                    </button>
+                                </div>
+                                <div className="col m12 s12">
+                                    <>
+                                        {liveClass.class_type === "Paid" ?
+                                            <button
+                                                value={liveClass._id}
+                                                onClick={this.onRegisterClick(liveClass.class_type)}
+                                                className="btn-flat blue-grey white-text darken-3 custom_btn">
+                                                Register for ৳ {liveClass.price}
+                                            </button>
+                                            : <button
+                                                value={liveClass._id}
+                                                onClick={this.onRegisterClick(liveClass.class_type)}
+                                                className="btn-flat blue-grey white-text darken-3 custom_btn">
+                                                Register for free
+                                            </button>
+                                        }
+                                    </>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         ));
         return (
             <div className="container" >
@@ -121,7 +134,7 @@ class LiveClassList extends Component {
                     ]}
                 />
                 <h4 style={{ margin: "50px" }}>Scheduled Classes</h4>
-                <ul style={{ width: "100%", textAlign: "left" }} className="collection">{liveClasses.reverse()}</ul>
+                <div className="row">{liveClasses.reverse()}</div>
                 <Link style={{ margin: "40px" }} to="/" className="btn-flat waves-effect teal darken-1 white-text">
                     <i className="material-icons left">keyboard_backspace</i>Go Back
                 </Link>

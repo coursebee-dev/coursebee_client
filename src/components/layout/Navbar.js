@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import UserIcon from "../userIcon/UserIcon"
 import styled from 'styled-components';
 import logo from '../../images/logo.png';
+import live from '../../images/live.gif';
 const LinkStyled = styled(Link)`
     color: black;
 	:hover {
@@ -25,7 +26,7 @@ class Navbar extends Component {
                 <ul className="sidenav" id="mobile-demo">
                     <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
                     <li><LinkStyled to="/about">About Us</LinkStyled></li>
-                    <li><LinkStyled to="/liveclass">Live Classroom</LinkStyled></li>
+                    <li><LinkStyled to="/liveclass"><img src={live} alt="live"/>Live Classroom</LinkStyled></li>
                     <li><LinkStyled to="/course">Courses</LinkStyled></li>
                     <li><LinkStyled to="/training">Training</LinkStyled></li>
                     {this.props.auth.isAuthenticated ? <li><LinkStyled className="grey" to="#">{this.props.auth.user.name}</LinkStyled></li> :
@@ -50,7 +51,7 @@ class Navbar extends Component {
                             </ul>
                             <ul className="right hide-on-med-and-down">
                                 <li><LinkStyled to="/about">About Us</LinkStyled></li>
-                                <li><LinkStyled to="/liveClass">Live Classroom</LinkStyled></li>
+                                <li><LinkStyled to="/liveClass"><img src={live} alt="live" style={{width: "10px", marginRight: "5px"}}/>Live Classroom</LinkStyled></li>
                                 <li><LinkStyled to="/course">Courses</LinkStyled></li>
                                 <li><LinkStyled to="/training">Training</LinkStyled></li>
                                 {this.props.auth.isAuthenticated ? <li><UserIcon /></li> :
