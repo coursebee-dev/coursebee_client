@@ -143,3 +143,6 @@ strong{
     box-shadow: 2px 5px 7px #928d8d;
     transform: translate(10px,-40px);
 }
+nav{
+    background: linear-gradient(45deg,#fffefd,#f8e9d9,#d79b59,#ef9229,#f68509,#db8322,#f68509);
+}
