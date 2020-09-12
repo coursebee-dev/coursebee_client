@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
   }
-  
+
   /* width */
   ::-webkit-scrollbar {
     width: 10px;
@@ -18,17 +18,17 @@ body {
   #description{
     height: 200px;
   }
-  
+
   /* Track */
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
   }
-  
+
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #888;
   }
-  
+
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
@@ -78,10 +78,10 @@ body {
 
 .editProfileForm {
   max-width: 300px;
-   min-width: 300px; 
+   min-width: 300px;
    display: flex;
    justify-content: center;
-   align-items: center; 
+   align-items: center;
    flex-direction: column;
 }
 
@@ -142,4 +142,30 @@ strong{
     background: #fffbf3;
     box-shadow: 2px 5px 7px #928d8d;
     transform: translate(10px,-40px);
+}
+nav{
+    background: linear-gradient(45deg,#fffefd,#f8e9d9,#d79b59,#ef9229,#de9341,#7b4d1b,#000000);
+}
+.details_tab{
+  padding: 15px;
+  font-weight: 800;
+  font-size: 15px;
+  border: 3px solid #ff4f4f;
+  display: block;
+  color: black;
+  text-align: center;
+  cursor: pointer;
+}
+.details_tab i{
+  margin-right: 15px
+}
+.active_tab{
+  padding: 15px;
+  font-weight: 800;
+  font-size: 15px;
+  background: #ff4f4f;
+  display: block;
+  color: white;
+  text-align: center;
+  cursor: pointer;
 }
