@@ -90,8 +90,8 @@ export default class LiveClassDetail extends Component {
                             </blockquote>
 
                             <div className="row" style={{ color: "black"}}>
-                                <div className="col m6 s6" onClick={() => this.setState({showTab: "description"})}><span className="details_tab"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Description</span></div>
-                                <div className="col m6 s6" onClick={() => this.setState({showTab: "class_schedule"})}><span className="details_tab"><i class="fa fa-address-book" aria-hidden="true"></i>Course Curriculam</span></div>
+                                <div className="col m6 s6" onClick={() => this.setState({showTab: "description"})}><span className={`details_tab ${this.state.showTab === "description" ? "active_tab" : ''}`}><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Description</span></div>
+                                <div className="col m6 s6" onClick={() => this.setState({showTab: "class_schedule"})}><span className={`details_tab ${this.state.showTab === "class_schedule" ? "active_tab" : ''}`}><i class="fa fa-address-book" aria-hidden="true"></i>Course Curriculam</span></div>
                             </div>
 
                             <div className="row">

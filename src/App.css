@@ -150,12 +150,22 @@ nav{
   padding: 15px;
   font-weight: 800;
   font-size: 15px;
-  background: #ff4f4f;
+  border: 3px solid #ff4f4f;
   display: block;
-  color: white;
+  color: black;
   text-align: center;
   cursor: pointer;
 }
 .details_tab i{
   margin-right: 15px
+}
+.active_tab{
+  padding: 15px;
+  font-weight: 800;
+  font-size: 15px;
+  background: #ff4f4f;
+  display: block;
+  color: white;
+  text-align: center;
+  cursor: pointer;
 }
