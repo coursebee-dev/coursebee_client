@@ -11,6 +11,7 @@ export default class LiveClassDetail extends Component {
             liveClasses: {},
             mentor: {},
             loading: false,
+            showTab : "description"
         }
         this.getMentor = this.getMentor.bind(this)
         this.getLiveClass = this.getLiveClass.bind(this)
@@ -88,8 +89,29 @@ export default class LiveClassDetail extends Component {
                                 <p><b>Type:</b> {this.state.liveClasses.class_type}</p>
                             </blockquote>
 
-                            <h4>Description:</h4>
-                            <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.description }}  style={{background: "rgb(241, 241, 241)", padding: "20px"}}/>
+                            <div className="row" style={{ color: "black"}}>
+                                <div className="col m6 s6" onClick={() => this.setState({showTab: "description"})}><span className="details_tab"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Description</span></div>
+                                <div className="col m6 s6" onClick={() => this.setState({showTab: "class_schedule"})}><span className="details_tab"><i class="fa fa-address-book" aria-hidden="true"></i>Course Curriculam</span></div>
+                            </div>
+
+                            <div className="row">
+                                {
+                                  this.state.showTab === "description" ?
+                                  (
+                                    <div clasName="col m12 s12">
+                                        <h4>Description:</h4>
+                                        <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.description }}  style={{background: "rgb(241, 241, 241)", padding: "20px"}}/>
+                                    </div>
+                                  ) :
+                                  (
+                                    <div clasName="col m12 s12">
+                                        <h4>Class Schedule:</h4>
+                                        <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.class_schedule }}  style={{background: "rgb(241, 241, 241)", padding: "20px"}}/>
+                                    </div>
+                                  )
+                                }
+                            </div>
+
                         </div>
                         <div className="col m3" style={{marginTop: "100px"}}>
                             {/*<div id="card" className="card vertical">*/}
