@@ -120,13 +120,15 @@ body {
     /*background: linear-gradient(90deg, black, black);*/
     background: linear-gradient(90deg, black, #EE8E24);
 }
-ul:not(.browser-default) {
+
+.description ul:not(.browser-default) {
     padding-left: 30px;
     list-style-type: disc;
 }
-ul:not(.browser-default)>li {
+.description ul:not(.browser-default)>li {
     list-style-type: disc;
 }
+
 strong{
     font-weight: bold;
 }

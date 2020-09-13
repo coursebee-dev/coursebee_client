@@ -79,10 +79,13 @@ class LiveClassList extends Component {
         const liveClasses = this.state.liveClasses.map(liveClass => (
                 <div className="collection-item col m4 s12" key={liveClass._id}>
                     <div className="card custom-card">
+                        <div className="card-image">
+                            <img src={liveClass.banner_url} alt="banner"/>
+                        </div>
                         <div className="card-content">
-
                             <div className="card-title center-align">{liveClass.topic}</div>
-                            <p><b>Start Time: </b>{new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>
+                            {/*<p><b>Start Time: </b>{new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>*/}
+                            <p><b>Start Time: </b>Coming Soon</p>
                             <p><b>Duration :</b> {Math.round(liveClass.duration / 60)} hour {liveClass.duration % 60} minutes</p>
                             <p><b>Type:</b> {liveClass.class_type}</p>
                         </div>
@@ -96,24 +99,7 @@ class LiveClassList extends Component {
                                         View Details
                                     </button>
                                 </div>
-                                <div className="col m12 s12">
-                                    <>
-                                        {liveClass.class_type === "Paid" ?
-                                            <button
-                                                value={liveClass._id}
-                                                onClick={this.onRegisterClick(liveClass.class_type)}
-                                                className="btn-flat blue-grey white-text darken-3 custom_btn">
-                                                Register for ৳ {liveClass.price}
-                                            </button>
-                                            : <button
-                                                value={liveClass._id}
-                                                onClick={this.onRegisterClick(liveClass.class_type)}
-                                                className="btn-flat blue-grey white-text darken-3 custom_btn">
-                                                Register for free
-                                            </button>
-                                        }
-                                    </>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -135,9 +121,7 @@ class LiveClassList extends Component {
                 />
                 <h4 style={{ margin: "50px" }}>Scheduled Classes</h4>
                 <div className="row">{liveClasses.reverse()}</div>
-                <Link style={{ margin: "40px" }} to="/" className="btn-flat waves-effect teal darken-1 white-text">
-                    <i className="material-icons left">keyboard_backspace</i>Go Back
-                </Link>
+
             </div>
         )
     }
