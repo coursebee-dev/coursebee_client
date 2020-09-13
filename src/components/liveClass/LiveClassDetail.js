@@ -81,10 +81,12 @@ export default class LiveClassDetail extends Component {
             <div className="container">
                 <div className="section">
                     <div className="row">
+                    <img src={this.state.liveClasses.banner_url} alt="banner" width="100%"/>
                         <div className="col m9">
+
                             <h1 className="center-align">{this.state.liveClasses.topic}</h1>
                             <blockquote>
-                                <p><b>Start Time:</b> {new Date(this.state.liveClasses.start_time).toLocaleDateString() + " " + new Date(this.state.liveClasses.start_time).toLocaleTimeString()} </p>
+
                                 <p><b>Duration :</b> {Math.round(this.state.liveClasses.duration / 60)} hour {this.state.liveClasses.duration % 60} minutes </p>
                                 <p><b>Type:</b> {this.state.liveClasses.class_type}</p>
                             </blockquote>
@@ -125,32 +127,17 @@ export default class LiveClassDetail extends Component {
                             {/*        <p>{this.state.mentor.position}</p>*/}
                             {/*    </div>*/}
                             {/*</div>*/}
-                            <div className="card vertical">
-                                <div className="card-image">
-                                    <img className=" mentors" alt="mentor" src="https://icon-library.com/images/profile-image-icon/profile-image-icon-26.jpg" />
-                                </div>
+                            <div className="card vertical effect2">
+
                                 <div className="card-content">
-                                    Mentor:
-                                    <span className="card-title">{this.state.mentor.name}</span>
-                                    <p>{this.state.mentor.medicalcollege}</p>
-                                    <p>{this.state.mentor.position}</p>
+                                    <h5  className="card-title center-align">Mentor</h5>
+                                    <span><b>Name: </b>{this.state.mentor.name}</span>
+                                    <p><b>Organization: </b>{this.state.mentor.organization}</p>
+                                    <p><b>Position: </b>{this.state.mentor.position}</p>
                                 </div>
                             </div>
 
-                            {this.state.liveClasses.class_type === "Paid" ?
-                                <button
-                                    value={this.state.liveClasses._id}
-                                    // onClick={this.onRegisterClick(this.state.liveClasses.class_type)}
-                                    className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">
-                                    Register for ৳ {this.state.liveClasses.price}
-                                </button>
-                                : <button
-                                    value={this.state.liveClasses._id}
-                                    // onClick={this.onRegisterClick(this.state.liveClasses.class_type)}
-                                    className="btn btn-small waves-effect waves-light hoverable orange darken-1 black-text">
-                                    Register for free
-                        </button>
-                            }
+
                         </div>
                     </div>
                     <Link style={{ margin: "40px" }} to="/liveClass" className="btn-flat waves-effect teal darken-1 white-text">
