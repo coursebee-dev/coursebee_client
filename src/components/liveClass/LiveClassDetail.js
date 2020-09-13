@@ -101,13 +101,11 @@ export default class LiveClassDetail extends Component {
                                   this.state.showTab === "description" ?
                                   (
                                     <div clasName="col m12 s12">
-                                        <h4>Description:</h4>
                                         <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.description }}  style={{background: "rgb(241, 241, 241)", padding: "20px"}}/>
                                     </div>
                                   ) :
                                   (
                                     <div clasName="col m12 s12">
-                                        <h4>Class Schedule:</h4>
                                         <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.class_schedule }}  style={{background: "rgb(241, 241, 241)", padding: "20px"}}/>
                                     </div>
                                   )
