@@ -100,12 +100,12 @@ export default class LiveClassDetail extends Component {
                                 {
                                   this.state.showTab === "description" ?
                                   (
-                                    <div clasName="col m12 s12">
+                                    <div clasName="col m12 s12 description">
                                         <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.description }}  style={{background: "rgb(241, 241, 241)", padding: "20px"}}/>
                                     </div>
                                   ) :
                                   (
-                                    <div clasName="col m12 s12">
+                                    <div clasName="col m12 s12 description">
                                         <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.class_schedule }}  style={{background: "rgb(241, 241, 241)", padding: "20px"}}/>
                                     </div>
                                   )
@@ -125,7 +125,7 @@ export default class LiveClassDetail extends Component {
                             {/*        <p>{this.state.mentor.position}</p>*/}
                             {/*    </div>*/}
                             {/*</div>*/}
-                            <div className="card vertical effect2">
+                            <div className="card vertical">
 
                                 <div className="card-content">
                                     <h5  className="card-title center-align">Mentor</h5>
