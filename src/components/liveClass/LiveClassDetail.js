@@ -81,7 +81,7 @@ export default class LiveClassDetail extends Component {
             <div className="container">
                 <div className="section">
                     <div className="row">
-                    <img src={this.state.liveClasses.banner_url} alt="banner" width="100%"/>
+                    <img src={this.state.liveClasses.banner_url} alt="banner" width="100%" height="600px"/>
                         <div className="col m9">
 
                             <h1 className="center-align">{this.state.liveClasses.topic}</h1>

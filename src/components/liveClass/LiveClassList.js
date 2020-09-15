@@ -80,7 +80,7 @@ class LiveClassList extends Component {
                 <div className="collection-item col m4 s12" key={liveClass._id}>
                     <div className="card custom-card">
                         <div className="card-image">
-                            <img src={liveClass.banner_url} alt="banner"/>
+                            <img src={liveClass.banner_url} alt="banner" height="200px" style={{width: "100%"}}/>
                         </div>
                         <div className="card-content">
                             <div className="card-title center-align">{liveClass.topic}</div>
