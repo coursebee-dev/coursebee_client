@@ -7,10 +7,13 @@ import styled from 'styled-components';
 import logo from '../../images/logo.png';
 import live from '../../images/live.gif';
 const LinkStyled = styled(Link)`
-    color: black;
+    color: #ffffff;
+    font-weight:bold;
+    letter-spacing:2px;
 	:hover {
-        background-color: #fb8c00;
-		color: white;
+        /background-color: #fb8c00;
+      color: #00897b;
+  		font-weight:bold
 	}
 `
 const LinkBrand = styled(Link)`
@@ -26,7 +29,7 @@ class Navbar extends Component {
                 <ul className="sidenav" id="mobile-demo">
                     <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
                     <li><LinkStyled to="/about">About Us</LinkStyled></li>
-                    <li><LinkStyled to="/liveclass"><img src={live} alt="live"/>Live Classroom</LinkStyled></li>
+                    <li><LinkStyled to="/liveclass"><img src={live}  style={{width: "10px", marginRight: "5px"}} alt="live"/>Live Classroom</LinkStyled></li>
                     <li><LinkStyled to="/course">Courses</LinkStyled></li>
                     <li><LinkStyled to="/training">Training</LinkStyled></li>
                     {this.props.auth.isAuthenticated ? <li><LinkStyled className="grey" to="#">{this.props.auth.user.name}</LinkStyled></li> :
