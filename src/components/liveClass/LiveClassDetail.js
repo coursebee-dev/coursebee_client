@@ -87,8 +87,9 @@ export default class LiveClassDetail extends Component {
                             <h1 className="center-align">{this.state.liveClasses.topic}</h1>
                             <blockquote>
 
-                                <p><b>Duration :</b> {Math.round(this.state.liveClasses.duration / 60)} hour {this.state.liveClasses.duration % 60} minutes </p>
-                                <p><b>Type:</b> {this.state.liveClasses.class_type}</p>
+                                <p><b>Duration :</b>{this.state.liveClasses.temp_duration } </p>
+                                {/*<p><b>Duration :</b> {Math.round(this.state.liveClasses.duration / 60)} hour {this.state.liveClasses.duration % 60} minutes </p>*/}
+                                <p><b>Price:</b> {this.state.liveClasses.price} Taka</p>
                             </blockquote>
 
                             <div className="row" style={{ color: "black"}}>
