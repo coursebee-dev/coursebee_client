@@ -88,7 +88,7 @@ class LiveClassList extends Component {
                             <p><b>Start Date: </b>Coming Soon</p>
                             <p><b>Duration :</b> {liveClass.temp_duration}</p>
                             {/*<p><b>Duration :</b> {Math.round(liveClass.duration / 60)} hour {liveClass.duration % 60} minutes</p>*/}
-                            <p><b>Price:</b> {liveClass.price === 0 ? "Price will be published soon"  : liveClass.price + " taka" }</p>
+                            <p><b>Price:</b> {liveClass.price === 0 ? "Price will be published soon"  : liveClass.price + " BDT" }</p>
                         </div>
                         <div className="card-action">
                             <div className="row">
