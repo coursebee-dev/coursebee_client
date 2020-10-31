@@ -1,12 +1,11 @@
-
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import axios from "axios";
 import { scheduleLiveClass } from "../../actions/liveClassAction";
 import { Editor } from '@tinymce/tinymce-react';
-import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
-import '../../App.css';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import '../../App.scss';
 
 class ScheduleClass extends Component {
     constructor() {
@@ -279,13 +278,13 @@ class ScheduleClass extends Component {
                                         >
                                             <option defaultValue="">Select day of the week</option>
                                             {/*<option value="Open" disabled>Open For All</option>*/}
-                                            <option value="1">Monday</option>
-                                            <option value="2">Tuesday</option>
-                                            <option value="3">Wednesday</option>
-                                            <option value="4">Thursday</option>
-                                            <option value="5">Friday</option>
-                                            <option value="6">Saturday</option>
-                                            <option value="7">Sunday</option>
+                                            <option value={0}>Sunday</option>
+                                            <option value={1}>Monday</option>
+                                            <option value={2}>Tuesday</option>
+                                            <option value={3}>Wednesday</option>
+                                            <option value={4}>Thursday</option>
+                                            <option value={5}>Friday</option>
+                                            <option value={6}>Saturday</option>
                                         </Field>
                                     </div>
                                     <button className="btn orange btn-small" onClick={(e) => {
@@ -296,7 +295,7 @@ class ScheduleClass extends Component {
                                         dateArray.push(start)
                                         while (start < end) {
                                             let a = new Date(start.setDate(start.getDate() + 1))
-                                            if (a.getDay() == values.week_day) {
+                                            if (a.getDay() === values.week_day) {
                                                 dateArray.push(a)
                                             }
                                             start = new Date(start.setDate(start.getDate() + 1))

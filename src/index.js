@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './index.css';
-import ReactGA from 'react-ga';
-
-ReactGA.initialize(process.env.REACT_APP_NOT_GA_TRACKING_ID);
+import './index.scss';
+import 'materialize-css/dist/css/materialize.min.css'
 
 
 ReactDOM.render(

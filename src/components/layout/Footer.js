@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef } from "react";
+
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -30,7 +31,7 @@ class Footer extends Component {
                 <div className="footer-copyright">
                     <div style={{ width: "100%" }} className="container">
                         <LinkStyled to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkStyled>
-                        <div style={{ lineHeight: "60px" }} className="right black-text">© Kernel Foundation</div>
+                        <div style={{ lineHeight: "60px" }} className="right black-text">© Kernel Technology</div>
                     </div>
                 </div>
             </footer>

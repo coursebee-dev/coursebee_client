@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import './App.css'
+import './App.scss'
 
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import PrivateRouteMentor from "./components/private-route/PrivateRouteMentor";
@@ -46,14 +46,25 @@ import Contact from './components/contact/Contact';
 import ChangePass from './components/forgotPass/ChangePass';
 import AccountMentor from './components/dashboardMentor/AccountMentor';
 import Categories from './components/dashboardAdmin/Categories';
+import CreateCourse from './components/dashboardMentor/CreateCourse';
+import EditCourse from './components/dashboardMentor/EditCourse';
+import ViewCourses from './components/dashboardAdmin/ViewCourses';
+import EditCourseAdmin from './components/dashboardAdmin/EditCourseAdmin';
 
 
 export default function PathRoute() {
+    const [navHeight, setNavHeight] = useState(0)
+    const [footHeight, setFootHeight] = useState(0)
+    const [bodyHeight, setBodyHeight] = useState(0)
+
+    useEffect(() => {
+        setBodyHeight(navHeight + footHeight)
+    }, [footHeight, navHeight])
     return (
         <Switch>
             <React.Fragment>
-                <Navbar />
-                <main className="no-padding">
+                <Navbar setNavHeight={navht => setNavHeight(navht)} />
+                <main className="no-padding" style={{ minHeight: `calc(100vh - ${bodyHeight}px)` }}>
                     <Route exact path="/" component={Landing} />
                     <Route exact path="/mentor" component={LandingMentor} />
                     <Route exact path="/admin" component={LandingAdmin} />
@@ -85,6 +96,8 @@ export default function PathRoute() {
                     <PrivateRoute exact path="/dashboard/liveclassroom/:classid" component={LiveClassRoom} />
                     <PrivateRouteMentor exact path="/mentor/dashboard" component={DashboardMentor} />
                     <PrivateRouteMentor exact path="/mentor/dashboard/scheduleclass" component={ScheduleClass} />
+                    <PrivateRouteMentor exact path="/mentor/dashboard/createcourse" component={CreateCourse} />
+                    <PrivateRouteMentor exact path="/mentor/dashboard/editcourse/:courseid" component={EditCourse} />
                     <PrivateRouteMentor exact path="/mentor/account" component={AccountMentor} />
                     <PrivateRouteMentor exact path="/mentor/dashboard/liveclassroom/:classid" component={LiveClassRoomMentor} />
                     <PrivateRouteAdmin exact path="/admin/dashboard" component={DashboardAdmin} />
@@ -93,8 +106,10 @@ export default function PathRoute() {
                     <PrivateRouteAdmin exact path="/admin/dashboard/viewliveclass" component={ViewLiveClass} />
                     <PrivateRouteAdmin exact path="/admin/dashboard/viewstudent" component={ViewStudent} />
                     <PrivateRouteAdmin exact path="/admin/dashboard/category" component={Categories} />
+                    <PrivateRouteAdmin exact path="/admin/dashboard/courses" component={ViewCourses} />
+                    <PrivateRouteAdmin exact path="/admin/dashboard/courses/:courseid" component={EditCourseAdmin} />
                 </main>
-                <Footer />
+                <Footer setFootHeight={footht => setFootHeight(footht)} />
             </React.Fragment>
         </Switch>
     )
