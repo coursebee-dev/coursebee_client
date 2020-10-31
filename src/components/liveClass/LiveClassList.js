@@ -10,7 +10,7 @@ class LiveClassList extends Component {
         super();
         this.state = {
             liveClasses: [],
-            loading: false,
+            loading: true,
         }
         this.getLiveClasses = this.getLiveClasses.bind(this)
     }
@@ -18,7 +18,7 @@ class LiveClassList extends Component {
     getLiveClasses = () => {
         axios.get('/api/approvedliveclass')
             .then(res => {
-                this.setState({ liveClasses: res.data })
+                this.setState({ liveClasses: res.data, loading: false })
             })
             .catch(err => {
                 console.log(err)
@@ -79,14 +79,15 @@ class LiveClassList extends Component {
             <div className="collection-item col m4 s12" key={liveClass._id}>
                 <div className="card custom-card">
                     <div className="card-image">
-                        <img src={liveClass.banner_url} alt="banner" />
+                        <img src={liveClass.banner_url} alt="banner" height="200px" style={{ width: "100%" }} />
                     </div>
                     <div className="card-content">
                         <div className="card-title center-align">{liveClass.topic}</div>
                         {/*<p><b>Start Time: </b>{new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>*/}
-                        <p><b>Start Time: </b>Coming Soon</p>
-                        <p><b>Duration :</b> {Math.round(liveClass.duration / 60)} hour {liveClass.duration % 60} minutes</p>
-                        <p><b>Type:</b> {liveClass.class_type}</p>
+                        <p><b>Start Date: </b>Coming Soon</p>
+                        <p><b>Duration :</b> {liveClass.temp_duration}</p>
+                        {/*<p><b>Duration :</b> {Math.round(liveClass.duration / 60)} hour {liveClass.duration % 60} minutes</p>*/}
+                        <p><b>Price:</b> {liveClass.price === 0 ? "Price will be published soon" : liveClass.price + " taka"}</p>
                     </div>
                     <div className="card-action">
                         <div className="row">
@@ -98,8 +99,8 @@ class LiveClassList extends Component {
                                     View Details
                                     </button>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -118,8 +119,15 @@ class LiveClassList extends Component {
                         { property: "og:url", content: seo.url },
                     ]}
                 />
-                <h4 style={{ margin: "50px" }}>Scheduled Classes</h4>
-                <div className="row">{liveClasses.reverse()}</div>
+                <h4 style={{ margin: "50px" }} className="center-align">Live Classes</h4>
+                {this.state.loading ? (
+                    <div className="progress">
+                        <div className="indeterminate blue"></div>
+                    </div>
+                ) : (
+                        <div className="row">{liveClasses.reverse()}</div>
+                    )}
+
 
             </div>
         )

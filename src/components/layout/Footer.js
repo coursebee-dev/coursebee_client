@@ -13,37 +13,30 @@ const LinkStyled = styled(Link)`
 	}
 `
 
-const Footer = ({ auth, setFootHeight }) => {
-    const heightRef = useRef(null)
-    useEffect(() => {
-        if (heightRef.current) {
-
-            let footerheight = heightRef.current.offsetHeight;
-            setFootHeight(footerheight)
-
-        }
-    }, [heightRef, setFootHeight])
-    return (
-        <footer ref={heightRef} className="page-footer white z-depth-1">
-            <div className="container" style={{ width: "40%", justifyContent: "center" }}>
-                <ul className="row">
-                    <li className="col s12 m6 l2"><LinkStyled to="/about">About</LinkStyled></li>
-                    <li className="col s12 m6 l2"><LinkStyled to="/contactus" title="Contact">Contact</LinkStyled></li>
-                    <li className="col s12 m6 l2"><LinkStyled to="/disclaimer">Disclaimer</LinkStyled></li>
-                    <li className="col s12 m6 l2"><LinkStyled to="/privacy">Privacy</LinkStyled></li>
-                    <li className="col s12 m6 l2"><LinkStyled to="/terms">Terms</LinkStyled></li>
-                    {auth.isAuthenticated ? null : <li className="col s12 m6 l2"><LinkStyled to="/admin">Admin</LinkStyled></li>}
-                    {auth.isAuthenticated ? <li className="col s12 m6 l2"><LinkStyled to="#">Settings</LinkStyled></li> : null}
-                </ul>
-            </div>
-            <div className="footer-copyright">
-                <div style={{ width: "100%" }} className="container">
-                    <LinkStyled to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkStyled>
-                    <div style={{ lineHeight: "60px" }} className="right black-text">© Kernel Foundation</div>
+class Footer extends Component {
+    render() {
+        return (
+            <footer className="page-footer white z-depth-1">
+                <div className="container" style={{ width: "40%", justifyContent: "center" }}>
+                    <ul className="row">
+                        <li className="col s12 m6 l2"><LinkStyled to="/about">About</LinkStyled></li>
+                        <li className="col s12 m6 l2"><LinkStyled to="/contactus" title="Contact">Contact</LinkStyled></li>
+                        <li className="col s12 m6 l2"><LinkStyled to="/disclaimer">Disclaimer</LinkStyled></li>
+                        <li className="col s12 m6 l2"><LinkStyled to="/privacy">Privacy</LinkStyled></li>
+                        <li className="col s12 m6 l2"><LinkStyled to="/terms">Terms</LinkStyled></li>
+                        {this.props.auth.isAuthenticated ? null : <li className="col s12 m6 l2"><LinkStyled to="/admin">Admin</LinkStyled></li>}
+                        {this.props.auth.isAuthenticated ? <li className="col s12 m6 l2"><LinkStyled to="#">Settings</LinkStyled></li> : null}
+                    </ul>
                 </div>
-            </div>
-        </footer>
-    );
+                <div className="footer-copyright">
+                    <div style={{ width: "100%" }} className="container">
+                        <LinkStyled to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkStyled>
+                        <div style={{ lineHeight: "60px" }} className="right black-text">© Kernel Technology</div>
+                    </div>
+                </div>
+            </footer>
+        );
+    }
 }
 Footer.propTypes = {
     auth: PropTypes.object.isRequired,
