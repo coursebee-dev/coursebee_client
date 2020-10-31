@@ -90,6 +90,7 @@ export default class LiveClassDetail extends Component {
                                 <p><b>Duration :</b>{this.state.liveClasses.temp_duration} </p>
                                 {/*<p><b>Duration :</b> {Math.round(this.state.liveClasses.duration / 60)} hour {this.state.liveClasses.duration % 60} minutes </p>*/}
                                 <p><b>Price:</b> {this.state.liveClasses.price} Taka</p>
+                                <p><b>Price:</b> <b style={{color: "green"}}>{this.state.liveClasses.price === 0 ? "Price will be published soon"  : "৳ "+this.state.liveClasses.price  }</b> {this.state.liveClasses.prev_price ? <strike style={{color: "red"}}> ৳ {this.state.liveClasses.prev_price}</strike> : ''}</p>
                             </blockquote>
 
                             <div className="row" style={{ color: "black" }}>

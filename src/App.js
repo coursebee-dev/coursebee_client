@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import setCurrentUser from "./actions/setUser";
 import logoutUser from "./actions/logoutAction";
-
+import './App.scss';
 import { Provider } from "react-redux";
 import store from "./store";
 import axios from "axios";
