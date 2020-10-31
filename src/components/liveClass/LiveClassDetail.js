@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import '../../App.css'
+import '../../App.scss'
 import M from "materialize-css"
 import { Link } from "react-router-dom";
 
@@ -11,7 +11,7 @@ export default class LiveClassDetail extends Component {
             liveClasses: {},
             mentor: {},
             loading: false,
-            showTab : "description"
+            showTab: "description"
         }
         this.getMentor = this.getMentor.bind(this)
         this.getLiveClass = this.getLiveClass.bind(this)
@@ -81,7 +81,7 @@ export default class LiveClassDetail extends Component {
             <div className="container">
                 <div className="section">
                     <div className="row">
-                    <img src={this.state.liveClasses.banner_url} alt="banner" width="100%"/>
+                        <img src={this.state.liveClasses.banner_url} alt="banner" width="100%" />
                         <div className="col m9">
 
                             <h1 className="center-align">{this.state.liveClasses.topic}</h1>
@@ -91,29 +91,29 @@ export default class LiveClassDetail extends Component {
                                 <p><b>Type:</b> {this.state.liveClasses.class_type}</p>
                             </blockquote>
 
-                            <div className="row" style={{ color: "black"}}>
-                                <div className="col m6 s6" onClick={() => this.setState({showTab: "description"})}><span className={`details_tab ${this.state.showTab === "description" ? "active_tab" : ''}`}><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Description</span></div>
-                                <div className="col m6 s6" onClick={() => this.setState({showTab: "class_schedule"})}><span className={`details_tab ${this.state.showTab === "class_schedule" ? "active_tab" : ''}`}><i class="fa fa-address-book" aria-hidden="true"></i>Course Curriculam</span></div>
+                            <div className="row" style={{ color: "black" }}>
+                                <div className="col m6 s6" onClick={() => this.setState({ showTab: "description" })}><span className={`details_tab ${this.state.showTab === "description" ? "active_tab" : ''}`}><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Description</span></div>
+                                <div className="col m6 s6" onClick={() => this.setState({ showTab: "class_schedule" })}><span className={`details_tab ${this.state.showTab === "class_schedule" ? "active_tab" : ''}`}><i class="fa fa-address-book" aria-hidden="true"></i>Course Curriculam</span></div>
                             </div>
 
                             <div className="row">
                                 {
-                                  this.state.showTab === "description" ?
-                                  (
-                                    <div clasName="col m12 s12 description">
-                                        <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.description }}  style={{background: "rgb(241, 241, 241)", padding: "20px"}}/>
-                                    </div>
-                                  ) :
-                                  (
-                                    <div clasName="col m12 s12 description">
-                                        <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.class_schedule }}  style={{background: "rgb(241, 241, 241)", padding: "20px"}}/>
-                                    </div>
-                                  )
+                                    this.state.showTab === "description" ?
+                                        (
+                                            <div clasName="col m12 s12 description">
+                                                <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.description }} style={{ background: "rgb(241, 241, 241)", padding: "20px" }} />
+                                            </div>
+                                        ) :
+                                        (
+                                            <div clasName="col m12 s12 description">
+                                                <div dangerouslySetInnerHTML={{ __html: this.state.liveClasses.class_schedule }} style={{ background: "rgb(241, 241, 241)", padding: "20px" }} />
+                                            </div>
+                                        )
                                 }
                             </div>
 
                         </div>
-                        <div className="col m3" style={{marginTop: "100px"}}>
+                        <div className="col m3" style={{ marginTop: "100px" }}>
                             {/*<div id="card" className="card vertical">*/}
                             {/*    <div className="card-image">*/}
                             {/*        <img className="responsive-img mentors" alt="mentor" src="https://icon-library.com/images/profile-image-icon/profile-image-icon-26.jpg" />*/}
@@ -128,7 +128,7 @@ export default class LiveClassDetail extends Component {
                             <div className="card vertical">
 
                                 <div className="card-content">
-                                    <h5  className="card-title center-align">Mentor</h5>
+                                    <h5 className="card-title center-align">Mentor</h5>
                                     <span><b>Name: </b>{this.state.mentor.name}</span>
                                     <p><b>Organization: </b>{this.state.mentor.organization}</p>
                                     <p><b>Position: </b>{this.state.mentor.position}</p>

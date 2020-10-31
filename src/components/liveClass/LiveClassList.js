@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet'
 import M from "materialize-css"
 
@@ -77,33 +76,33 @@ class LiveClassList extends Component {
             image: ""
         };
         const liveClasses = this.state.liveClasses.map(liveClass => (
-                <div className="collection-item col m4 s12" key={liveClass._id}>
-                    <div className="card custom-card">
-                        <div className="card-image">
-                            <img src={liveClass.banner_url} alt="banner"/>
-                        </div>
-                        <div className="card-content">
-                            <div className="card-title center-align">{liveClass.topic}</div>
-                            {/*<p><b>Start Time: </b>{new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>*/}
-                            <p><b>Start Time: </b>Coming Soon</p>
-                            <p><b>Duration :</b> {Math.round(liveClass.duration / 60)} hour {liveClass.duration % 60} minutes</p>
-                            <p><b>Type:</b> {liveClass.class_type}</p>
-                        </div>
-                        <div className="card-action">
-                            <div className="row">
-                                <div className="col m12 s12" style={{marginBottom : "10px"}}>
-                                    <button
-                                        value={liveClass._id}
-                                        onClick={this.seeDetails}
-                                        className="btn-flat custom_btn">
-                                        View Details
+            <div className="collection-item col m4 s12" key={liveClass._id}>
+                <div className="card custom-card">
+                    <div className="card-image">
+                        <img src={liveClass.banner_url} alt="banner" />
+                    </div>
+                    <div className="card-content">
+                        <div className="card-title center-align">{liveClass.topic}</div>
+                        {/*<p><b>Start Time: </b>{new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>*/}
+                        <p><b>Start Time: </b>Coming Soon</p>
+                        <p><b>Duration :</b> {Math.round(liveClass.duration / 60)} hour {liveClass.duration % 60} minutes</p>
+                        <p><b>Type:</b> {liveClass.class_type}</p>
+                    </div>
+                    <div className="card-action">
+                        <div className="row">
+                            <div className="col m12 s12" style={{ marginBottom: "10px" }}>
+                                <button
+                                    value={liveClass._id}
+                                    onClick={this.seeDetails}
+                                    className="btn-flat custom_btn">
+                                    View Details
                                     </button>
-                                </div>
-
                             </div>
+
                         </div>
                     </div>
                 </div>
+            </div>
         ));
         return (
             <div className="container" >

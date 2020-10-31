@@ -51,7 +51,7 @@ class DashboardMentor extends Component {
                     <div style={{ height: "80%" }}><img style={{ width: "100%" }} src={liveClass} alt="live class" /></div>
                     <div style={{ marginBottom: "20px" }}>Schedule A Live Class Now</div>
                   </Link>
-                  <Link to="#" style={{ margin: "5%", padding: '0', width: "400px", height: "auto" }} className="btn btn-large waves-effect waves-light hoverable white black-text">
+                  <Link to="/mentor/dashboard/createcourse" style={{ margin: "5%", padding: '0', width: "400px", height: "auto" }} className="btn btn-large waves-effect waves-light hoverable white black-text">
                     <div style={{ height: "80%" }}><img style={{ width: "100%" }} src={onlineCourse} alt="online course" /></div>
                     <div style={{ marginBottom: "20px" }}>Drop An Online Course Now</div>
                   </Link>

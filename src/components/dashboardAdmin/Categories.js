@@ -10,7 +10,7 @@ export default function Categories() {
             const { data } = await axios.get('api/admin/category');
             setCategories(data);
         } catch (error) {
-
+            console.log(error)
         }
     }
 
@@ -64,7 +64,7 @@ export default function Categories() {
                                         setSubcategory(e.target.value)
                                         setSubcatid(e.target.id)
                                     }} />
-                                    <button className="col s4" type="submit" className="btn btn-small">Add Sub-Category</button>
+                                    <button type="submit" className="col s4 btn btn-small">Add Sub-Category</button>
                                 </form>
                                 <div style={{ border: "1px solid black", padding: "15px" }}>
                                     <h6>Sub-categories:</h6>

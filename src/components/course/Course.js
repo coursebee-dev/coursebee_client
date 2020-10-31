@@ -122,7 +122,7 @@ export class Course extends Component {
                                 {coursedata.map((course, id) => (
                                     <div class="card horizontal" style={{ width: "100%" }} >
                                         <div class="card-image">
-                                            <img style={{ maxHeight: "200px" }} src={courselogo} />
+                                            <img style={{ maxHeight: "200px" }} src={courselogo} alt="" />
                                         </div>
                                         <div class="card-stacked">
                                             <div class="card-content">
@@ -130,7 +130,8 @@ export class Course extends Component {
                                                 <p>{course.name}</p>
                                             </div>
                                             <div class="card-action">
-                                                <a href="#">Coming Soon</a>
+                                                {/* <a href="#">Coming Soon</a> */}
+                                                <button className="btn btn-flat">Coming soon</button>
                                             </div>
                                         </div>
                                     </div>

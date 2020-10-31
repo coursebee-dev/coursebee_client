@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import '../../App.css';
-import axios from 'axios';
+import '../../App.scss';
+//import axios from 'axios';
 
 class AccountMentor extends Component {
     constructor() {

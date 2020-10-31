@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { registerMentor } from "../../actions/authActionMentor";
 import classnames from "classnames";
 import ReCAPTCHA from 'react-google-recaptcha';
-import "../../App.css";
+import "../../App.scss";
 class Register extends Component {
     constructor() {
         super();
