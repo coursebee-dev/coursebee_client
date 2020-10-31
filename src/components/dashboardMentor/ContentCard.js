@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { Vimeo } from 'vimeo';
-import axios from 'axios';
+//import axios from 'axios';
 
 const client = new Vimeo("cf13af4abfa9eaf53d7924fe92dd10a8039f00c5", "NxYZZV8wIznfmaqENbdtKOtTFYNixg49OYKNuf3PK0Fk+mLuxkmEyn0QeeknMPs7N5ZkSINM+cQNy4jlcGKeJdg2pdR+ddMe0Ez7mtGSBD4e4ZXNjlkm5kDU9x5GiXPs", "c07d774a7936a6bca236722c896ec34e");
 
 
 export default function ContentCard({ content }) {
-    const [form, setForm] = useState('')
     const [video, setVideo] = useState([])
     const [reveal, setReveal] = useState(false)
     const [videoUpload, setVideoUpload] = useState(false)
@@ -125,7 +124,6 @@ export default function ContentCard({ content }) {
                                 >Submit content</button>
                             </div>
                         </form>
-                        <div dangerouslySetInnerHTML={{ __html: form }} />
                     </>
                 ) : null}
             </div>
