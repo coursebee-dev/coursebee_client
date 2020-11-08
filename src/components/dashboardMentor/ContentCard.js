@@ -24,7 +24,7 @@ export default function ContentCard({ content }) {
     const handleUpload = async e => {
         e.preventDefault()
         console.log(video)
-        const maxBlob = 1 * 1000 * 1000;
+        const maxBlob = 0.5 * 1000 * 1000;
         if (video.size < maxBlob) {
             dbx.filesUpload({
                 contents: video,
@@ -46,23 +46,28 @@ export default function ContentCard({ content }) {
 
             const task = workItems.reduce((acc, blob, idx, items) => {
                 if (idx === 0) {
-                    return acc.then(() => {
-                        return dbx.filesUploadSessionStart({
+                    return acc.then(async () => {
+                        return await dbx.filesUploadSessionStart({
                             contents: blob,
                             close: false
                         })
-                            .then(response => response.session_id)
+                            .then(response => {
+                                return response.result.session_id
+                            })
                     });
                 } else if (idx < items.length - 1) {
-                    return acc.then((sessionId) => {
+                    return acc.then(async (sessionId) => {
                         var cursor = { session_id: sessionId, offset: idx * maxBlob };
-                        return dbx.filesUploadSessionAppendV2({ cursor: cursor, close: false, contents: blob }).then(() => sessionId);
+                        await dbx.filesUploadSessionAppendV2({ cursor: cursor, close: false, contents: blob });
+                        console.log(sessionId)
+                        return sessionId;
                     })
                 } else {
-                    return acc.then((sessionId) => {
+                    return acc.then(async (sessionId) => {
+                        console.log(sessionId)
                         var cursor = { session_id: sessionId, offset: video.size - blob.size };
                         var commit = { path: '/' + video.name, mode: 'add', autorename: true, mute: false };
-                        return dbx.filesUploadSessionFinish({ cursor: cursor, commit: commit, contents: blob });
+                        return await dbx.filesUploadSessionFinish({ cursor: cursor, commit: commit, contents: blob });
                     })
                 }
             }, Promise.resolve());
