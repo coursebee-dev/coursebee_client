@@ -1,0 +1,70 @@
+import { Vimeo } from 'vimeo';
+
+const client = new Vimeo("cf13af4abfa9eaf53d7924fe92dd10a8039f00c5", "NxYZZV8wIznfmaqENbdtKOtTFYNixg49OYKNuf3PK0Fk+mLuxkmEyn0QeeknMPs7N5ZkSINM+cQNy4jlcGKeJdg2pdR+ddMe0Ez7mtGSBD4e4ZXNjlkm5kDU9x5GiXPs", "c07d774a7936a6bca236722c896ec34e");
+
+client.upload(
+            video,
+            {
+                'name': content.name,
+                'description': 'The description goes here.'
+            },
+            function (uri) {
+                console.log('Your video URI is: ' + uri);
+                client.request(uri + '?fields=link', function (error, body, statusCode, headers) {
+                    if (error) {
+                        console.log('There was an error making the request.')
+                        console.log('Server reported: ' + error)
+                        return
+                    }
+
+                    console.log('Your video link is: ' + body.link)
+                })
+            },
+            function (bytes_uploaded, bytes_total) {
+                var percentage = (bytes_uploaded / bytes_total * 100).toFixed(2)
+                console.log(bytes_uploaded, bytes_total, percentage + '%')
+            },
+            function (error) {
+                console.log('Failed because: ' + error)
+            }
+        )
+
+        /*try {
+            const resdatadata = await fetch('https://api.vimeo.com/me/videos', {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin',
+                headers: {
+                    'Authorization': 'bearer c07d774a7936a6bca236722c896ec34e',
+                    'Content-Type': "application/json",
+                    'Accept': "application/vnd.vimeo.*+json;version=3.4"
+                },
+                body: JSON.stringify({
+                    "upload": {
+                        "approach": "tus",
+                        "size": video.size,
+                    }
+                })
+            })
+            const jresdata = await resdatadata.json()
+            const upldlink = jresdata.upload.upload_link;
+            console.log(jresdata)
+
+            /*const resdatadata2 = await fetch(upldlink, {
+                method: 'PATCH',
+                mode: 'cors',
+                headers: {
+                    'Authorization': 'bearer c07d774a7936a6bca236722c896ec34e',
+                    'Content-Type': "application/json",
+                    'Accept': "application/vnd.vimeo.*+json;version=3.4",
+                    'Upload-Offset': 0,
+                    "Tus-Resumable": "1.0.0"
+                },
+                body: video
+            })
+            console.log(resdatadata2.json())
+        } catch (err) {
+            console.log(err)
+        }
+        */

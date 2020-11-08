@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
-import { Vimeo } from 'vimeo';
 //import axios from 'axios';
+import { Dropbox } from 'dropbox'
+import isofetch from 'isomorphic-fetch';
 
-const client = new Vimeo("cf13af4abfa9eaf53d7924fe92dd10a8039f00c5", "NxYZZV8wIznfmaqENbdtKOtTFYNixg49OYKNuf3PK0Fk+mLuxkmEyn0QeeknMPs7N5ZkSINM+cQNy4jlcGKeJdg2pdR+ddMe0Ez7mtGSBD4e4ZXNjlkm5kDU9x5GiXPs", "c07d774a7936a6bca236722c896ec34e");
-
+var dbx = new Dropbox({
+    fetch: isofetch,
+    accessToken:
+        "n1xQYgZJqggAAAAAAAAAAS84zl1NnrjktWEB2wJq4mdpV6XfB_UQoPguCAHCz9KN"
+});
+const maxBlob = 3 * 1000 * 1000;
 
 export default function ContentCard({ content }) {
     const [video, setVideo] = useState([])
+    const [loaded, setLoaded] = useState(0)
     const [reveal, setReveal] = useState(false)
     const [videoUpload, setVideoUpload] = useState(false)
     function setDescription() {
@@ -18,73 +24,53 @@ export default function ContentCard({ content }) {
     const handleUpload = async e => {
         e.preventDefault()
         console.log(video)
-        client.upload(
-            video,
-            {
-                'name': content.name,
-                'description': 'The description goes here.'
-            },
-            function (uri) {
-                console.log('Your video URI is: ' + uri);
-                client.request(uri + '?fields=link', function (error, body, statusCode, headers) {
-                    if (error) {
-                        console.log('There was an error making the request.')
-                        console.log('Server reported: ' + error)
-                        return
-                    }
-
-                    console.log('Your video link is: ' + body.link)
-                })
-            },
-            function (bytes_uploaded, bytes_total) {
-                var percentage = (bytes_uploaded / bytes_total * 100).toFixed(2)
-                console.log(bytes_uploaded, bytes_total, percentage + '%')
-            },
-            function (error) {
-                console.log('Failed because: ' + error)
+        const maxBlob = 1 * 1000 * 1000;
+        if (video.size < maxBlob) {
+            dbx.filesUpload({
+                contents: video,
+                path: '/' + video.name,
+                mode: 'add',
+                autorename: true,
+                mute: false
+            })
+                .then(res => console.log(res))
+                .catch(error => console.log(error))
+        } else {
+            let workItems = [];
+            let offset = 0;
+            while (offset < video.size) {
+                let chunkSize = Math.min(maxBlob, video.size - offset);
+                workItems.push(video.slice(offset, offset + chunkSize));
+                offset += chunkSize;
             }
-        )
-        /*try {
-            const resdatadata = await fetch('https://api.vimeo.com/me/videos', {
-                method: 'POST',
-                mode: 'cors',
-                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: 'same-origin',
-                headers: {
-                    'Authorization': 'bearer c07d774a7936a6bca236722c896ec34e',
-                    'Content-Type': "application/json",
-                    'Accept': "application/vnd.vimeo.*+json;version=3.4"
-                },
-                body: JSON.stringify({
-                    "upload": {
-                        "approach": "pull",
-                        "size": video.size,
-                        "link": video
-                    }
-                })
+
+            const task = workItems.reduce((acc, blob, idx, items) => {
+                if (idx === 0) {
+                    return acc.then(() => {
+                        return dbx.filesUploadSessionStart({
+                            contents: blob,
+                            close: false
+                        })
+                            .then(response => response.session_id)
+                    });
+                } else if (idx < items.length - 1) {
+                    return acc.then((sessionId) => {
+                        var cursor = { session_id: sessionId, offset: idx * maxBlob };
+                        return dbx.filesUploadSessionAppendV2({ cursor: cursor, close: false, contents: blob }).then(() => sessionId);
+                    })
+                } else {
+                    return acc.then((sessionId) => {
+                        var cursor = { session_id: sessionId, offset: video.size - blob.size };
+                        var commit = { path: '/' + video.name, mode: 'add', autorename: true, mute: false };
+                        return dbx.filesUploadSessionFinish({ cursor: cursor, commit: commit, contents: blob });
+                    })
+                }
+            }, Promise.resolve());
+
+            task.then((data) => {
+                console.log(data)
             })
-            const jresdata = await resdatadata.json()
-            //const upldlink = jresdata.upload.form;
-            console.log(jresdata)
-            //var myWindow = window.open("", "MsgWindow", "width=200,height=100");
-            //myWindow.document.write(upldlink);
-            //setForm(upldlink)
-            /*const resdatadata2 = await fetch(upldlink, {
-                method: 'PATCH',
-                mode: 'cors',
-                headers: {
-                    'Authorization': 'bearer c07d774a7936a6bca236722c896ec34e',
-                    'Content-Type': "application/json",
-                    'Accept': "application/vnd.vimeo.*+json;version=3.4",
-                    'Upload-Offset': 0,
-                    "Tus-Resumable": "1.0.0"
-                },
-                body: video
-            })
-            console.log(resdatadata2.json())
-        } catch (err) {
-            console.log(err)
-        }*/
+        }
     }
 
     return (
@@ -97,36 +83,36 @@ export default function ContentCard({ content }) {
                 {videoUpload ? null : <button onClick={() => setVideoUpload(upld => !upld)} className="btn yellow black-text">Add a video</button>}
 
                 {videoUpload ? (
-                    <>
-                        <form>
-                            <div className="file-field input-field">
-                                <div className="btn">
-                                    <span>Video</span>
-                                    <input type="file" accept="video/*" onChange={e => setVideo(e.target.files[0])} />
-                                </div>
-                                <div className="file-path-wrapper">
-                                    <input className="file-path validate" type="text" />
-                                </div>
+                    <form>
+                        <div className="file-field input-field">
+                            <div className="btn">
+                                <span>Video</span>
+                                <input type="file" accept="video/*" onChange={e => setVideo(e.target.files[0])} />
                             </div>
-                            <div className="col s12">
-                                <button
-                                    onClick={e => {
-                                        e.preventDefault()
-                                        setVideoUpload(upld => !upld)
-                                    }}
-                                    type="button"
-                                    className="btn black-text hoverable yellow"
-                                >Cancel</button>
-                                <button
-                                    type="submit"
-                                    className="btn hoverable orange"
-                                    onClick={handleUpload}
-                                >Submit content</button>
+                            <div className="file-path-wrapper">
+                                <input className="file-path validate" type="text" />
                             </div>
-                        </form>
-                    </>
+                        </div>
+                        <p>{loaded}% of 100%</p>
+                        <div className="col s12">
+                            <button
+                                onClick={e => {
+                                    e.preventDefault()
+                                    setVideoUpload(upld => !upld)
+                                }}
+                                type="button"
+                                className="btn black-text hoverable yellow"
+                            >Cancel</button>
+                            <button
+                                type="submit"
+                                className="btn hoverable orange"
+                                onClick={handleUpload}
+                            >Submit content</button>
+                        </div>
+                    </form>
                 ) : null}
             </div>
         </div>
     )
 }
+
