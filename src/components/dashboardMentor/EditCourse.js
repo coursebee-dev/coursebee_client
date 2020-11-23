@@ -60,10 +60,10 @@ export default function EditCourse({ match }) {
         <div style={{ margin: '40px' }}>
             <span>Course name</span>
             <input disabled={!editName} type="text" placeholder={course?.name} onChange={e => setCourseName(e.target.value)} />
-            <button className="btn-small orange" onClick={() => setEditName(edit => !edit)}>{editName ? <>Cancel</> : <>Edit course name</>}</button>
+            <button disabled={course?.submitted} className="btn-small orange" onClick={() => setEditName(edit => !edit)}>{editName ? <>Cancel</> : <>Edit course name</>}</button>
             {editName ? <button className="btn-small orange" onClick={changeCourseName}>Save</button> : null}
             <div style={{ marginTop: '20px' }}>
-                <button className='btn small green' onClick={addContentHandler}>{addContent ? "Cancel" : "Add a course content"}</button>
+                <button disabled={course?.submitted} className='btn small green' onClick={addContentHandler}>{addContent ? "Cancel" : "Add a course content"}</button>
             </div>
             {addContent ? (
                 <Formik
@@ -186,7 +186,7 @@ export default function EditCourse({ match }) {
             ) : (
                     <Fragment>
                         {course?.contents?.map((content, id) => (
-                            <ContentCard key={id} content={content} />
+                            <ContentCard key={id} videoid={id + 1} coursetitle={course?.name} courseId={course?._id} content={content} submitted={course.submitted} getCourse={getCourse} />
                         ))}
                         <button onClick={submitForReview} disabled={course?.submitted} className="btn-large">{course?.submitted ? "Submitted for review" : "Submit for review"}</button>
                     </Fragment>

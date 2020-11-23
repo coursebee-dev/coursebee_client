@@ -5,6 +5,7 @@ import M from 'materialize-css'
 
 export default function EditCourseAdmin({ match }) {
     const [course, setCourse] = useState()
+    const [reveal, setReveal] = useState(false)
     const getCourse = useCallback(
         async () => {
             const { data } = await axios.get(`/api/admin/getcourse/${match.params.courseid}`)
@@ -30,9 +31,12 @@ export default function EditCourseAdmin({ match }) {
     return (
         <div style={{ margin: "40px" }}>
             <h1>{course?.name}</h1>
-            <div dangerouslySetInnerHTML={{ __html: course?.description }} />
+            <button onClick={() => setReveal(rev => !rev)} className="btn-small blue">{reveal ? "Hide" : "See"} description</button>
+            {reveal ? (
+                <div dangerouslySetInnerHTML={{ __html: course?.description }} />
+            ) : null}
             {course?.contents?.map((content, id) => (
-                <ContentCardAdmin key={id} content={content} />
+                <ContentCardAdmin key={id} id={course?._id} content={content} getCourse={getCourse} />
             ))}
             <button className="btn" disabled={course?.approved} onClick={approveCourse}>{course?.approved ? "Approved Course" : "Approve Course"}</button>
         </div>
