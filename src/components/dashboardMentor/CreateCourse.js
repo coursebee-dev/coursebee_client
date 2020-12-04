@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import M from 'materialize-css'
 import CreateCourseForm from './CreateCourseForm'
 import axios from 'axios'
 import CourseList from './CourseList'
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-export default function CreateCourse() {
+function CreateCourse({ auth }) {
     const [createCourse, setCreateCourse] = useState(false)
     const [courses, setCourses] = useState([])
     const createCourseHandler = async () => {
@@ -22,18 +24,20 @@ export default function CreateCourse() {
         setCreateCourse(set => !set)
     }
 
-    const getCourses = async () => {
-        const { data } = await axios.get('/api/mentor/course')
+    const getCourses = useCallback(async () => {
+        const { data } = await axios.post('/api/mentor/course', {
+            mentorid: auth.user.id
+        })
         if (data.success) {
             setCourses(data.courses)
         } else {
             M.toast({ html: data.message })
         }
-    }
+    }, [auth.user.id])
 
     useEffect(() => {
         getCourses()
-    }, [createCourse])
+    }, [getCourses])
 
     return (
         <div style={{ margin: "30px", }}>
@@ -44,3 +48,14 @@ export default function CreateCourse() {
         </div>
     )
 }
+
+CreateCourse.propTypes = {
+    auth: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(
+    mapStateToProps
+)(CreateCourse)

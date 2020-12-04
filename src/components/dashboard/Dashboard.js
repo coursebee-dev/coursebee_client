@@ -1,23 +1,59 @@
-import React, { Component } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import logoutUser from "../../actions/logoutAction";
-import HeaderImg from "../layout/HeaderImg"
+//import HeaderImg from "../layout/HeaderImg"
 import MyLiveClass from "./MyLiveClass"
+import axios from "axios";
 
-class Dashboard extends Component {
-  onLogoutClick = e => {
+function Dashboard({ auth, history }) {
+  const dispatch = useDispatch()
+  const [categories, setCategories] = useState([])
+  const [search, setSearch] = useState('')
+  const onLogoutClick = e => {
     e.preventDefault();
-    this.props.history.push("/");
-    this.props.logoutUser();
+    dispatch(logoutUser());
   };
-  render() {
-    const { user } = this.props.auth;
-    return (
-      <div>
-        <HeaderImg />
-        <div>
+  const getCategories = async () => {
+    try {
+      const { data } = await axios.get('/api/get/categories')
+      setCategories(data.categories)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+  const { user } = auth;
+  useEffect(() => {
+    getCategories();
+  }, [])
+  return (
+    <Fragment>
+      <div className="cta">
+
+        <div className="cta__nav">
+          <div className="cta__nav__actions">
+            <h1>Hello {user.name.split(" ")[0]}</h1>
+            <p>Thank you for signing in to COURSEBEE. We are continuously working to make this a better platform.</p>
+            <button>Join us!</button>
+          </div>
+          <div className="cta__nav__categories">
+            {categories.map((cat, id) => (
+              <button key={id}>{cat.title}</button>
+            ))}
+          </div>
+        </div>
+        <div className="cta__search">
+          <form>
+            <h2>Search your course here</h2>
+            <input type="search" onChange={e => setSearch(e.target.value)} />
+          </form>
+        </div>
+      </div>
+      {search ? (
+        <p>{search}</p>
+      ) : (
+
           <div className="row">
             <div className="col s12 center-align">
               <h4>
@@ -34,7 +70,7 @@ class Dashboard extends Component {
                 <i className="material-icons left">arrow_forward</i>
               </Link>
               <div className="container">
-                <MyLiveClass history={this.props.history} studentId={this.props.auth.user.id} />
+                <MyLiveClass history={history} studentId={auth.user.id} />
               </div>
               <button
                 style={{
@@ -43,21 +79,19 @@ class Dashboard extends Component {
                   letterSpacing: "1.5px",
                   marginTop: "1rem"
                 }}
-                onClick={this.onLogoutClick}
+                onClick={onLogoutClick}
                 className="btn btn-large waves-effect waves-light hoverable teal darken-1"
               >
                 Logout
               </button>
             </div>
           </div>
-        </div>
-      </div>
-    );
-  }
+        )}
+    </Fragment>
+  );
 }
 
 Dashboard.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
@@ -66,5 +100,4 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
 )(Dashboard);

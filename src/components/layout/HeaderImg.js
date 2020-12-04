@@ -7,7 +7,7 @@ class HeaderImg extends Component {
     render() {
         return (
             <div>
-                <img style={{ width: "100vw" }} src={hexagon} alt="header img" />
+                <img style={{ width: "100%" }} src={hexagon} alt="header img" />
             </div>
 
         );

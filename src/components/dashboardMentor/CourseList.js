@@ -13,7 +13,11 @@ export default function CourseList({ courses }) {
             {courses.map((course, id) => (
                 <div key={id}>
                     <h6>{course.name}</h6>
-                    <button value={course._id} className="btn btn-small grey" onClick={gotoCourse}>{course?.submitted ? "Course submitted for review - View course" : "Edit"}</button>
+                    {course.approved ? (
+                        <button value={course._id} className="btn btn-small green" onClick={gotoCourse}>Course Approved. View course.</button>
+                    ) : (
+                            <button value={course._id} className="btn btn-small grey" onClick={gotoCourse}>{course?.submitted ? "Course submitted for review - View course" : "Edit"}</button>
+                        )}
                 </div>
             ))}
         </div>

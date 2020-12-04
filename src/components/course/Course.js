@@ -1,156 +1,83 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import courselogo from "../../images/ComingSoon.png";
+import React, { Fragment, useState, useEffect, useCallback } from 'react'
 import { Helmet } from 'react-helmet';
-const coursedata = [
-    {
-        name: "Microsoft Excel - Excel from Beginner to Advanced Excel with this A- Z Microsoft Excel Course.Microsoft Excel 2010, 2013, 2016, Excel 2019 and Office 365"
-    },
-    {
-        name: "Agile Certified Practitioner Traning Program- Beginner Level"
-    },
-    {
-        name: "PMP exam preparation complete course."
-    },
-    {
-        name: "Complete MATLAB course"
-    },
-    {
-        name: "Calculus for Engineering"
-    },
-    {
-        name: "University admission Math course"
-    },
-    {
-        name: "HSC math Complete Course"
-    },
-    {
-        name: "The complete Financial Analyst Course (Beginner to advanced). Excel, accounting,financial statement analysis, business analysis, financial math,powerpoint"
-    },
-    {
-        name: "Learn Adobe Photoshop"
-    },
-    {
-        name: "Learn Adobe Lightroom,"
-    },
-    {
-        name: "Learn Adobe Premier"
-    },
-    {
-        name: "Adobe AfterEffect"
-    },
-    {
-        name: "Learn Power BI"
-    },
-    {
-        name: "Learn Blockchain A to Z"
-    },
-    {
-        name: "An extensive course on Graphics Designing: Beginner, Intermediate, Advanced."
-    },
-    {
-        name: "Software testing A to Z"
-    },
-    {
-        name: "Civil engineering construction materials : concrete structures."
-    },
-    {
-        name: "Learn wordpress"
-    },
-    {
-        name: "Learn building your ecommerce site."
-    },
-    {
-        name: "Photography masterclass: complete guide to photography."
-    },
-    {
-        name: "Learn Bioinformatics."
-    },
-    {
-        name: "Ultimate drawing course - beginner to advanced."
-    },
-    {
-        name: "Complete digital marketing 12 courses in 1. Master digital marketing: strategy, social media marketing, SEO, Youtube, Email, Facebook Marketing, Analytics."
-    },
-    {
-        name: "An entire MBA in 1 course."
-    },
-    {
-        name: "Learn  Total.quality management."
-    },
-    {
-        name: "Learn supply chain management."
-    },
-    {
-        name: "Learn production planning and operation management."
-    },
-    {
-        name: "Prince 2 foundation certification training."
-    },
-    {
-        name: "Introduction to project management with prince2 and prince 2 agile.n282"
-    },
-]
-export class Course extends Component {
-    render() {
-        const seo = {
-            title: "Coursebee : Course",
-            description:
-                "Courses from top-notch mentors are coming soon.",
-            url: "https://coursebee.com/course/",
-            image: ""
-        };
-        return (
-            <div>
-                {/*<h4 style={{ margin: "50px" }}>Courses</h4>*/}
-                <Helmet
-                    title={seo.title}
-                    meta={[
-                        {
-                            name: "description",
-                            property: "og:description",
-                            content: seo.description
-                        },
-                        { property: "og:title", content: seo.title },
-                        { property: "og:url", content: seo.url },
-                    ]}
-                />
-                <div className="container">
-                    <div className="section">
-                        <div className="row">
-                            <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
-                                {coursedata.map((course, id) => (
-                                    <div class="card horizontal" style={{ width: "100%" }} >
-                                        <div class="card-image">
-                                            <img style={{ maxHeight: "200px" }} src={courselogo} alt="" />
-                                        </div>
-                                        <div class="card-stacked">
-                                            <div class="card-content">
-                                                <h6>Course {`${id + 1}`}</h6>
-                                                <p>{course.name}</p>
-                                            </div>
-                                            <div class="card-action">
-                                                {/* <a href="#">Coming Soon</a> */}
-                                                <button className="btn btn-flat">Coming soon</button>
+import axios from 'axios';
+
+const seo = {
+    title: "Course : Coursebee",
+    description:
+        "Courses from top-notch mentors brought to you by coursebee.com.",
+    url: "https://coursebee.com/course/",
+    image: ""
+};
+
+export default function Course() {
+    const [courses, setCourses] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [search, setSearch] = useState('')
+
+    const getCourses = useCallback(async () => {
+        setLoading(true)
+        try {
+            const { data } = await axios.get('/api/get/courses')
+            setCourses(data.courses)
+        } catch (error) {
+            console.log(error.message)
+        }
+        setLoading(false)
+    }, [])
+    useEffect(() => {
+        getCourses()
+    }, [getCourses])
+
+    return (
+        <Fragment>
+            <Helmet
+                title={seo.title}
+                meta={[
+                    {
+                        name: "description",
+                        property: "og:description",
+                        content: seo.description
+                    },
+                    { property: "og:title", content: seo.title },
+                    { property: "og:url", content: seo.url },
+                ]}
+            />
+            <div className="coursepage">
+                <form onSubmit={e => e.preventDefault()}>
+                    <input placeholder="search your favourite courses here" type="search" onChange={e => setSearch(e.target.value)} />
+                </form>
+                <div className="coursepage__container">
+                    <div className="coursepage__container__nav">
+
+                    </div>
+                    <div className="coursepage__container__cards">
+                        {loading ? (
+                            <div className="loader"></div>
+                        ) : (
+                                <Fragment>
+                                    {courses?.filter(course => {
+                                        return course?.name.toLowerCase().includes(search.toLowerCase()) || course?.description.toLowerCase().includes(search.toLowerCase())
+                                    }).map((course, id) => (
+                                        <div key={id} className="card">
+                                            <div className="card__content">
+                                                <h3>{course.name}</h3>
+                                                {course.categories.map((cat, catid) => (
+                                                    <small key={catid} className="chip">{cat}</small>
+                                                ))}
+                                                {course.subcategories.map((scat, scatid) => (
+                                                    <small key={scatid} className="chip">{scat}</small>
+                                                ))}
+                                                <button>Add to cart</button>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                                    ))}
+                                </Fragment>
+                            )}
                     </div>
                 </div>
             </div>
-        )
-    }
+
+        </Fragment >
+    )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Course)

@@ -6,16 +6,7 @@ import UserIcon from "../userIcon/UserIcon"
 import styled from 'styled-components';
 import logo from '../../images/logo.png';
 import live from '../../images/live.gif';
-const LinkStyled = styled(Link)`
-    color: #ffffff;
-    font-weight:bold;
-    letter-spacing:2px;
-	:hover {
-        /background-color: #fb8c00;
-      color: #00897b;
-  		font-weight:bold
-	}
-`
+
 const LinkBrand = styled(Link)`
     height: 64px;
 	:hover {
@@ -34,37 +25,53 @@ const Navbar = ({ auth, setNavHeight }) => {
     }, [heightRef, setNavHeight])
     return (
         <header ref={heightRef} className="no-padding">
-            <ul className="sidenav" id="mobile-demo">
-                <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
-                <li><LinkStyled to="/about">About Us</LinkStyled></li>
-                <li><LinkStyled to="/liveclass"><img src={live} style={{ width: "10px", marginRight: "5px" }} alt="live" />Live Classroom</LinkStyled></li>
-                <li><LinkStyled to="/course">Courses</LinkStyled></li>
-                <li><LinkStyled to="/training">Training</LinkStyled></li>
-                {auth.isAuthenticated ? <li><LinkStyled className="grey" to="#">{auth.user.name}</LinkStyled></li> :
+            <nav className="navbar">
+                <Link to="/">
+                    <img src={logo} alt="logo" />
+                </Link>
+                <ul>
                     <li>
-                        <LinkStyled to="/mentor">
+                        <Link to="/course">Courses</Link>
+                    </li>
+                    <li>
+                        <Link to="/training">Training</Link>
+                    </li>
+                    <li>
+                        <Link to="/login">Login</Link>
+                    </li>
+                </ul>
+            </nav>
+            <ul style={{ display: "none" }} className="sidenav" id="mobile-demo">
+                <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
+                <li><Link to="/about">About Us</Link></li>
+                <li><Link to="/liveclass"><img src={live} style={{ width: "10px", marginRight: "5px" }} alt="live" />Live Classroom</Link></li>
+                <li><Link to="/course">Courses</Link></li>
+                <li><Link to="/training">Training</Link></li>
+                {auth.isAuthenticated ? <li><Link className="grey" to="#">{auth.user.name}</Link></li> :
+                    <li>
+                        <Link to="/mentor">
                             Mentors Here!
-                                </LinkStyled>
+                                </Link>
                     </li>
                 }
                 <li><Link to="#!" className="sidenav-close"><i className="material-icons">close</i></Link></li>
             </ul>
-            <div className="navbar-fixed">
+            <div style={{ display: "none" }} className="navbar-fixed">
                 <nav style={{ height: "64px" }} className="white z-depth-2">
                     <div className="nav-wrapper">
                         <ul className="left">
-                            <li><LinkStyled to="#" style={{ height: "64px" }} data-target="mobile-demo" className="sidenav-trigger">
+                            <li><Link to="#" style={{ height: "64px" }} data-target="mobile-demo" className="sidenav-trigger">
 
-                                <i style={{ lineHeight: "64px" }} className="material-icons">menu</i></LinkStyled>
+                                <i style={{ lineHeight: "64px" }} className="material-icons">menu</i></Link>
                             </li>
 
                             <li><LinkBrand to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkBrand></li>
                         </ul>
                         <ul className="right hide-on-med-and-down">
-                            <li><LinkStyled to="/about">About Us</LinkStyled></li>
-                            <li><LinkStyled to="/liveClass"><img src={live} alt="live" style={{ width: "10px", marginRight: "5px" }} />Live Classroom</LinkStyled></li>
-                            <li><LinkStyled to="/course">Courses</LinkStyled></li>
-                            <li><LinkStyled to="/training">Training</LinkStyled></li>
+                            <li><Link to="/about">About Us</Link></li>
+                            <li><Link to="/liveClass"><img src={live} alt="live" style={{ width: "10px", marginRight: "5px" }} />Live Classroom</Link></li>
+                            <li><Link to="/course">Courses</Link></li>
+                            <li><Link to="/training">Training</Link></li>
                             {auth.isAuthenticated ? <li><UserIcon /></li> :
                                 <li>
                                     <Link className="teal darken-1" to="/mentor">

@@ -3,15 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import styled from 'styled-components';
 import logo from '../../images/logo.png';
-
-const LinkStyled = styled(Link)`
-	color: black;
-	:hover {
-		color: #ef6c00;
-	}
-`
 
 const Footer = ({ auth, setFootHeight }) => {
     const heightRef = useRef(null)
@@ -24,23 +16,19 @@ const Footer = ({ auth, setFootHeight }) => {
         }
     }, [heightRef, setFootHeight])
     return (
-        <footer ref={heightRef} className="page-footer white z-depth-1">
-            <div className="container" style={{ width: "40%", justifyContent: "center" }}>
-                <ul className="row">
-                    <li className="col s12 m6 l2"><LinkStyled to="/about">About</LinkStyled></li>
-                    <li className="col s12 m6 l2"><LinkStyled to="/contactus" title="Contact">Contact</LinkStyled></li>
-                    <li className="col s12 m6 l2"><LinkStyled to="/disclaimer">Disclaimer</LinkStyled></li>
-                    <li className="col s12 m6 l2"><LinkStyled to="/privacy">Privacy</LinkStyled></li>
-                    <li className="col s12 m6 l2"><LinkStyled to="/terms">Terms</LinkStyled></li>
-                    {auth.isAuthenticated ? null : <li className="col s12 m6 l2"><LinkStyled to="/admin">Admin</LinkStyled></li>}
-                    {auth.isAuthenticated ? <li className="col s12 m6 l2"><LinkStyled to="#">Settings</LinkStyled></li> : null}
-                </ul>
-            </div>
-            <div className="footer-copyright">
-                <div style={{ width: "100%" }} className="container">
-                    <LinkStyled to="/" ><img style={{ height: "60px" }} src={logo} alt="COURSEBEE" /></LinkStyled>
-                    <div style={{ lineHeight: "60px" }} className="right black-text">© Kernel Technologies</div>
-                </div>
+        <footer ref={heightRef}>
+            <ul >
+                <li ><Link to="/about">About</Link></li>
+                <li ><Link to="/contactus" title="Contact">Contact</Link></li>
+                <li ><Link to="/disclaimer">Disclaimer</Link></li>
+                <li ><Link to="/privacy">Privacy</Link></li>
+                <li ><Link to="/terms">Terms</Link></li>
+                {auth.isAuthenticated ? null : <li><Link to="/admin">Admin</Link></li>}
+                {auth.isAuthenticated ? <li ><Link to="#">Settings</Link></li> : null}
+            </ul>
+            <div className='footer__copyright'>
+                <Link to="/" ><img src={logo} alt="COURSEBEE" /></Link>
+                <p >© Kernel Technologies</p>
             </div>
         </footer>
     );

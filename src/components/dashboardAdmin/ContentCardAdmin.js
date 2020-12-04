@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, Fragment } from 'react'
 import axios from 'axios'
 import M from 'materialize-css'
 import { Dropbox } from 'dropbox'
@@ -25,6 +25,9 @@ export default function ContentCardAdmin({ content, id, getCourse }) {
         try {
             const { data } = await axios.put(`/api/admin/video/final/add/${id}/${content._id}`, { link: final })
             M.toast({ html: data.message })
+            if (data.success) {
+                getCourse()
+            }
         } catch (error) {
             M.toast({ html: error.message })
         }
@@ -98,13 +101,23 @@ export default function ContentCardAdmin({ content, id, getCourse }) {
                     <button disabled={content?.ready === false} onClick={disapprove} className="btn-small red">Content is not ok</button>
                     <button disabled={content?.ready === true} onClick={approve} className="btn-small green">Content is ok</button>
                 </div>
-                <div style={{ marginTop: "20px" }}>
-                    <p>Add final content: Upload the video in youtube with privacy "unlisted". This is very important to set the video privacy as unlisted.</p>
-                    <p>After uploading, copy the url and paste it here</p>
-                    <input type="url" onChange={e => setFinal(e.target.value)} />
-                    <button onClick={submitFinal} className="btn-small green">Add final content</button>
-                </div>
+                {content.finalLink ? (
+                    <div>
+                        <p>Video Uploaded. <a href={content.finalLink} target="_blank" rel="noopener noreferrer">See here</a></p>
+                    </div>
+                ) : (
+                        <Fragment>
+                            {content.videoobject ? (
+                                <div style={{ marginTop: "20px" }}>
+                                    <p>Add final content: Upload the video in vimeo.</p>
+                                    <p>After uploading, copy the url and paste it here</p>
+                                    <input type="url" onChange={e => setFinal(e.target.value)} />
+                                    <button onClick={submitFinal} className="btn-small green">Add final content</button>
+                                </div>
+                            ) : null}
+                        </Fragment>
+                    )}
             </div>
-        </div>
+        </div >
     )
 }

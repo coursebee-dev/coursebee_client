@@ -37,7 +37,7 @@ function ContentCard({ auth, coursetitle, courseId, content, videoid, getCourse,
     const handleUpload = async e => {
         e.preventDefault()
         console.log(video)
-        const maxBlob = 5 * 1000 * 1000;
+        const maxBlob = 3 * 1000 * 1000;
         let ext = video.name.split('.').pop();
         if (video.size < maxBlob) {
             dbx.filesUpload({

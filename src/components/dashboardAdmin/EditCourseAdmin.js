@@ -2,10 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import ContentCardAdmin from './ContentCardAdmin'
 import M from 'materialize-css'
+import { useHistory } from 'react-router-dom'
 
 export default function EditCourseAdmin({ match }) {
     const [course, setCourse] = useState()
     const [reveal, setReveal] = useState(false)
+    const history = useHistory()
     const getCourse = useCallback(
         async () => {
             const { data } = await axios.get(`/api/admin/getcourse/${match.params.courseid}`)
@@ -18,7 +20,10 @@ export default function EditCourseAdmin({ match }) {
         try {
             const { data } = await axios.put(`/api/admin/course/${course._id}/approve`)
             M.toast({ html: data.message })
-            getCourse()
+            if (data.success) {
+                getCourse()
+                history.push('/admin/dashboard/courses')
+            }
         } catch (error) {
             console.log(error)
             M.toast({ html: error.message })

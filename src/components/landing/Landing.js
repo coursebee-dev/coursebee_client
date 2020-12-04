@@ -1,81 +1,59 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import HeaderImg from "../layout/HeaderImg"
+import React, { Fragment, useState, useEffect, useCallback } from "react";
+//import { Link } from "react-router-dom";
+import axios from 'axios'
+import HomeCourseContainer from "../course/HomeCourseContainer";
+import HomeContents from "../course/HomeContents";
 
-class Landing extends Component {
-  componentDidMount() {
+function Landing({ history }) {
+  const [categories, setCategories] = useState([])
+  const [search, setSearch] = useState('')
+  const getCategories = useCallback(async () => {
+    try {
+      const { data } = await axios.get('/api/get/categories')
+      setCategories(data.categories)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }, [setCategories])
+  useEffect(() => {
     window.scrollTo = (x, y) => {
       document.documentElement.scrollTop = y;
     }
     window.scrollTo(0, 0)
-    // If logged in and user navigates to Landing page, should redirect them to dashboard
-    if (this.props.auth.isAuthenticated) {
-      if (this.props.auth.user.type === "student") {
-        this.props.history.push("/dashboard");
-      } else if (this.props.auth.user.type === "mentor") {
-        this.props.history.push("mentor/dashboard");
-      }
-      else if (this.props.auth.user.type === "admin") {
-        this.props.history.push("admin/dashboard");
-      }
-    }
-  }
-  render() {
-    return (
-      <div>
-        <HeaderImg />
-        <div>
-          <div className="center-align container">
-            <h4>
-              Dear Students, Greetings from<b> COURSEBEE</b>
-            </h4>
-            <div>Coursebee is online education platform where we disseminate contemporary knowledge through live classroom , training and video based courses.</div>
-            <br />
-            <div>Coursebee একটি অনলাইন শিক্ষামূলক প্ল্যাটফর্ম। আমাদের মূল লক্ষ্য হল একটি ইউনিফাইড প্ল্যাটফর্মে শিক্ষার্থী এবং প্রফেশনালদের একত্রিত করা।</div>
-            <p className="flow-text grey-text text-darken-1">
-              We are just starting our journey to develop the best platform for you.<br />
-              To be one of the first students in COURSEBEE<br />
-            </p>
-            <h4>Register Now</h4>
-            <br />
-            <div style={{ maxWidth: "600px", display: "flex", justifyContent: "space-evenly" }} className="container">
-              <div>
-                <Link to="/register" style={{ margin: "10px", width: "140px", borderRadius: "3px", letterSpacing: "1.5px" }} className="btn btn-large waves-effect waves-light hoverable orange darken-1  black-text">
-                  Register
-              </Link>
-              </div>
-              <div>
-                <Link to="/login" style={{ margin: "10px", width: "140px", borderRadius: "3px", letterSpacing: "1.5px" }} className="btn btn-large waves-effect hoverable teal darken-1">
-                  Log In
-              </Link>
-              </div>
+    getCategories()
+  }, [getCategories])
+  /*useEffect(() => {
+    console.log(categories)
+  }, [categories])*/
+  return (
+    <Fragment>
+      <div className="ctabody">
+        <div className="cta">
+
+          <div className="cta__nav">
+            <div className="cta__nav__actions">
+              <p>Welcome to COURSEBEE.</p>
+              <button onClick={() => history.push('/register')}>Join us!</button>
             </div>
-            <div style={{ marginTop: "50px", marginBottom: "50px" }}>
-              <br />
-              <h4>
-                About Us
-              </h4>
-              <div>Coursebee একটি অনলাইন শিক্ষামূলক প্ল্যাটফর্ম। আমাদের মূল লক্ষ্য হল একটি ইউনিফাইড প্ল্যাটফর্মে শিক্ষার্থী এবং প্রফেশনালদের একত্রিত করা।শিক্ষার্থীরা প্রায়শই বিভিন্ন সমস্যায় আটকে যায় যা তারা সবসময় নিজেরা সামলাতে পারে না। যথাযথ গাইড্লাইন না পেয়ে, তারা অনেক সময় ভুল সিদ্ধান্ত নেয় যা তারা ভবিষ্যতে অনুশোচনা করে।
-                <br /><br />Coursebee এমন একটি প্ল্যাটফর্ম যেখানে তারা প্রফেশনালদের কাছ থেকে পরামর্শ নিতে পারবে এবং তাদের অভিজ্ঞতা share করতে পারবে।
-              এখানে, গ্রুপের সদস্যরা তাদের ক্রিয়েটিভ চিন্তাভাবনা, প্রতিদিনের সমস্যাগুলি, ক্যারিয়ার পরামর্শ, নির্দেশিকা ইত্যাদি share করবে, যা অন্যান্য সদস্যদের সহায়তা করবে। বীজগণিত, ফ্লুইড মেকানিক্স,অ্যাকাউন্টিং, ফটোগ্রাফি, কোডিং, অর্থনীতি, সাহিত্য সহ সবকিছু এই প্ল্যাটফর্মের আওতায় আসবে।
-              এই গ্রুপে আমরা বিভিন্ন বিষয়ে লাইভ সেশন এবং ওয়েবিনারের ব্যবস্থা করব যেখানে শিক্ষার্থীরা পেশাদারদের এবং বিশেষজ্ঞদের সাথে লাইভ ইনটারেকশন করতে পারে। এই কমিউনিটির মাধ্যমে Coursebee হবে বাংলাদেশের বৃহত্তম অনলাইন শিক্ষামূলক প্ল্যাটফর্মে।
-              </div>
+            <div className="cta__nav__categories">
+              {categories.map((cat, id) => (
+                <button key={id}>{cat.title}</button>
+              ))}
             </div>
           </div>
-
+          <div className="cta__search">
+            <form onSubmit={e => e.preventDefault()}>
+              <input type="search" placeholder="What to learn? e.g. photography, marketing, self deveopment, excell . . . " onChange={e => setSearch(e.target.value)} />
+            </form>
+          </div>
         </div>
       </div>
-    );
-  }
+      {search ? (
+        <HomeCourseContainer search={search} />
+      ) : (
+          <HomeContents />
+        )}
+    </Fragment>
+  );
 }
-Landing.propTypes = {
-  auth: PropTypes.object.isRequired,
-};
-const mapStateToProps = state => ({
-  auth: state.auth,
-});
-export default connect(
-  mapStateToProps
-)(Landing);
+export default Landing;
