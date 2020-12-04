@@ -23,8 +23,7 @@ const Footer = ({ auth, setFootHeight }) => {
                 <li ><Link to="/disclaimer">Disclaimer</Link></li>
                 <li ><Link to="/privacy">Privacy</Link></li>
                 <li ><Link to="/terms">Terms</Link></li>
-                {auth.isAuthenticated ? null : <li><Link to="/admin">Admin</Link></li>}
-                {auth.isAuthenticated ? <li ><Link to="#">Settings</Link></li> : null}
+                {!auth.isAuthenticated && <li><Link to="/admin">Admin</Link></li>}
             </ul>
             <div className='footer__copyright'>
                 <Link to="/" ><img src={logo} alt="COURSEBEE" /></Link>

@@ -62,12 +62,15 @@ export default function Course() {
                                         <div key={id} className="card">
                                             <div className="card__content">
                                                 <h3>{course.name}</h3>
-                                                {course.categories.map((cat, catid) => (
-                                                    <small key={catid} className="chip">{cat}</small>
-                                                ))}
-                                                {course.subcategories.map((scat, scatid) => (
-                                                    <small key={scatid} className="chip">{scat}</small>
-                                                ))}
+                                                <div className="tags">
+
+                                                    {course.categories.map((cat, catid) => (
+                                                        <small key={catid} >{cat}</small>
+                                                    ))}
+                                                    {course.subcategories.map((scat, scatid) => (
+                                                        <small key={scatid}>{scat}</small>
+                                                    ))}
+                                                </div>
                                                 <button>Add to cart</button>
                                             </div>
                                         </div>

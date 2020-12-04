@@ -1,9 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;700&family=Raleway:wght@200;300;400;700;900&display=swap");
+
 *,
 *::before,
 *::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+.nunito {
+  font-family: "Nunito", sans-serif;
+}
+
+.raleway {
+  font-family: "Raleway", sans-serif;
 }
 
 li {
@@ -63,4 +74,14 @@ button:hover {
   padding: 5px;
   background: #ffb96e;
   color: white;
+}
+
+.errortext {
+  color: red;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -3,7 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerAdmin } from "../../actions/authActionAdmin";
-import classnames from "classnames";
 import ReCAPTCHA from 'react-google-recaptcha';
 
 class Register extends Component {
@@ -80,169 +79,120 @@ class Register extends Component {
         let captcha_secret = process.env.REACT_APP_NOT_CAPTCHA_SECRET
         return (
             <div className="container">
-                <div style={{ marginTop: "8rem", marginBottom: "8rem" }} className="row">
-                    <div className="col s8 offset-s2">
-                        <Link to="/admin" className="btn-flat waves-effect">
-                            <i className="material-icons left">keyboard_backspace</i>
-                            Back to home
-                        </Link>
-                        <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                            <h4>
-                                <b>Register</b> below
-                            </h4>
-                            <p className="grey-text text-darken-1">
-                                Already have an account? <Link className="orange-text text-darken-1" to="/admin/login">Log in</Link>
-                            </p>
-                        </div>
-                        <form noValidate onSubmit={this.onSubmit}>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.name}
-                                    error={errors.name}
-                                    id="name"
-                                    type="text"
-                                    className={classnames("", {
-                                        invalid: errors.name
-                                    })}
-                                />
-                                <label htmlFor="name">Name</label>
-                                <span className="red-text">{errors.name}</span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.email}
-                                    error={errors.email}
-                                    id="email"
-                                    type="email"
-                                    className={classnames("", {
-                                        invalid: errors.email
-                                    })}
-                                />
-                                <label htmlFor="email">Email</label>
-                                <span className="red-text">{errors.email}</span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.password}
-                                    error={errors.password}
-                                    id="password"
-                                    type="password"
-                                    className={classnames("", {
-                                        invalid: errors.password
-                                    })}
-                                />
-                                <label htmlFor="password">Password</label>
-                                <span className="red-text">{errors.password}</span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.password2}
-                                    error={errors.password2}
-                                    id="password2"
-                                    type="password"
-                                    className={classnames("", {
-                                        invalid: errors.password2
-                                    })}
-                                />
-                                <label htmlFor="password2">Confirm Password</label>
-                                <span className="red-text">{errors.password}</span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.mobileNo}
-                                    error={errors.mobileNo}
-                                    id="mobileNo"
-                                    type="text"
-                                    className={classnames("", {
-                                        invalid: errors.mobileNo
-                                    })}
-                                />
-                                <label htmlFor="mobileNo">Mobile No.</label>
-                                <span className="red-text">{errors.mobileNo}</span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.organization}
-                                    error={errors.organization}
-                                    id="organization"
-                                    type="text"
-                                    className={classnames("", {
-                                        invalid: errors.organization
-                                    })}
-                                />
-                                <label htmlFor="organization">Organization</label>
-                                <span className="red-text">{errors.organization}</span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.position}
-                                    error={errors.position}
-                                    id="position"
-                                    type="text"
-                                    className={classnames("", {
-                                        invalid: errors.position
-                                    })}
-                                />
-                                <label htmlFor="position">Position</label>
-                                <span className="red-text">{errors.position}</span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.location}
-                                    error={errors.location}
-                                    id="location"
-                                    type="text"
-                                    className={classnames("", {
-                                        invalid: errors.location
-                                    })}
-                                />
-                                <label htmlFor="location">Location</label>
-                                <span className="red-text">{errors.location}</span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.adminKey}
-                                    error={errors.adminKey}
-                                    id="adminKey"
-                                    type="password"
-                                    className={classnames("", {
-                                        invalid: errors.adminKey
-                                    })}
-                                />
-                                <label htmlFor="adminKey">Admin Key</label>
-                                <span className="red-text">{errors.adminKey}</span>
-                            </div>
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                <ReCAPTCHA
-                                    sitekey={`${captcha_secret}`}
-                                    onChange={this.verifyCaptcha}
-                                />
-                            </div>
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                <button
-                                    style={{
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        marginTop: "1rem"
-                                    }}
-                                    type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable teal-darken-1"
-                                >
-                                    Sign up
-                                </button>
-                            </div>
-                        </form>
+                <div className="auth">
+                    <div className="auth__nav">
+                        <Link to="/">Back to home</Link>
                     </div>
+                    <form noValidate onSubmit={this.onSubmit}>
+                        <div className="auth__form__control">
+                            <label htmlFor="name">Name</label>
+                            <input
+                                onChange={this.onChange}
+                                value={this.state.name}
+                                error={errors.name}
+                                id="name"
+                                type="text"
+                            />
+                            <small className="errortext">{errors.name}</small>
+                        </div>
+                        <div className="auth__form__control">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                onChange={this.onChange}
+                                value={this.state.email}
+                                error={errors.email}
+                                id="email"
+                                type="email"
+                            />
+                            <small className="errortext">{errors.email}</small>
+                        </div>
+                        <div className="auth__form__control">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                onChange={this.onChange}
+                                value={this.state.password}
+                                error={errors.password}
+                                id="password"
+                                type="password"
+                            />
+                            <small className="errortext">{errors.password}</small>
+                        </div>
+                        <div className="auth__form__control">
+                            <label htmlFor="password2">Confirm Password</label>
+                            <input
+                                onChange={this.onChange}
+                                value={this.state.password2}
+                                error={errors.password2}
+                                id="password2"
+                                type="password"
+                            />
+                            <small className="errortext">{errors.password}</small>
+                        </div>
+                        <div className="auth__form__control">
+                            <label htmlFor="mobileNo">Mobile No.</label>
+                            <input
+                                onChange={this.onChange}
+                                value={this.state.mobileNo}
+                                error={errors.mobileNo}
+                                id="mobileNo"
+                                type="text"
+                            />
+                            <small className="errortext">{errors.mobileNo}</small>
+                        </div>
+                        <div className="auth__form__control">
+                            <label htmlFor="organization">Organization</label>
+                            <input
+                                onChange={this.onChange}
+                                value={this.state.organization}
+                                error={errors.organization}
+                                id="organization"
+                                type="text"
+                            />
+                            <small className="errortext">{errors.organization}</small>
+                        </div>
+                        <div className="auth__form__control">
+                            <label htmlFor="position">Position</label>
+                            <input
+                                onChange={this.onChange}
+                                value={this.state.position}
+                                error={errors.position}
+                                id="position"
+                                type="text"
+                            />
+                            <small className="errortext">{errors.position}</small>
+                        </div>
+                        <div className="auth__form__control">
+                            <label htmlFor="location">Location</label>
+                            <input
+                                onChange={this.onChange}
+                                value={this.state.location}
+                                error={errors.location}
+                                id="location"
+                                type="text"
+                            />
+                            <small className="errortext">{errors.location}</small>
+                        </div>
+                        <div className="auth__form__control">
+                            <label htmlFor="adminKey">Admin Key</label>
+                            <input
+                                onChange={this.onChange}
+                                value={this.state.adminKey}
+                                error={errors.adminKey}
+                                id="adminKey"
+                                type="password"
+                            />
+                            <small className="errortext">{errors.adminKey}</small>
+                        </div>
+                        <div className="auth__form__control">
+                            <ReCAPTCHA
+                                sitekey={`${captcha_secret}`}
+                                onChange={this.verifyCaptcha}
+                            />
+                        </div>
+                        <div className="auth__form__control">
+                            <button type="submit">Sign up</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         );

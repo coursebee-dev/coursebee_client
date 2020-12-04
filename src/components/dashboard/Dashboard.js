@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import logoutUser from "../../actions/logoutAction";
-//import HeaderImg from "../layout/HeaderImg"
 import MyLiveClass from "./MyLiveClass"
 import axios from "axios";
 

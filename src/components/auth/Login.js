@@ -1,143 +1,86 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { loginUser } from "../../actions/authAction";
-import classnames from "classnames";
 
-class Login extends Component {
-    constructor() {
-        super();
-        this.state = {
-            email: "",
-            password: "",
-            loading: false,
-            errors: {}
-        };
-    }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.auth.isAuthenticated) {
-            this.props.history.push("/dashboard"); // push user to dashboard when they login
-        }
-        if (nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors,
-                loading: false
-            });
-        }
-    }
-    componentDidMount() {
+
+function Login({ auth, errors }) {
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+
+
+    useEffect(() => {
         window.scrollTo(0, 0)
-        // If logged in and user navigates to Login page, should redirect them to dashboard
-        if (this.props.auth.isAuthenticated) {
-            if (this.props.auth.user.type === "student") {
-                this.props.history.push("/dashboard");
-            } else if (this.props.auth.user.type === "mentor") {
-                this.props.history.push("/mentor/dashboard");
-            } else if (this.props.auth.user.type === "admin") {
-                this.props.history.push("/admin/dashboard");
+        if (auth.isAuthenticated) {
+            history.push("/dashboard"); // push user to dashboard when they login
+        }
+        if (auth.isAuthenticated) {
+            if (auth.user.type === "student") {
+                history.push("/dashboard");
+            } else if (auth.user.type === "mentor") {
+                history.push("/mentor/dashboard");
+            } else if (auth.user.type === "admin") {
+                history.push("/admin/dashboard");
             }
         }
-    }
-    onChange = e => {
-        this.setState({ [e.target.id]: e.target.value });
-    };
-    onSubmit = e => {
+    }, [auth.user.type, history, auth.isAuthenticated])
+    useEffect(() => {
+        if (errors) {
+            setLoading(false)
+        }
+    }, [errors])
+
+    const onSubmit = e => {
         e.preventDefault();
-        this.setState({ loading: true })
+        setLoading(true)
         const userData = {
-            email: this.state.email,
-            password: this.state.password
+            email: email,
+            password: password
         };
-        this.props.loginUser(userData, this.props.history);
-        this.setState({ loading: false })
+        dispatch(loginUser(userData, history))
+        setLoading(true)
     }
 
-    render() {
-        const { errors } = this.state;
-        return (
-            <div className="container">
-                <div style={{ marginTop: "8rem", marginBottom: "8rem" }} className="row">
-                    <div className="col s8 offset-s2">
-                        <Link to="/" className="btn-flat waves-effect">
-                            <i className="material-icons left">keyboard_backspace</i> Back to
-                            home
-                        </Link>
-                        <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                            <h4>
-                                <b>Login</b> below
-                            </h4>
-                            <p className="grey-text text-darken-1">
-                                Don't have an account? <Link className="orange-text text-darken-1" to="/register">Register</Link>
-                            </p>
-                        </div>
-                        <form noValidate onSubmit={this.onSubmit}>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.email}
-                                    error={errors.email}
-                                    id="email"
-                                    type="email"
-                                    className={classnames("", {
-                                        invalid: errors.email || errors.emailnotfound
-                                    })}
-                                />
-                                <label htmlFor="email">Email</label>
-                                <span className="red-text">
-                                    {errors.email}
-                                    {errors.emailnotfound}
-                                </span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.password}
-                                    error={errors.password}
-                                    id="password"
-                                    type="password"
-                                    className={classnames("", {
-                                        invalid: errors.password || errors.passwordincorrect
-                                    })}
-                                />
-                                <label htmlFor="password">Password</label>
-                                <span className="red-text">
-                                    {errors.password}
-                                    {errors.passwordincorrect}
-                                </span>
-                            </div>
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                {this.state.loading ? (
-                                    <div className="progress">
-                                        <div className="indeterminate"></div>
-                                    </div>
-                                ) : (
-                                        <button
-                                            style={{
-                                                width: "150px",
-                                                borderRadius: "3px",
-                                                letterSpacing: "1.5px",
-                                                marginTop: "1rem"
-                                            }}
-                                            type="submit"
-                                            className="btn btn-large waves-effect waves-light hoverable teal darken-1"
-                                        >
-                                            Login
-                                        </button>
-                                    )}
-                            </div>
-                        </form>
-                        <div className="col s12" style={{ marginTop: "5%" }}>
-                            <Link className="orange-text text-darken-1" to="/forgotpass">Forgot Password?</Link>
-                        </div>
+    return (
+        <div className="container">
+            <div className="auth">
+                <div className="auth__nav">
+                    <Link to="/">Back to home</Link>
+                </div>
+                <form className="auth__form" noValidate onSubmit={onSubmit}>
+                    <div className="auth__form__control">
+                        <label htmlFor="email">Email</label>
+                        <input onChange={e => setEmail(e.target.value)} error={errors.email} id="email" type="email" />
+                        <small className="errortext">{errors.email} {errors.emailnotfound}</small>
                     </div>
+                    <div className="auth__form__control">
+                        <label htmlFor="password">Password</label>
+                        <input onChange={e => setPassword(e.target.value)} error={errors.password} id="password" type="password" />
+                        <small className="errortext"> {errors.password} {errors.passwordincorrect}</small>
+                    </div>
+                    <div className="auth__form__control">
+                        {loading ? (
+                            <div className="loader"></div>
+                        ) : (
+                                <button type="submit">
+                                    Login
+                                </button>
+                            )}
+                    </div>
+                </form>
+                <div className="auth__footer">
+                    <p>Don't have an account? <Link to="/register">Register</Link></p>
+                    <Link to="/forgotpass">Forgot Password?</Link>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
 Login.propTypes = {
-    loginUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
@@ -147,5 +90,4 @@ const mapStateToProps = state => ({
 });
 export default connect(
     mapStateToProps,
-    { loginUser }
 )(Login);

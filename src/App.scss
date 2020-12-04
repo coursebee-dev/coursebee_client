@@ -7,6 +7,7 @@ body {
 main {
   display: flex;
   flex-direction: column;
+  background: #e2e2e2;
 }
 
 /* width */
@@ -229,6 +230,8 @@ strong {
   background-repeat: no-repeat;
   background-blend-mode: hue;
   background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
   .cta {
     backdrop-filter: blur(10px);
     display: flex;
@@ -355,6 +358,130 @@ strong {
   }
 }
 
+.coursepage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    input {
+      border: 2px solid #ee8e24;
+      padding: 10px;
+      border-radius: 25px;
+      outline: none;
+      font-size: 30px;
+      width: 80vw;
+      max-width: 800px;
+    }
+    input::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+    }
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &__nav {
+      display: flex;
+    }
+    &__cards {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      max-width: 800px;
+      .card {
+        border: 2px solid #ee8e24;
+        border-radius: 5px;
+        margin: 10px;
+        &__content {
+          width: 230px;
+          height: 200px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          .tags {
+            display: flex;
+            flex-direction: column;
+            color: #ee8e24;
+            small {
+              padding: 5px;
+              border-radius: 10px;
+              cursor: pointer;
+            }
+            small:hover {
+              background: #ee8e24;
+              color: white;
+            }
+          }
+          * {
+            margin: 5px;
+          }
+          button {
+            width: 100%;
+            margin: auto 0 0 0;
+            font-weight: bold;
+            border-top: 2px solid #ee8e24;
+            border-bottom: none;
+            border-right: none;
+            border-left: none;
+          }
+          button:hover {
+            font-weight: bolder;
+          }
+        }
+      }
+    }
+  }
+}
+
+.auth {
+  margin: 40px;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  &__nav {
+    margin: 20px 0;
+    a {
+      color: #fff;
+      padding: 10px;
+      background: #ee8e24;
+    }
+  }
+  &__form {
+    margin: 20px 0;
+    &__control {
+      display: flex;
+      flex-direction: column;
+      label {
+        font-size: 1.4rem;
+      }
+      input {
+        margin: 10px 0;
+        padding: 10px;
+        outline: none;
+        border: 2px solid #d3d3d3;
+      }
+      input:focus {
+        border: 2px solid #ee8e24;
+      }
+    }
+  }
+  &__footer {
+    margin: 20px 0;
+    a {
+      color: #ee8e24;
+    }
+  }
+}
+
 footer {
   display: flex;
   flex-direction: column;
@@ -362,7 +489,7 @@ footer {
   align-items: center;
   ul {
     width: 100%;
-    background: #e2e2e2;
+    background: #ffe0bf;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -378,18 +505,18 @@ footer {
       }
     }
   }
-}
-footer .footer__copyright {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  a img {
-    height: 60px;
-    margin-left: 10px;
-  }
-  p {
-    margin-right: 20px;
+  .footer__copyright {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    a img {
+      height: 60px;
+      margin-left: 10px;
+    }
+    p {
+      margin-right: 20px;
+    }
   }
 }
