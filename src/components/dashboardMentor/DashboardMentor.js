@@ -6,7 +6,6 @@ import logoutUser from "../../actions/logoutAction";
 import HeaderImg from "../layout/HeaderImg"
 import liveClass from '../../images/liveClass.jpg'
 import onlineCourse from '../../images/onlineCourse.jpg'
-import LiveClassMentor from './LiveClassMentor';
 
 class DashboardMentor extends Component {
   onLogoutClick = e => {
@@ -57,7 +56,6 @@ class DashboardMentor extends Component {
                   </Link>
                 </div>
               }
-              <LiveClassMentor mentorId={this.props.auth.user.id} />
               <button
                 style={{
                   width: "150px",

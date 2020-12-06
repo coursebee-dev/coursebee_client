@@ -1,9 +1,11 @@
 import React, { Fragment, useState, useEffect, useCallback } from 'react'
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, removeFromCart } from '../../actions/cartAction';
 
 const seo = {
-    title: "Course : Coursebee",
+    title: "Courses : Coursebee",
     description:
         "Courses from top-notch mentors brought to you by coursebee.com.",
     url: "https://coursebee.com/course/",
@@ -14,7 +16,9 @@ export default function Course() {
     const [courses, setCourses] = useState([])
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState('')
-
+    const dispatch = useDispatch()
+    const { items } = useSelector(state => state.cart)
+    //const { courses } = useSelector(state => state.content)
     const getCourses = useCallback(async () => {
         setLoading(true)
         try {
@@ -26,9 +30,8 @@ export default function Course() {
         setLoading(false)
     }, [])
     useEffect(() => {
-        getCourses()
+        getCourses();
     }, [getCourses])
-
     return (
         <Fragment>
             <Helmet
@@ -71,7 +74,11 @@ export default function Course() {
                                                         <small key={scatid}>{scat}</small>
                                                     ))}
                                                 </div>
-                                                <button>Add to cart</button>
+                                                {items?.some(p => p === course._id) ? (
+                                                    <button value={course._id} onClick={e => dispatch(removeFromCart(e.target.value))}>Remove from cart</button>
+                                                ) : (
+                                                        <button value={course._id} onClick={e => dispatch(addToCart(e.target.value))}>Add to cart</button>
+                                                    )}
                                             </div>
                                         </div>
                                     ))}

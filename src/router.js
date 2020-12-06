@@ -23,18 +23,13 @@ import Training from './components/training/Training';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Dashboard from './components/dashboard/Dashboard';
-import LiveClassList from './components/liveClass/LiveClassList';
-import LiveClassRoom from './components/dashboard/LiveClassRoom';
 import DashboardMentor from './components/dashboardMentor/DashboardMentor';
 import ScheduleClass from './components/dashboardMentor/ScheduleClass';
-import LiveClassRoomMentor from './components/dashboardMentor/LiveClassRoomMentor';
 import DashboardAdmin from './components/dashboardAdmin/DashboardAdmin';
 import ViewMentor from './components/dashboardAdmin/ViewMentor';
 import ViewMentorDetail from './components/dashboardAdmin/ViewMentorDetail';
 import ViewLiveClass from './components/dashboardAdmin/ViewLiveClass';
 import ViewStudent from './components/dashboardAdmin/ViewStudent';
-import MyLiveClass from './components/dashboard/MyLiveClass';
-import LiveClassDetail from './components/liveClass/LiveClassDetail';
 import PostPayment from './components/payment/PostPayment';
 import ForgotPass from './components/forgotPass/ForgotPass';
 import ForgotPassMentor from './components/forgotPass/ForgotPassMentor';
@@ -50,6 +45,7 @@ import CreateCourse from './components/dashboardMentor/CreateCourse';
 import EditCourse from './components/dashboardMentor/EditCourse';
 import ViewCourses from './components/dashboardAdmin/ViewCourses';
 import EditCourseAdmin from './components/dashboardAdmin/EditCourseAdmin';
+import Cart from './components/layout/Cart';
 
 
 export default function PathRoute() {
@@ -80,8 +76,6 @@ export default function PathRoute() {
                     <Route exact path="/changepass/:token" component={ChangePass} />
                     <Route exact path="/verifyemail" component={VerifyEmail} />
                     <Route exact path="/about" component={About} />
-                    <Route exact path="/liveclass" component={LiveClassList} />
-                    <Route exact path="/liveClass/:id" component={LiveClassDetail} />
                     <Route exact path="/course" component={Course} />
                     <Route exact path="/training" component={Training} />
                     <Route exact path="/success" component={PostPayment} />
@@ -92,14 +86,11 @@ export default function PathRoute() {
                     <Route exact path="/disclaimer" component={Disclaimer} />
                     <Route exact path="/contactus" component={Contact} />
                     <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                    <PrivateRoute exact path="/dashboard/myliveclass/:id" component={MyLiveClass} />
-                    <PrivateRoute exact path="/dashboard/liveclassroom/:classid" component={LiveClassRoom} />
                     <PrivateRouteMentor exact path="/mentor/dashboard" component={DashboardMentor} />
                     <PrivateRouteMentor exact path="/mentor/dashboard/scheduleclass" component={ScheduleClass} />
                     <PrivateRouteMentor exact path="/mentor/dashboard/createcourse" component={CreateCourse} />
                     <PrivateRouteMentor exact path="/mentor/dashboard/editcourse/:courseid" component={EditCourse} />
                     <PrivateRouteMentor exact path="/mentor/account" component={AccountMentor} />
-                    <PrivateRouteMentor exact path="/mentor/dashboard/liveclassroom/:classid" component={LiveClassRoomMentor} />
                     <PrivateRouteAdmin exact path="/admin/dashboard" component={DashboardAdmin} />
                     <PrivateRouteAdmin exact path="/admin/dashboard/viewmentor" component={ViewMentor} />
                     <PrivateRouteAdmin exact path="/admin/dashboard/viewmentor/:mentorid" component={ViewMentorDetail} />
@@ -108,6 +99,7 @@ export default function PathRoute() {
                     <PrivateRouteAdmin exact path="/admin/dashboard/category" component={Categories} />
                     <PrivateRouteAdmin exact path="/admin/dashboard/courses" component={ViewCourses} />
                     <PrivateRouteAdmin exact path="/admin/dashboard/courses/:courseid" component={EditCourseAdmin} />
+                    <Cart />
                 </main>
                 <Footer setFootHeight={footht => setFootHeight(footht)} />
             </React.Fragment>

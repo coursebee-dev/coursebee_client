@@ -1,12 +1,14 @@
-import React, { Fragment, useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, Fragment } from "react";
 //import { Link } from "react-router-dom";
 import axios from 'axios'
 import HomeCourseContainer from "../course/HomeCourseContainer";
 import HomeContents from "../course/HomeContents";
+import { useSelector } from "react-redux";
 
 function Landing({ history }) {
   const [categories, setCategories] = useState([])
   const [search, setSearch] = useState('')
+  const { isAuthenticated } = useSelector(state => state.auth)
   const getCategories = useCallback(async () => {
     try {
       const { data } = await axios.get('/api/get/categories')
@@ -26,14 +28,18 @@ function Landing({ history }) {
     console.log(categories)
   }, [categories])*/
   return (
-    <Fragment>
+    <div style={{ display: "flex", flexDirection: 'column', width: "100%" }}>
       <div className="ctabody">
         <div className="cta">
 
           <div className="cta__nav">
             <div className="cta__nav__actions">
               <p>Welcome to COURSEBEE.</p>
-              <button onClick={() => history.push('/register')}>Join us!</button>
+              {!isAuthenticated &&
+                <Fragment>
+                  <button onClick={() => history.push('/register')}>Start learning as a student!</button>
+                  <button onClick={() => history.push('/mentor/register')}>Join us as a mentor!</button>
+                </Fragment>}
             </div>
             <div className="cta__nav__categories">
               {categories.map((cat, id) => (
@@ -53,7 +59,7 @@ function Landing({ history }) {
       ) : (
           <HomeContents />
         )}
-    </Fragment>
+    </div>
   );
 }
 export default Landing;
