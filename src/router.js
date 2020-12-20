@@ -9,12 +9,11 @@ import PrivateRouteAdmin from "./components/private-route/PrivateRouteAdmin";
 
 import Landing from './components/landing/Landing';
 import LandingMentor from './components/landingMentor/LandingMentor';
-import LandingAdmin from './components/landingAdmin/LandingAdmin';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import RegisterMentor from './components/authMentor/RegisterMentor';
 import LoginMentor from './components/authMentor/LoginMentor';
-import RegisterAdmin from './components/authAdmin/RegisterAdmin';
+//import RegisterAdmin from './components/authAdmin/RegisterAdmin';
 import LoginAdmin from './components/authAdmin/LoginAdmin';
 import VerifyEmail from './components/verifyEmail/VerifyEmail';
 import About from './components/about/About';
@@ -46,16 +45,25 @@ import EditCourse from './components/dashboardMentor/EditCourse';
 import ViewCourses from './components/dashboardAdmin/ViewCourses';
 import EditCourseAdmin from './components/dashboardAdmin/EditCourseAdmin';
 import Cart from './components/layout/Cart';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCourses } from './actions/contentAction';
+import Checkout from './components/pages/Checkout';
+import CourseDetails from './components/course/CourseDetails';
+import Watch from './components/dashboard/Watch';
 
 
 export default function PathRoute() {
     const [navHeight, setNavHeight] = useState(0)
     const [footHeight, setFootHeight] = useState(0)
     const [bodyHeight, setBodyHeight] = useState(0)
-
+    const { isAuthenticated, user } = useSelector(state => state.auth)
+    const dispatch = useDispatch()
     useEffect(() => {
         setBodyHeight(navHeight + footHeight)
     }, [footHeight, navHeight])
+    useEffect(() => {
+        dispatch(getCourses())
+    }, [dispatch])
     return (
         <Switch>
             <React.Fragment>
@@ -63,14 +71,13 @@ export default function PathRoute() {
                 <main className="no-padding" style={{ minHeight: `calc(100vh - ${bodyHeight}px)` }}>
                     <Route exact path="/" component={Landing} />
                     <Route exact path="/mentor" component={LandingMentor} />
-                    <Route exact path="/admin" component={LandingAdmin} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/forgotpass" component={ForgotPass} />
                     <Route exact path="/mentor/register" component={RegisterMentor} />
                     <Route exact path="/mentor/login" component={LoginMentor} />
                     <Route exact path="/mentor/forgotpass" component={ForgotPassMentor} />
-                    <Route exact path="/admin/register" component={RegisterAdmin} />
+                    {/*<Route exact path="/admin/register" component={RegisterAdmin} />*/}
                     <Route exact path="/admin/login" component={LoginAdmin} />
                     <Route exact path="/admin/forgotpass" component={ForgotPassAdmin} />
                     <Route exact path="/changepass/:token" component={ChangePass} />
@@ -85,6 +92,9 @@ export default function PathRoute() {
                     <Route exact path="/privacy" component={Privacy} />
                     <Route exact path="/disclaimer" component={Disclaimer} />
                     <Route exact path="/contactus" component={Contact} />
+                    <Route exact path="/course/:id" component={CourseDetails} />
+                    <PrivateRoute exact path="/watch/:id" component={Watch} />
+                    <PrivateRoute exact path="/checkout" component={Checkout} />
                     <PrivateRoute exact path="/dashboard" component={Dashboard} />
                     <PrivateRouteMentor exact path="/mentor/dashboard" component={DashboardMentor} />
                     <PrivateRouteMentor exact path="/mentor/dashboard/scheduleclass" component={ScheduleClass} />
@@ -99,7 +109,7 @@ export default function PathRoute() {
                     <PrivateRouteAdmin exact path="/admin/dashboard/category" component={Categories} />
                     <PrivateRouteAdmin exact path="/admin/dashboard/courses" component={ViewCourses} />
                     <PrivateRouteAdmin exact path="/admin/dashboard/courses/:courseid" component={EditCourseAdmin} />
-                    <Cart />
+                    {(isAuthenticated && ((user.type !== 'admin') && (user.type !== 'mentor'))) && <Cart />}
                 </main>
                 <Footer setFootHeight={footht => setFootHeight(footht)} />
             </React.Fragment>

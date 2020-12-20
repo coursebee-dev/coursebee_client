@@ -19,7 +19,7 @@ export default class ViewStudent extends Component {
             });
     }
     render() {
-        const allStudents = this.state.allStudents.map(student => (
+        const allStudents = this.state.allStudents?.map(student => (
             <li className="collection-item" key={student._id}>
                 <h6>Name : {student.name}</h6>
                 <p>Email: {student.email}</p>

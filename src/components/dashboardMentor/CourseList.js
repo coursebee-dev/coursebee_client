@@ -10,7 +10,7 @@ export default function CourseList({ courses }) {
 
     return (
         <div style={{ marginTop: "40px" }}>
-            {courses.map((course, id) => (
+            {courses?.map((course, id) => (
                 <div key={id}>
                     <h6>{course.name}</h6>
                     {course.approved ? (

@@ -56,7 +56,7 @@ export default function Categories() {
                         </form>
                     </div>
                     <div className="col s12">
-                        {categories.map((cat, id) => (
+                        {categories?.map((cat, id) => (
                             <div className="section" key={id}>
                                 <p>{cat.title}</p>
                                 <form className="row" onSubmit={addSubCategory}>
@@ -68,7 +68,7 @@ export default function Categories() {
                                 </form>
                                 <div style={{ border: "1px solid black", padding: "15px" }}>
                                     <h6>Sub-categories:</h6>
-                                    {cat.subcategory.map((subcat, id) => (
+                                    {cat.subcategory?.map((subcat, id) => (
                                         <div className="chip" key={id}>{subcat.name}</div>
                                     ))}
                                 </div>

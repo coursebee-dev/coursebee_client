@@ -308,6 +308,7 @@ strong {
     max-width: 800px;
     width: 100%;
     min-height: 120px;
+    animation: pop 0.3s linear 1;
     h3,
     p {
       margin: 5px;
@@ -316,6 +317,9 @@ strong {
       margin: 2px;
       border-radius: 15px;
     }
+  }
+  button {
+    margin: 10px 0 0 0;
   }
 }
 
@@ -349,11 +353,23 @@ strong {
       &__body {
         width: 230px;
         height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         * {
           margin: 5px;
         }
         .chip {
           margin: 5px;
+          cursor: pointer;
+        }
+        button {
+          width: 100%;
+          margin: 0;
+          border-top: 2px solid #ee8e24;
+          border-right: none;
+          border-left: none;
+          border-bottom: none;
         }
       }
     }
@@ -401,11 +417,10 @@ strong {
       max-width: 800px;
       .card {
         border: 2px solid #ee8e24;
-        border-radius: 5px;
+        //border-radius: 5px;
         margin: 10px;
         &__content {
           width: 230px;
-          height: 200px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -490,6 +505,18 @@ strong {
   background-color: #f1f1f1;
   padding: 10px;
   width: 250px;
+  &__item {
+    border: 2px solid #ee8e24;
+    margin: 10px 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    button {
+      padding: 5px;
+      background: red;
+    }
+  }
 }
 
 .userdash {
@@ -531,6 +558,36 @@ strong {
   }
 }
 
+.admindash {
+  &__nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    a {
+      color: #fff;
+      background: black;
+      padding: 20px;
+      margin: 10px;
+    }
+  }
+}
+.editcourseadmin {
+  width: 800px;
+  margin-top: 40px;
+  button {
+    padding: 5px;
+  }
+  .description {
+    width: 100%;
+    padding: 10px;
+    background: #fcfcfc;
+    border: 2px solid #cca77f;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+}
+
 footer {
   display: flex;
   flex-direction: column;
@@ -566,6 +623,84 @@ footer {
     }
     p {
       margin-right: 20px;
+    }
+  }
+}
+
+.checkout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__body {
+    padding: 20px;
+    p,
+    button {
+      margin: 10px;
+    }
+    table {
+      background-color: white;
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      //border-radius: 1em;
+      box-shadow: 3px 3px 3px grey;
+      border: 2px solid #ee8e24;
+      overflow: hidden;
+    }
+    th,
+    td {
+      padding: 15px;
+      border-bottom: 2px solid #ee8e24;
+    }
+
+    tr:hover {
+      background-color: rgb(255, 250, 240);
+      cursor: pointer;
+    }
+  }
+}
+
+.coursedetailspage {
+  display: flex;
+  flex-direction: column;
+  float: left;
+  min-width: 60%;
+  max-width: 1000px;
+  .description {
+    padding: 20px;
+    background: #fff;
+  }
+  .content {
+    padding: 10px;
+  }
+}
+
+@keyframes pop {
+  50% {
+    transform: scale(1.2);
+  }
+}
+.videopage {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  .videonav {
+    height: 100%;
+    background: #666666;
+    ul {
+      display: flex;
+      flex-direction: column;
+      li {
+        width: 100%;
+        cursor: pointer;
+        background: #414141;
+        color: white;
+        padding: 10px;
+      }
+      li:hover {
+        background: #ee8e24;
+      }
     }
   }
 }

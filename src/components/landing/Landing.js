@@ -31,7 +31,6 @@ function Landing({ history }) {
     <div style={{ display: "flex", flexDirection: 'column', width: "100%" }}>
       <div className="ctabody">
         <div className="cta">
-
           <div className="cta__nav">
             <div className="cta__nav__actions">
               <p>Welcome to COURSEBEE.</p>
@@ -42,7 +41,7 @@ function Landing({ history }) {
                 </Fragment>}
             </div>
             <div className="cta__nav__categories">
-              {categories.map((cat, id) => (
+              {categories?.map((cat, id) => (
                 <button key={id}>{cat.title}</button>
               ))}
             </div>

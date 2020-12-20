@@ -1,25 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import axios from 'axios'
+import React, { Fragment } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { addToCart, removeFromCart } from '../../actions/cartAction'
 
 export default function HomeContents() {
     const history = useHistory()
-    const [courses, setCourses] = useState([])
-    const [loading, setLoading] = useState(false)
-    const getCourses = useCallback(async () => {
-        setLoading(true)
-        try {
-            const { data } = await axios.get('/api/get/courses')
-            setCourses(data.courses)
-        } catch (error) {
-            console.log(error.message)
-        }
-        setLoading(false)
-    }, [])
-
-    useEffect(() => {
-        getCourses()
-    }, [getCourses])
+    const dispatch = useDispatch()
+    const { courses, contentLoaded } = useSelector(state => state.content)
+    const { isAuthenticated, user } = useSelector(state => state.auth)
+    const { items } = useSelector(state => state.cart)
     return (
         <div className="hc">
             <div className="hc__nav">
@@ -28,23 +17,28 @@ export default function HomeContents() {
                 <button>Upcoming</button>
                 <button onClick={() => history.push('/course')}>All Courses</button>
             </div>
-            {loading ? <div className="loader"></div> : (
+            {!contentLoaded ? <div className="loader"></div> : (
                 <div className="hc__container">
-                    {courses.map((course, id) => (
+                    {courses?.map((course, id) => (
                         <div key={id} className="card">
                             <div className="card__body">
                                 <p><b>{course.name}</b></p>
                                 <p>
-                                    {course.categories.map((ccat, ccatid) => (
+                                    {course.categories?.map((ccat, ccatid) => (
                                         <small key={ccatid} className="chip">{ccat}</small>
                                     ))}
-                                </p>
-                                <p>
-                                    {course.subcategories.map((sccat, sccatid) => (
+
+                                    {course.subcategories?.map((sccat, sccatid) => (
                                         <small key={sccatid} className="chip">{sccat}</small>
                                     ))}
                                 </p>
-                                <MentorName id={course.mentorId} />
+                                {(isAuthenticated && ((user.type !== 'admin') && (user.type !== 'mentor'))) && <Fragment>
+                                    {items?.some(p => p === course._id) ? (
+                                        <button value={course._id} onClick={e => dispatch(removeFromCart(e.target.value))}>Remove from cart</button>
+                                    ) : (
+                                            <button value={course._id} onClick={e => dispatch(addToCart(e.target.value))}>Add to cart</button>
+                                        )}
+                                </Fragment>}
                             </div>
                         </div>
                     ))}
@@ -53,25 +47,4 @@ export default function HomeContents() {
             )}
         </div>
     )
-}
-
-const MentorName = ({ id }) => {
-    const [payload, setPayload] = useState('')
-    const getMentorName = useCallback(async () => {
-        try {
-            const { data } = await axios.get(`/api/get/mentorname/${id}`)
-            if (data.success) {
-                setPayload(data.name)
-            } else {
-                setPayload(data.message)
-            }
-        } catch (error) {
-            console.log(error.message)
-        }
-    }, [id])
-    useEffect(() => {
-        getMentorName()
-    }, [id, getMentorName])
-
-    return <p>{payload}</p>;
 }

@@ -235,10 +235,10 @@ class ScheduleClass extends Component {
                                                 <label>Select Liveclass Subjects</label>
                                                 {this.state.categories && this.state.categories
                                                     .filter(sub => values.category.some(s => sub.title.includes(s)))
-                                                    .map(((sub, id) => (
+                                                    ?.map(((sub, id) => (
                                                         <div key={id}>
                                                             <h5>Category: {sub.title}</h5>
-                                                            {sub.subcategory.map((subcat, id) => (
+                                                            {sub.subcategory?.map((subcat, id) => (
                                                                 <p key={id}>
                                                                     <label>
                                                                         <Field name="subcategory" type="checkbox" value={subcat.name} />
@@ -305,7 +305,7 @@ class ScheduleClass extends Component {
                                         //let dates = this.generateDates(values.start_date.toLocaleDateString(), values.end_date.toLocaleDateString(), values.week_day)
                                     }}>Generate Date</button>
                                     <div className="section">
-                                        {values.classtime.map((ct, id) => (
+                                        {values.classtime?.map((ct, id) => (
                                             <div key={id}>
                                                 <b>{ct.toString()}</b>
                                             </div>

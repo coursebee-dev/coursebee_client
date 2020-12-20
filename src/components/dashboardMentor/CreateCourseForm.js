@@ -141,7 +141,7 @@ function CreateCourseForm({ auth, createCourseHandler }) {
                             {values && values.categories.length === 0 ? null : (
                                 <div className="col s12 m6" style={{ marginTop: "20px" }}>
                                     <span >Sub-categories</span>
-                                    {categories && categories.filter(sub => values.categories.some(s => sub.title.includes(s))).map((cat, id) => (
+                                    {categories && categories.filter(sub => values.categories.some(s => sub.title.includes(s)))?.map((cat, id) => (
                                         <React.Fragment key={id}>
                                             {cat.subcategory?.map((subcat) => (
                                                 <p key={subcat._id}>

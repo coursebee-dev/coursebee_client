@@ -23,7 +23,7 @@ export default class ViewMentor extends Component {
         this.props.history.push('/admin/dashboard/viewmentor/' + mentorId)
     }
     render() {
-        const allMentors = this.state.allMentors.map(mentor => (
+        const allMentors = this.state.allMentors?.map(mentor => (
             <li className="collection-item" key={mentor._id}>
                 <p className="secondary-content">
                     <button onClick={this.onViewDetailClick(mentor._id)} className="btn btn-small waves-effect waves-light hoverable black">View Details</button>

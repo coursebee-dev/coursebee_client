@@ -36,14 +36,14 @@ export default class ViewLiveClass extends Component {
             });
     }
     render() {
-        const liveClasses = this.state.liveClasses.map(liveClass => (
+        const liveClasses = this.state.liveClasses?.map(liveClass => (
             <li className="collection-item" key={liveClass._id}>
                 <p className="secondary-content">Approval Status :<br />
                     {liveClass.approved ? <span> Approved</span> : <span className="red-text"> Waiting Approval<br /><br /><button onClick={this.onApproveClick(liveClass._id)} className="btn btn-small waves-effect waves-light hoverable black">Approve</button></span>}
                 </p>
 
                 <h6>Topic : {liveClass.topic}</h6>
-                <div dangerouslySetInnerHTML={{__html: liveClass.description}} />
+                <div dangerouslySetInnerHTML={{ __html: liveClass.description }} />
                 <p>Start Time: {new Date(liveClass.start_time).toLocaleDateString() + " " + new Date(liveClass.start_time).toLocaleTimeString()} </p>
                 <p>Duration : {liveClass.duration}</p>
                 <p>Type: {liveClass.class_type}</p>

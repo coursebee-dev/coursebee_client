@@ -187,7 +187,7 @@ class Register extends Component {
                             />
                             <small className="errortext">{errors.position}</small>
                         </div>
-                        {this.state.interests.map((interest, id) => (
+                        {this.state.interests?.map((interest, id) => (
                             <div className="chip" key={id}>
                                 {interest}
                             </div>

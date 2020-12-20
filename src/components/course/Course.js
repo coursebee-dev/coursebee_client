@@ -1,8 +1,8 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../../actions/cartAction';
+import axios from 'axios';
 
 const seo = {
     title: "Courses : Coursebee",
@@ -13,25 +13,29 @@ const seo = {
 };
 
 export default function Course() {
-    const [courses, setCourses] = useState([])
-    const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState('')
+    const [userData, setUserData] = useState()
     const dispatch = useDispatch()
     const { items } = useSelector(state => state.cart)
-    //const { courses } = useSelector(state => state.content)
-    const getCourses = useCallback(async () => {
-        setLoading(true)
+    const { courses, contentLoaded } = useSelector(state => state.content)
+    const { isAuthenticated, user } = useSelector(state => state.auth)
+    const getUser = useCallback(async () => {
         try {
-            const { data } = await axios.get('/api/get/courses')
-            setCourses(data.courses)
+            const { data } = await axios.get(`/api/userinfo/${user.id}`)
+            if (data.success) {
+                setUserData(data.user)
+            } else {
+                console.log(data.message)
+            }
         } catch (error) {
             console.log(error.message)
         }
-        setLoading(false)
-    }, [])
+    }, [user.id])
+
     useEffect(() => {
-        getCourses();
-    }, [getCourses])
+        getUser()
+    }, [getUser])
+
     return (
         <Fragment>
             <Helmet
@@ -55,30 +59,43 @@ export default function Course() {
 
                     </div>
                     <div className="coursepage__container__cards">
-                        {loading ? (
+                        {!contentLoaded ? (
                             <div className="loader"></div>
                         ) : (
                                 <Fragment>
                                     {courses?.filter(course => {
                                         return course?.name.toLowerCase().includes(search.toLowerCase()) || course?.description.toLowerCase().includes(search.toLowerCase())
-                                    }).map((course, id) => (
+                                    })?.sort().map((course, id) => (
                                         <div key={id} className="card">
                                             <div className="card__content">
                                                 <h3>{course.name}</h3>
                                                 <div className="tags">
 
-                                                    {course.categories.map((cat, catid) => (
+                                                    {course.categories?.map((cat, catid) => (
                                                         <small key={catid} >{cat}</small>
                                                     ))}
-                                                    {course.subcategories.map((scat, scatid) => (
+                                                    {course.subcategories?.map((scat, scatid) => (
                                                         <small key={scatid}>{scat}</small>
                                                     ))}
                                                 </div>
-                                                {items?.some(p => p === course._id) ? (
-                                                    <button value={course._id} onClick={e => dispatch(removeFromCart(e.target.value))}>Remove from cart</button>
+                                                {course?.price === 0 || !course?.price ? (
+                                                    <p>Price: Free</p>
                                                 ) : (
-                                                        <button value={course._id} onClick={e => dispatch(addToCart(e.target.value))}>Add to cart</button>
+                                                        <p>Price: {course.price} taka</p>
                                                     )}
+                                                {(isAuthenticated && ((user.type !== 'admin') && (user.type !== 'mentor'))) && <Fragment>
+                                                    {userData?.enrolledcourses?.includes(course._id) ? (
+                                                        <button value={course._id} disabled={true}>Already Enrolled</button>
+                                                    ) : (
+                                                            <Fragment>
+                                                                {items?.some(p => p === course._id) ? (
+                                                                    <button value={course._id} onClick={e => dispatch(removeFromCart(e.target.value))}>Remove from cart</button>
+                                                                ) : (
+                                                                        <button value={course._id} onClick={e => dispatch(addToCart(e.target.value))}>Add to cart</button>
+                                                                    )}
+                                                            </Fragment>
+                                                        )}
+                                                </Fragment>}
                                             </div>
                                         </div>
                                     ))}

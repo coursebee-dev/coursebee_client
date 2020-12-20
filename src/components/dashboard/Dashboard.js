@@ -31,7 +31,7 @@ function Dashboard({ auth, history }) {
         </div>
 
         <div className="userdash__nav">
-          {categories.map((cat, id) => (
+          {categories?.map((cat, id) => (
             <button key={id}>{cat.title}</button>
           ))}
         </div>
@@ -41,11 +41,7 @@ function Dashboard({ auth, history }) {
             <input type="search" onChange={e => setSearch(e.target.value)} />
           </form>
         </div>
-        {search ? (
-          <MyCourses search={search} />
-        ) : (
-            <div>Hello</div>
-          )}
+        <MyCourses search={search} />
       </div>
     </div>
   );

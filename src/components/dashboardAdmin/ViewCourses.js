@@ -5,7 +5,7 @@ import M from 'materialize-css'
 export default function ViewCourses() {
     const [courses, setCourses] = useState([])
     const getCourses = async () => {
-        const { data } = await axios.get('/api/mentor/course')
+        const { data } = await axios.get('/api/admin/get/courses')
         if (data.success) {
             setCourses(data.courses)
         } else {
@@ -24,7 +24,7 @@ export default function ViewCourses() {
                     <blockquote>
                         <h4>Courses for review</h4>
                     </blockquote>
-                    {courses?.filter(course => course.submitted === true && course.approved === false).map((course, id) => (
+                    {courses?.filter(course => course.submitted === true && course.approved === false)?.map((course, id) => (
                         <div key={id} className="card green">
                             <div className="card-content text-white">
                                 <span className="card-title">{course.name}</span>
@@ -35,7 +35,7 @@ export default function ViewCourses() {
                     <blockquote>
                         <h4>Approved Courses</h4>
                     </blockquote>
-                    {courses?.filter(course => course.submitted === true && course.approved === true).map((course, id) => (
+                    {courses?.filter(course => course.submitted === true && course.approved === true)?.map((course, id) => (
                         <div key={id} className="card green">
                             <div className="card-content text-white">
                                 <span className="card-title">{course.name}</span>

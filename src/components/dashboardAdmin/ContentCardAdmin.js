@@ -77,29 +77,29 @@ export default function ContentCardAdmin({ content, id, getCourse }) {
     }
 
     return (
-        <div className="card  blue lighten-4">
-            <div className="card-content black-text">
-                <span className="card-title">{content.title}<i style={{ cursor: "pointer", userSelect: "none" }} onClick={() => setReveal(rev => !rev)} className="material-icons right">{reveal ? "keyboard_arrow_up" : "keyboard_arrow_down"}</i></span>
+        <div>
+            <div>
+                <span>{content.title}<button style={{ cursor: "pointer", userSelect: "none" }} onClick={() => setReveal(rev => !rev)}>{reveal ? "Hide details" : "Show details"}</button></span>
                 {reveal ? (
-                    <div dangerouslySetInnerHTML={setDescription()} />
+                    <div className="description" dangerouslySetInnerHTML={setDescription()} />
                 ) : null}
                 {content.videoobject ? (
-                    <div style={{ marginTop: "20px" }} >
+                    <div>
                         <p>Contains a video :</p>
-                        <button className="btn blue" onClick={getTempLink}>Get temporary download link</button>
+                        <button onClick={getTempLink}>Get temporary download link</button>
                         {link ? (
                             <div>
                                 <input ref={linkRef} type="url" defaultValue={link} />
-                                <button onClick={copyLink} className="btn-small">copy link</button>
-                                <button className="btn-small orange" onClick={() => { window.open(link, "_blank") }}>View file</button>
+                                <button onClick={copyLink} >copy link</button>
+                                <button onClick={() => { window.open(link, "_blank") }}>View file</button>
                             </div>
                         ) : null}
                     </div>
                 ) : <p>Does not contain a video file</p>}
-                <div style={{ marginTop: "20px" }}>
+                <div>
                     <p>Approve content: (just for marking. not mandatory.)</p>
-                    <button disabled={content?.ready === false} onClick={disapprove} className="btn-small red">Content is not ok</button>
-                    <button disabled={content?.ready === true} onClick={approve} className="btn-small green">Content is ok</button>
+                    <button disabled={content?.ready === false} onClick={disapprove}>Content is not ok</button>
+                    <button disabled={content?.ready === true} onClick={approve}>Content is ok</button>
                 </div>
                 {content.finalLink ? (
                     <div>
