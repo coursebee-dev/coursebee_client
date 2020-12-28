@@ -178,15 +178,11 @@ strong {
 }
 
 .navbar {
+  background: rgb(255, 255, 255);
   background: linear-gradient(
     45deg,
-    #fffefd,
-    #f8e9d9,
-    #d79b59,
-    #ef9229,
-    #de9341,
-    #7b4d1b,
-    #000000
+    rgba(255, 255, 255, 0.6408450704225352) 0%,
+    rgba(141, 27, 61, 1) 100%
   );
   min-height: 64px;
   color: white;
@@ -220,7 +216,7 @@ strong {
       }
     }
     li:hover {
-      color: #ee8e24;
+      color: #8d1b3d;
       font-weight: bold;
       background: white;
     }
@@ -256,6 +252,13 @@ strong {
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+        .welcome {
+          padding: 10px;
+          background: #fcfcfc93;
+          text-align: center;
+          color: #8d1b3d;
+          font-weight: bolder;
+        }
         button {
           margin: 5px;
           font-weight: bold;
@@ -279,7 +282,7 @@ strong {
         justify-content: center;
         align-items: center;
         input {
-          border: 2px solid #ee8e24;
+          border: 2px solid #8d1b3d;
           padding: 20px;
           border-radius: 25px;
           outline: none;
@@ -347,7 +350,7 @@ strong {
     align-items: center;
     max-width: 1000px;
     .card {
-      border: 2px solid #ee8e24;
+      border: 2px solid #8d1b3d;
       border-radius: 5px;
       margin: 10px;
       &__body {
@@ -366,7 +369,7 @@ strong {
         button {
           width: 100%;
           margin: 0;
-          border-top: 2px solid #ee8e24;
+          border-top: 2px solid #8d1b3d;
           border-right: none;
           border-left: none;
           border-bottom: none;
@@ -388,7 +391,7 @@ strong {
     align-items: center;
     margin-top: 10px;
     input {
-      border: 2px solid #ee8e24;
+      border: 2px solid #8d1b3d;
       padding: 10px;
       border-radius: 25px;
       outline: none;
@@ -416,7 +419,7 @@ strong {
       align-items: center;
       max-width: 800px;
       .card {
-        border: 2px solid #ee8e24;
+        border: 2px solid #8d1b3d;
         //border-radius: 5px;
         margin: 10px;
         &__content {
@@ -427,14 +430,14 @@ strong {
           .tags {
             display: flex;
             flex-direction: column;
-            color: #ee8e24;
+            color: #8d1b3d;
             small {
               padding: 5px;
               border-radius: 10px;
               cursor: pointer;
             }
             small:hover {
-              background: #ee8e24;
+              background: #8d1b3d;
               color: white;
             }
           }
@@ -445,7 +448,7 @@ strong {
             width: 100%;
             margin: auto 0 0 0;
             font-weight: bold;
-            border-top: 2px solid #ee8e24;
+            border-top: 2px solid #8d1b3d;
             border-bottom: none;
             border-right: none;
             border-left: none;
@@ -469,7 +472,7 @@ strong {
     a {
       color: #fff;
       padding: 10px;
-      background: #ee8e24;
+      background: #8d1b3d;
     }
   }
   &__form {
@@ -487,14 +490,14 @@ strong {
         border: 2px solid #d3d3d3;
       }
       input:focus {
-        border: 2px solid #ee8e24;
+        border: 2px solid #8d1b3d;
       }
     }
   }
   &__footer {
     margin: 20px 0;
     a {
-      color: #ee8e24;
+      color: #8d1b3d;
     }
   }
 }
@@ -506,7 +509,7 @@ strong {
   padding: 10px;
   width: 250px;
   &__item {
-    border: 2px solid #ee8e24;
+    border: 2px solid #8d1b3d;
     margin: 10px 0;
     padding: 10px;
     display: flex;
@@ -543,7 +546,7 @@ strong {
       justify-content: center;
       align-items: center;
       input {
-        border: 2px solid #ee8e24;
+        border: 2px solid #8d1b3d;
         padding: 20px;
         border-radius: 25px;
         outline: none;
@@ -573,18 +576,31 @@ strong {
   }
 }
 .editcourseadmin {
-  width: 800px;
-  margin-top: 40px;
-  button {
-    padding: 5px;
-  }
-  .description {
-    width: 100%;
-    padding: 10px;
-    background: #fcfcfc;
-    border: 2px solid #cca77f;
-    margin: 5px 0;
-    border-radius: 5px;
+  .paper {
+    &__title {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card {
+      padding: 10px;
+      margin: 10px 0;
+      background: white;
+    }
+    width: 800px;
+    margin-top: 40px;
+    button {
+      padding: 5px;
+    }
+    .description {
+      width: 100%;
+      padding: 10px;
+      background: #fcfcfc;
+      border: 2px solid #cca77f;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
   }
 }
 
@@ -595,7 +611,7 @@ footer {
   align-items: center;
   ul {
     width: 100%;
-    background: #ffe0bf;
+    background: #dd7d9a;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -607,7 +623,7 @@ footer {
         color: black;
       }
       a:hover {
-        color: #ee8e24;
+        color: #8d1b3d;
       }
     }
   }
@@ -645,13 +661,13 @@ footer {
       border-collapse: collapse;
       //border-radius: 1em;
       box-shadow: 3px 3px 3px grey;
-      border: 2px solid #ee8e24;
+      border: 2px solid #8d1b3d;
       overflow: hidden;
     }
     th,
     td {
       padding: 15px;
-      border-bottom: 2px solid #ee8e24;
+      border-bottom: 2px solid #8d1b3d;
     }
 
     tr:hover {
@@ -699,8 +715,50 @@ footer {
         padding: 10px;
       }
       li:hover {
-        background: #ee8e24;
+        background: #8d1b3d;
       }
+    }
+  }
+}
+
+.createcourselist {
+  .coursecard {
+    padding: 20px;
+    margin: 5px 0;
+    border: 2px solid #8d1b3d;
+  }
+}
+
+.mentorcoursecard {
+  padding: 20px;
+  margin: 10px 0;
+  background: white;
+  .cardtitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .carddescription {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #8d1b3d;
+  }
+}
+
+.admincourselist {
+  .card {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #8d1b3d;
+    background: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      padding: 5px;
+      background: #8d1b3d;
+      color: white;
     }
   }
 }

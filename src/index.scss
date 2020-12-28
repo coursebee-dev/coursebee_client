@@ -30,32 +30,32 @@ a {
 }
 
 button {
-  background: #ee8e24;
+  background: #8d1b3d;
   padding: 15px;
   color: #fff;
   font-size: inherit;
   outline: none;
-  border: 1px solid #ee8e24;
+  border: 1px solid #8d1b3d;
 }
 
 button:hover {
   background: #fff;
-  color: #ee8e24;
+  color: #8d1b3d;
 }
 
 button:disabled {
   background: #c2c2c2;
-  color: black;
+  color: rgb(133, 133, 133);
 }
 
 ::selection {
   background: #fff;
-  color: #ee8e24;
+  color: #8d1b3d;
 }
 
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #ee8e24; /* Blue */
+  border-top: 16px solid #8d1b3d; /* Blue */
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -72,13 +72,13 @@ button:disabled {
 }
 
 .paper {
-  border: 2px solid #ee8e24;
+  border: 2px solid #8d1b3d;
   padding: 20px;
 }
 
 .chip {
   padding: 5px;
-  background: #ffb96e;
+  background: #a05d71;
   color: white;
 }
 

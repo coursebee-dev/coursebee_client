@@ -33,7 +33,7 @@ function Landing({ history }) {
         <div className="cta">
           <div className="cta__nav">
             <div className="cta__nav__actions">
-              <p>Welcome to COURSEBEE.</p>
+              <p className="welcome">Welcome to COURSEBEE.</p>
               {!isAuthenticated &&
                 <Fragment>
                   <button onClick={() => history.push('/register')}>Start learning as a student!</button>

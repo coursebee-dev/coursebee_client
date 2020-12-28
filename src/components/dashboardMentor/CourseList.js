@@ -9,10 +9,10 @@ export default function CourseList({ courses }) {
     }
 
     return (
-        <div style={{ marginTop: "40px" }}>
+        <div className="createcourselist">
             {courses?.map((course, id) => (
-                <div key={id}>
-                    <h6>{course.name}</h6>
+                <div className="coursecard" key={id}>
+                    <h3>{course.name}</h3>
                     {course.approved ? (
                         <button value={course._id} className="btn btn-small green" onClick={gotoCourse}>Course Approved. View course.</button>
                     ) : (

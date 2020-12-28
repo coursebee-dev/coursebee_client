@@ -77,47 +77,45 @@ export default function ContentCardAdmin({ content, id, getCourse }) {
     }
 
     return (
-        <div>
+        <div className="card">
+            <span>{content.title}<button style={{ cursor: "pointer", userSelect: "none" }} onClick={() => setReveal(rev => !rev)}>{reveal ? "Hide details" : "Show details"}</button></span>
+            {reveal ? (
+                <div className="description" dangerouslySetInnerHTML={setDescription()} />
+            ) : null}
+            {content.videoobject ? (
+                <div>
+                    <p>Contains a video :</p>
+                    <button onClick={getTempLink}>Get temporary download link</button>
+                    {link ? (
+                        <div>
+                            <input ref={linkRef} type="url" defaultValue={link} />
+                            <button onClick={copyLink} >copy link</button>
+                            <button onClick={() => { window.open(link, "_blank") }}>View file</button>
+                        </div>
+                    ) : null}
+                </div>
+            ) : <p>Does not contain a video file</p>}
             <div>
-                <span>{content.title}<button style={{ cursor: "pointer", userSelect: "none" }} onClick={() => setReveal(rev => !rev)}>{reveal ? "Hide details" : "Show details"}</button></span>
-                {reveal ? (
-                    <div className="description" dangerouslySetInnerHTML={setDescription()} />
-                ) : null}
-                {content.videoobject ? (
-                    <div>
-                        <p>Contains a video :</p>
-                        <button onClick={getTempLink}>Get temporary download link</button>
-                        {link ? (
-                            <div>
-                                <input ref={linkRef} type="url" defaultValue={link} />
-                                <button onClick={copyLink} >copy link</button>
-                                <button onClick={() => { window.open(link, "_blank") }}>View file</button>
+                <p>Approve content: (just for marking. not mandatory.)</p>
+                <button disabled={content?.ready === false} onClick={disapprove}>Content is not ok</button>
+                <button disabled={content?.ready === true} onClick={approve}>Content is ok</button>
+            </div>
+            {content.finalLink ? (
+                <div>
+                    <p>Video Uploaded. <a href={content.finalLink} target="_blank" rel="noopener noreferrer">See here</a></p>
+                </div>
+            ) : (
+                    <Fragment>
+                        {content.videoobject ? (
+                            <div style={{ marginTop: "20px" }}>
+                                <p>Add final content: Upload the video in vimeo.</p>
+                                <p>After uploading, copy the url and paste it here</p>
+                                <input type="url" onChange={e => setFinal(e.target.value)} />
+                                <button onClick={submitFinal} className="btn-small green">Add final content</button>
                             </div>
                         ) : null}
-                    </div>
-                ) : <p>Does not contain a video file</p>}
-                <div>
-                    <p>Approve content: (just for marking. not mandatory.)</p>
-                    <button disabled={content?.ready === false} onClick={disapprove}>Content is not ok</button>
-                    <button disabled={content?.ready === true} onClick={approve}>Content is ok</button>
-                </div>
-                {content.finalLink ? (
-                    <div>
-                        <p>Video Uploaded. <a href={content.finalLink} target="_blank" rel="noopener noreferrer">See here</a></p>
-                    </div>
-                ) : (
-                        <Fragment>
-                            {content.videoobject ? (
-                                <div style={{ marginTop: "20px" }}>
-                                    <p>Add final content: Upload the video in vimeo.</p>
-                                    <p>After uploading, copy the url and paste it here</p>
-                                    <input type="url" onChange={e => setFinal(e.target.value)} />
-                                    <button onClick={submitFinal} className="btn-small green">Add final content</button>
-                                </div>
-                            ) : null}
-                        </Fragment>
-                    )}
-            </div>
-        </div >
+                    </Fragment>
+                )}
+        </div>
     )
 }

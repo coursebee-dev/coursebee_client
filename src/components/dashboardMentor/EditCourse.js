@@ -161,8 +161,7 @@ export default function EditCourse({ match }) {
                                 <ErrorMessage name="description" render={msg => <span className="red-text">{msg}</span>} />
                             </div>
                             {tinyLoaded ? null : (
-                                <div className="progress">
-                                    <div className="indeterminate orange"></div>
+                                <div className="loader">
                                 </div>
                             )}
                             {/*<div className="file-field input-field">
@@ -174,11 +173,8 @@ export default function EditCourse({ match }) {
                                     <input className="file-path validate" type="text" />
                                 </div>
                             </div>*/}
-                            <div className="col s12">
-                                <button
-                                    type="submit"
-                                    className="btn waves-effect waves-light hoverable orange"
-                                >Submit content</button>
+                            <div>
+                                <button type="submit">Submit content</button>
                             </div>
                         </Form>
                     )}

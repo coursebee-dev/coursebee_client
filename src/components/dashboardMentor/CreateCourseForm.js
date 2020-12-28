@@ -121,8 +121,7 @@ function CreateCourseForm({ auth, createCourseHandler }) {
                             <ErrorMessage name="description" render={msg => <span className="red-text">{msg}</span>} />
                         </div>
                         {tinyLoaded ? null : (
-                            <div className="progress">
-                                <div className="indeterminate orange"></div>
+                            <div className="loader">
                             </div>
                         )}
 

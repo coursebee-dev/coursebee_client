@@ -3,13 +3,15 @@ import axios from 'axios'
 import ContentCardAdmin from './ContentCardAdmin'
 import M from 'materialize-css'
 import { useHistory } from 'react-router-dom'
-
+import { useDispatch } from 'react-redux'
+import { getCourses as getCourseView } from '../../actions/contentAction'
 export default function EditCourseAdmin({ match }) {
     const [course, setCourse] = useState()
     const [reveal, setReveal] = useState(false)
     const [price, setPrice] = useState(0)
     const [editPrice, setEditPrice] = useState(false)
     const history = useHistory()
+    const dispatch = useDispatch()
     const getCourse = useCallback(
         async () => {
             const { data } = await axios.get(`/api/admin/getcourse/${match.params.courseid}`)
@@ -17,7 +19,6 @@ export default function EditCourseAdmin({ match }) {
         },
         [match.params.courseid],
     )
-
     const asignPrice = async e => {
         e.preventDefault()
         try {
@@ -25,8 +26,8 @@ export default function EditCourseAdmin({ match }) {
                 price: price
             })
             if (data.success) {
-
                 getCourse()
+                setEditPrice(ep => !ep)
             }
             console.log(data.message)
         } catch (error) {
@@ -40,6 +41,7 @@ export default function EditCourseAdmin({ match }) {
             M.toast({ html: data.message })
             if (data.success) {
                 getCourse()
+                dispatch(getCourseView())
                 history.push('/admin/dashboard/courses')
             }
         } catch (error) {
@@ -60,24 +62,29 @@ export default function EditCourseAdmin({ match }) {
     // }, [course])
     return (
         <div className="editcourseadmin">
-            <h1>{course?.name}</h1>
-            <button onClick={() => setReveal(rev => !rev)} className="btn-small blue">{reveal ? "Hide" : "See"} description</button>
-            {reveal ? (
-                <div className="description" dangerouslySetInnerHTML={{ __html: course?.description }} />
-            ) : null}
-            {course?.contents?.map((content, id) => (
-                <ContentCardAdmin key={id} id={course?._id} content={content} getCourse={getCourse} />
-            ))}
-            {editPrice ?
-                <form onSubmit={asignPrice}>
-                    <label htmlFor="price">{course?.price ? "Edit" : "Set"} Price</label>
-                    <input defaultValue={price || course?.price} name="price" id="price" type="number" min="0" onClick={e => setPrice(e.target.value)} />
-                    <button type="button" onClick={() => setEditPrice(ep => !ep)}>Cancel </button>
-                </form>
-                :
-                <button onClick={() => setEditPrice(ep => !ep)}>Edit Price</button>
-            }
-            <button className="btn" disabled={course?.approved} onClick={approveCourse}>{course?.approved ? "Approved Course" : "Approve Course"}</button>
+            <div className="paper">
+                <div className="paper__title">
+                    <h1>{course?.name}</h1>
+                    <button onClick={() => setReveal(rev => !rev)} className="btn-small blue">{reveal ? "Hide" : "See"} description</button>
+                </div>
+                {reveal ? (
+                    <div className="description" dangerouslySetInnerHTML={{ __html: course?.description }} />
+                ) : null}
+                {course?.contents?.map((content, id) => (
+                    <ContentCardAdmin key={id} id={course?._id} content={content} getCourse={getCourse} />
+                ))}
+                {editPrice ?
+                    <form onSubmit={asignPrice}>
+                        <label htmlFor="price">{course?.price ? "Edit" : "Set"} Price</label>
+                        <input defaultValue={price || course?.price} name="price" id="price" type="number" min="0" onChange={e => setPrice(e.target.value)} />
+                        <button type="button" onClick={() => setEditPrice(ep => !ep)}>Cancel </button>
+                        <button type="submit">Set price </button>
+                    </form>
+                    :
+                    <button onClick={() => setEditPrice(ep => !ep)}>Edit Price</button>
+                }
+                <button className="btn" disabled={course?.approved} onClick={approveCourse}>{course?.approved ? "Approved Course" : "Approve Course"}</button>
+            </div>
         </div>
     )
 }

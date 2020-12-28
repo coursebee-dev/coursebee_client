@@ -18,33 +18,29 @@ export default function ViewCourses() {
     }, [])
 
     return (
-        <div className="container">
-            <div className="row" style={{ marginTop: "40px" }}>
-                <div className="col s12">
-                    <blockquote>
-                        <h4>Courses for review</h4>
-                    </blockquote>
-                    {courses?.filter(course => course.submitted === true && course.approved === false)?.map((course, id) => (
-                        <div key={id} className="card green">
-                            <div className="card-content text-white">
-                                <span className="card-title">{course.name}</span>
-                                <Link to={`/admin/dashboard/courses/${course._id}`} className="btn">Review Course</Link>
-                            </div>
-                        </div>
-                    ))}
-                    <blockquote>
-                        <h4>Approved Courses</h4>
-                    </blockquote>
-                    {courses?.filter(course => course.submitted === true && course.approved === true)?.map((course, id) => (
-                        <div key={id} className="card green">
-                            <div className="card-content text-white">
-                                <span className="card-title">{course.name}</span>
-                                <Link to={`/admin/dashboard/courses/${course._id}`} className="btn">Review Course</Link>
-                            </div>
-                        </div>
-                    ))}
+        <div style={{ marginTop: "20px" }}>
+            <blockquote>
+                <h4>Courses for review</h4>
+            </blockquote>
+            {courses?.filter(course => course.submitted === true && course.approved === false)?.map((course, id) => (
+                <div key={id} className="admincourselist">
+                    <div className="card">
+                        <h3>{course.name}</h3>
+                        <Link to={`/admin/dashboard/courses/${course._id}`} className="btn">Review Course</Link>
+                    </div>
                 </div>
-            </div>
+            ))}
+            <blockquote>
+                <h4>Approved Courses</h4>
+            </blockquote>
+            {courses?.filter(course => course.submitted === true && course.approved === true)?.map((course, id) => (
+                <div key={id} className="admincourselist">
+                    <div className="card">
+                        <h3>{course.name}</h3>
+                        <Link to={`/admin/dashboard/courses/${course._id}`} className="btn">Review Course</Link>
+                    </div>
+                </div>
+            ))}
         </div>
     )
 }
