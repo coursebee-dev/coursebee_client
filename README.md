@@ -1,6 +1,6 @@
 # coursebee_client
 
-# Website Link: [coursebee.now.sh](coursebee.now.sh)
+# Website Link: [https://coursebee.vercel.app](https://coursebee.vercel.app)
 
 This website was developed for an EduTech company. The frontend is developed using ReactJS with Redux.
 
