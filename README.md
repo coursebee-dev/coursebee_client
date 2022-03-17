@@ -1,5 +1,9 @@
 # coursebee_client
 
+# Website Link: coursebee.now.sh
+
+This website was developed for an EduTech company. The frontend is developed using ReactJS with Redux.
+
 commit message:
 
 :bulb: ADDED :<br/>
